@@ -87,3 +87,7 @@ typings/
 
 # Electron-Forge
 out/
+
+
+myholo.code-workspace
+test/test.html
