@@ -1,30 +1,31 @@
 "use strict";
 
-let sectionName = ["home", "my", "level", "respawn", "advance", "record"];
-const fs = window.api.getFS();
+let secInfo = fm.readJSON("src/section/sections.json");
 
 function hideAllSection() {
-    sectionName.forEach(function (nam) {
-        $(`#s_${nam}`).hide();
-    });
+    for (let sec of secInfo.entries) {
+        $(`#s_${sec.name}`).hide();
+    }
 }
 
 $(function () {
-    sectionName.forEach(function (nam) {
-        fs.readFile(`src/section/${nam}.html`, "utf-8", function (err, data) {
-            console.log(`read data ${data} with err ${err}`);
-            let $sec = $("<div/>", {
-                id: `s_${nam}`,
-                hidden: true,
-            });
-            $sec.append($(data));
-            $("#sections").append($sec);
-        });
-
-        $(`#b_${nam}`).on("click", function () {
-            console.log("activated section " + nam);
-            hideAllSection();
-            $("#s_" + nam).show();
-        });
+    api.ipc.on("received", function (event, arg) {
+        console.log(arg);
     });
+
+    for (let sec of secInfo.entries) {
+        let $sec = $("<div/>", {
+            id: `s_${sec.name}`,
+            hidden: true,
+        });
+        $sec.append(fm.readHTML(`src/section/${sec.name}.html`));
+        $("#sections").append($sec);
+
+        $(`#b_${sec.name}`).on("click", function () {
+            console.log("activated section " + sec.name);
+            hideAllSection();
+            $("#s_" + sec.name).show();
+            api.ipc.send("activate", sec.name);
+        });
+    }
 });
