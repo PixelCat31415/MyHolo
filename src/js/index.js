@@ -1,31 +1,28 @@
 "use strict";
 
-let secInfo = fm.readJSON("src/section/sections.json");
-
-function hideAllSection() {
-    for (let sec of secInfo.entries) {
-        $(`#s_${sec.name}`).hide();
-    }
-}
-
 $(function () {
-    api.ipc.on("received", function (event, arg) {
-        console.log(arg);
-    });
+    // api.ipc.on("received", function (event, arg) {
+    //     console.log(arg);
+    // });
+    const settings = {
+        margins: true,
+        enableFocus: true,
+        setOnClick: true,
+    };
+    const element = $("#navList")[0];
+    const navbar = new Lavalamp(element, settings);
+    // const navbar = new Lavalamp(element);
+    let active = $("#nav_home")[0];
+    navbar.activeElement = active;
+    navbar.reposition(active);
 
-    for (let sec of secInfo.entries) {
-        let $sec = $("<div/>", {
-            id: `s_${sec.name}`,
-            hidden: true,
-        });
-        $sec.append(fm.readHTML(`src/section/${sec.name}.html`));
-        $("#sections").append($sec);
-
-        $(`#b_${sec.name}`).on("click", function () {
-            console.log("activated section " + sec.name);
-            hideAllSection();
-            $("#s_" + sec.name).show();
-            api.ipc.send("activate", sec.name);
+    let names = ["home", "my", "lvl", "resp", "adv", "rec"];
+    for (let name of names) {
+        let entry = $(`#nav_${name}`);
+        entry.on("click", function () {
+            $(".page").hide();
+            $(`#pg_${name}`).show();
         });
     }
+    $("#pg_home").show();
 });

@@ -4,24 +4,72 @@
         <meta charset="UTF-8" />
         <title>Hello World!</title>
 
-        <link rel="stylesheet" href="css/index.css" />
+        <!-- useful libraries -->
+        <script defer src="dependencies/jquery-3.6.0.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="dependencies/Lava-Lamp/build/css/lavalamp.css"/>
+        <script defer src="dependencies/Lava-Lamp/build/js/lavalamp.js"></script>
+
+        <!-- style sheets -->
+        <link type="text/css" rel="stylesheet" href="css/index.css" />
 
         <!-- script stuff -->
-        <script defer src="js/dependicies/jquery-3.6.0.min.js"></script>
         <script defer src="js/util.js"></script>
         <script defer src="js/index.js"></script>
     </head>
     <body>
-        <h class="h1">MyHolo v1.0</h>
-        <p>To Be Finished for now...</p>
-        <div id="menu">
-            <div><button type="button" id="b_home">HOME</button></div>
-            <div><button type="button" id="b_my">我的Holo</button></div>
-            <div><button type="button" id="b_level">樓層挑戰</button></div>
-            <div><button type="button" id="b_respawn">轉生系統</button></div>
-            <div><button type="button" id="b_advance">成就列表</button></div>
-            <div><button type="button" id="b_record">挑戰紀錄</button></div>
+        <h1>MyHolo v1.0</h1>
+        <p>Under construction💤...</p>
+        <ul id="navList">
+            <li id="nav_home" class="navTarget active">
+                HOME
+            </li>
+            <li id="nav_my" class="navTarget">
+                我的HOLO
+            </li>
+            <li id="nav_lvl" class="navTarget">
+                樓層挑戰
+            </li>
+            <li id="nav_resp" class="navTarget">
+                轉生系統
+            </li>
+            <li id="nav_adv" class="navTarget">
+                成就列表
+            </li>
+            <li id="nav_rec" class="navTarget">
+                挑戰紀錄
+            </li>
+        </ul>
+        <div id="d_pages">
+            <div id="pg_home" class="page" hidden>
+                <h1>HOME</h1>
+                <p>hmmm</p>
+                <button onclick="alert('owo!')">owo!</button>
+            </div>
+            <div id="pg_my" class="page" hidden>
+                <h1>我的HOLO</h1>
+                <p>hmmm</p>
+                <button onclick="alert('owo!')">owo!</button>
+            </div>
+            <div id="pg_lvl" class="page" hidden>
+                <h1>樓層挑戰</h1>
+                <p>hmmm</p>
+                <button onclick="alert('owo!')">owo!</button>
+            </div>
+            <div id="pg_resp" class="page" hidden>
+                <h1>轉生系統</h1>
+                <p>hmmm</p>
+                <button onclick="alert('owo!')">owo!</button>
+            </div>
+            <div id="pg_adv" class="page" hidden>
+                <h1>成就列表</h1>
+                <p>hmmm</p>
+                <button onclick="alert('owo!')">owo!</button>
+            </div>
+            <div id="pg_rec" class="page" hidden>
+                <h1>挑戰紀錄</h1>
+                <p>hmmm</p>
+                <button onclick="alert('owo!')">owo!</button>
+            </div>
         </div>
-        <div id="sections"></div>
     </body>
 </html>

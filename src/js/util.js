@@ -2,7 +2,7 @@
 // wraps file related stuff
 fm = {
     readText: function (path) {
-        return api.fs.readFileSync(path, { encoding: "utf-8" });
+        return core.require(path);
     },
     readJSON: function (path) {
         return JSON.parse(this.readText(path));
@@ -10,10 +10,15 @@ fm = {
     readHTML: function (path) {
         return $(this.readText(path));
     },
-    saveText: function (path, data) {
-        api.fs.writeFile(path, data, { encoding: "utf-8" });
+    writeText: function (path, data) {
+        core.save(path, data);
     },
-    saveJSON: function (path, obj) {
-        this.saveText(path, JSON.stringify(obj));
+    writeJSON: function (path, obj) {
+        this.writeText(path, JSON.stringify(obj));
     },
+    // remove: function (path) {
+    //     api.fs.remove(path, {}, function (err) {
+    //         if (err) console.log(`Error when removing file ${path}!\n${err}`);
+    //     });
+    // },
 };

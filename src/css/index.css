@@ -3,20 +3,43 @@
     src: url("../../res/fonts/LXGWWenKaiTC-Regular.ttf") format("truetype");
 }
 
+/*
 #sections {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
 }
+*/
 
 button {
-    width: 100px;
+    width: 150px;
     height: 40px;
     text-align: center;
     font-family: "LXGW";
     font-size: 20px;
 }
 
-.h1 {
+h1 {
     font-family: "LXGW";
     color: #0099ff;
+}
+
+.lavalamp__object {
+    box-shadow: 0 0 5px 0 #999 inset;
+}
+
+/* navigation bar */
+#navList {
+    padding-left: 0px;
+    background-color: #bde7ff;
+    text-align: center;
+}
+#navList > li {
+    color: rgb(45, 42, 255);
+    font-size: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+}
+#navList > li > a {
+    color: white;
+    text-decoration: none;
 }
