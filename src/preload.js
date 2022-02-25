@@ -1,11 +1,10 @@
 const { contextBridge, ipcRenderer } = require("electron");
-const fs = require("fs");
 
 contextBridge.exposeInMainWorld("core", {
-    require: function (path) {
-        return ipcRenderer.sendSync("require", path);
+    send: function (channel, ...data) {
+        return ipcRenderer.invoke(channel, ...data);
     },
-    save: function (path, data) {
-        ipcRenderer.sendSync("save", path, data);
+    handle: function (channel, callable) {
+        ipcRenderer.on(channel, callable);
     },
 });

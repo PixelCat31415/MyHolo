@@ -1,3 +1,6 @@
+// DEPRECATED.
+// 'core' api should be sufficient
+
 // file manager
 // wraps file related stuff
 fm = {

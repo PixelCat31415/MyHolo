@@ -4,15 +4,25 @@
 
 ## File.js
 
+Do cool things regarding files. Relative paths starts from `myholo/`.
+
 ### import
 
 import in `myholo/src/core/File.js`
 
 ```js
-require( "relative path to File.js" )
+const fio = require("./core/File");
+// path from the .js file to File.js
 ```
 
 ### API
+
+- `fio.checkExist(path)`
+- `fio.readText(path)`
+- `fio.readObj(path)`
+- `fio.writeText(path, data)`
+- `fio.writeObj(path, obj)`
+- `fio.getAllFiles(path)`
 
 #### `fio.checkExist(path)`
 
