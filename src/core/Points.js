@@ -1,14 +1,16 @@
-// handle processing of ability points
-// should contain:
-//  - constructing from scratch
-//  - constructing from file
-//  - addition / substraction
+/*
+ handle processing of ability points
+ should contain:
+  - constructing from scratch
+  - constructing from file
+  - addition / substraction
+*/
 
-const fio=require("./File")
+const fio = require("./File");
 
 class Points {
     static get entries() {
-        return ["血量", "攻擊", "防禦", "敏捷", "體力", "技巧", "幸運"];
+        return ["hp", "atk", "def", "agi", "str", "skl", "luk"];
     }
     constructor(obj) {
         if (typeof obj != "object") {
@@ -22,19 +24,22 @@ class Points {
             }
         }
     }
-    static from_file(path){
-        obj=fio.readObj(path);
+    static from_file(path) {
+        obj = fio.readObj(path);
         return new Points(obj);
     }
     add(o) {
         let res = new Points(o);
         for (let key of Points.entries) {
-            res.key += this.key;
+            res[key] += this[key];
         }
         return res;
     }
+    fill(value) {
+        for (let key of Points.entries) {
+            this[key] = value;
+        }
+    }
 }
-
-console.log("loaded module POINTS");
 
 module.exports = Points;

@@ -4,7 +4,8 @@ const fs = require("fs");
 
 const fio = require("./core/File");
 const Points = require("./core/Points");
-require("./core/Player");
+const Player = require("./core/Player");
+const Chars = require("./core/Characters");
 
 let win;
 
@@ -21,7 +22,7 @@ const createWindow = function () {
     });
 
     win.loadFile(path.join(__dirname, "index.html"));
-    
+
     win.openDevTools();
 };
 
@@ -39,7 +40,14 @@ app.on("activate", () => {
     }
 });
 
-ipcMain.handle("ping", async function(event, data){
+ipcMain.handle("ping", async function (event, data) {
     console.log(`Renderer process said: ${data}`);
-    win.webContents.send("pong", "message from main process");
-})
+    return "PONG from main process";
+});
+
+ipcMain.handle("ready", async function (event) {
+    console.log("App ready!");
+    let player = new Player();
+    win.webContents.send("log", player);
+    player.save("./data/players/player.json");
+});

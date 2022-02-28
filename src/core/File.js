@@ -3,27 +3,25 @@
 
 const fs = require("fs");
 
-fio = {
-    checkExist: function (path){
+class FileIO{
+    static checkExist(path){
         return fs.existsSync(path);
-    },
-    readText: function (path) {
+    }
+    static readText(path) {
         return fs.readFileSync(path, { encoding: "utf-8" });
-    },
-    readObj: function (path) {
+    }
+    static readObj(path) {
         return JSON.parse(this.readText(path));
-    },
-    writeText: function (path, data) {
+    }
+    static writeText(path, data) {
         fs.writeFileSync(path, data, { encoding: "utf-8" });
-    },
-    writeObj: function (path, obj) {
+    }
+    static writeObj(path, obj) {
         this.writeText(path, JSON.stringify(obj));
-    },
-    getAllFiles: function (path) {
+    }
+    static getAllFiles(path) {
         return fs.readdirSync(path);
-    },
+    }
 };
 
-console.log("loaded module FILE");
-
-module.exports = fio;
+module.exports = FileIO;

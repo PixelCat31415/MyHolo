@@ -1,36 +1,43 @@
 // defines properties of a player
 
+const Characters = require("./Characters");
 const fio = require("./File");
-const Points = require("./Points")
+const Points = require("./Points");
 
-const dataPath = "./data/players/player.json";
+// const dataPath = "./data/players/player.json";
 
 class Player {
-    name; // player name (configurable)
-    pts; // ability points
-    rePts; // respawn points
-    status; // -1 = dead, 0 = alive, 1 = uninitialized
+    name;
+    rePts;
+    status;
+    char;
 
-    constructor() {
-        if(!fio.checkExist(dataPath)){
+    constructor(obj) {
+        // read from file if path is given
+        // give default value if nothing given
+        if (typeof obj === "string") {
+            obj = fio.readObj(obj);
+        } else if (!obj) {
             console.log("No player data found. Creating a new one.");
-            fio.writeObj(
-                dataPath,
-                {
-                    name: "New Player",
-                    pts: new Points(),
-                    rePts: new Points(),
-                    status: 1,
-                }
-            )
+            obj = {
+                name: "I8E23A",
+                rePts: new Points(),
+                status: 1,
+                char: new Characters(0),
+            };
         }
-        // TODO: construct from data file
+        // construct from obj
+        this.name = obj.name;
+        this.rePts = new Points(obj.rePts);
+        this.status = obj.status;
+        this.char = obj.char;
     }
 
     // save to file
-    save() {}
+    save(path) {
+        fio.writeObj(path, this);
+        console.log("saved player data");
+    }
 }
 
-player=new Player();
-
-console.log("loaded module PLAYER");
+module.exports = Player;

@@ -88,6 +88,8 @@ typings/
 # Electron-Forge
 out/
 
-
+# :owo:
 myholo.code-workspace
-test/test.html
+test/
+data/
+src/deprecated/

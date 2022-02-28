@@ -1,12 +1,18 @@
 "use strict";
 
-async function ping(){
-    core.send("ping", "message from renderer process")
+async function ping() {
+    let msg = await core.send("ping", "PING from renderer process");
+    console.log(msg);
 }
 
-core.handle("pong", async(event, data)=>{
-    alert(`main process said: ${data}`)
-})
+function init() {
+    core.handle("pong", async (event, data) => {
+        console.log(`main process said: ${data}`);
+    });
+    core.handle("log", function (event, data) {
+        console.log(data);
+    });
+}
 
 $(function () {
     const settings = {
@@ -31,9 +37,6 @@ $(function () {
     }
     $("#pg_home").show();
 
-    core.handle("log", function (event, data) {
-        console.log(data);
-    });
-
-    core.send("ping", "owo");
+    init();
+    core.send("ready");
 });
