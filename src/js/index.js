@@ -2,7 +2,21 @@
 
 async function ping() {
     let msg = await core.send("ping", "PING from renderer process");
-    console.log(msg);
+    console.log(`Main process replied: ${msg}`);
+}
+
+async function match(){
+    let mat = await core.send("match");
+    mat.time = (new Date(mat.time)).toLocaleString('zh-TW');
+    console.log(mat);
+}
+
+function owo(){
+    console.log("owo!\n");
+}
+
+function getTime(){
+    console.log((new Date(Date.now())).toLocaleString('zh-TW'));
 }
 
 function init() {
@@ -38,5 +52,5 @@ $(function () {
     $("#pg_home").show();
 
     init();
-    core.send("ready");
+    match();
 });

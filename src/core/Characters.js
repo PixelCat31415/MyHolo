@@ -5,18 +5,22 @@ const Points = require("./Points");
 class Characters {
     name;
     pts;
-    prepare(self, opp, match) {}
-    attack(self, opp, match) {}
-    finish(self, opp, match) {}
 
     constructor(char) {
+        char = char || 0;
         if (_charProto[char]) {
             return new _charProto[char]();
         }
-        char = char || {};
         this.name = char.name || "Character";
-        this.pts = new Points(char.pts) || new Points();
+        this.pts = new Points(char.pts);
     }
+
+    prepare(self, opp, match) {}
+    attack(self, opp, match) {}
+    isDefeated(self, opp, match) {
+        return self.pts.hp < 0;
+    }
+    finish(self, opp, match) {}
 }
 
 // character prototype
@@ -34,9 +38,27 @@ const _charProto = {
             match.addMessage(`${opp.name}... I shall forgive your rudeness.`);
             self.pts.hp = 100000;
         }
-        finish(self, opp, match){
+        finish(self, opp, match) {
             match.addMessage(`${opp.name}. I've remembered you...`);
             self.pts.hp = 100000;
+        }
+    },
+    49: class extends Characters {
+        constructor() {
+            this.name = "NAME HERE";
+            this.pts = {
+                hp: 0,
+                atk: 100,
+                def: 0,
+                agi: 0,
+                str: 0,
+                skl: 0,
+                luk: 0,
+            };
+        }
+        attack(self, opp, match) {
+            self.pts.atk += 49;
+            opp.pts.hp -= self.pts.atk;
         }
     },
 };

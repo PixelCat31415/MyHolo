@@ -6,6 +6,7 @@ const fio = require("./core/File");
 const Points = require("./core/Points");
 const Player = require("./core/Player");
 const Chars = require("./core/Characters");
+const Match = require("./core/Match");
 
 let win;
 
@@ -43,6 +44,15 @@ app.on("activate", () => {
 ipcMain.handle("ping", async function (event, data) {
     console.log(`Renderer process said: ${data}`);
     return "PONG from main process";
+});
+
+ipcMain.handle("match", async function(event){
+    let p1 = new Player({ name: "NightShade" });
+    let p2 = new Player({ name: "PixelCat" });
+    let mat = new Match(p1, p2, "testing battle");
+    mat.start();
+    console.log(new Points());
+    return mat;
 });
 
 ipcMain.handle("ready", async function (event) {
