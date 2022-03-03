@@ -47,11 +47,11 @@ ipcMain.handle("ping", async function (event, data) {
 });
 
 ipcMain.handle("match", async function(event){
-    let p1 = new Player({ name: "NightShade" });
+    let p1 = new Player({ name: "NightShade", charid: 1, });
     let p2 = new Player({ name: "PixelCat" });
     let mat = new Match(p1, p2, "testing battle");
     mat.start();
-    console.log(new Points());
+    mat.save();
     return mat;
 });
 

@@ -1,5 +1,7 @@
 // handle battles
 
+const fio = require("./File");
+
 const MAX_ROUNDS = 100;
 
 class Match {
@@ -61,6 +63,10 @@ class Match {
 
     addMessage(msg) {
         this.record.push(msg);
+    }
+
+    save() {
+        fio.writeObj(`./data/match/match_${this.time}.json`, this);
     }
 }
 

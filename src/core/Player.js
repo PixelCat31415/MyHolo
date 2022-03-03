@@ -9,9 +9,11 @@ const Points = require("./Points");
 class Player {
     name;
     pts;
+    maxPts;
     rePts;
     status;
-    char;
+    charid;
+    #char;
 
     constructor(obj) {
         if (typeof obj === "string") {
@@ -21,9 +23,12 @@ class Player {
             obj = {};
         }
         this.name = obj.name || "I8E23A";
+        this.pts = new Points(obj.pts);
+        this.maxPts = new Points(obj.maxPts);
         this.rePts = new Points(obj.rePts);
         this.status = obj.status || 1;
-        this.char = new Characters(obj.char);
+        this.charid = obj.charid || 0;
+        this.#char = Characters.getCharacter(this.charid);
     }
 
     save(path) {
@@ -32,18 +37,18 @@ class Player {
     }
 
     prepare(opp, match) {
-        this.pts = new Points(this.char.pts);
-        this.char.prepare(this, opp, match);
+        this.pts = new Points(this.maxPts);
+        this.#char.prepare(this, opp, match);
     }
     attack(opp, match) {
         match.addMessage(`${this.name}'s turn...`);
-        this.char.attack(this, opp, match);
+        this.#char.attack(this, opp, match);
     }
     isDefeated(opp, match) {
-        return this.char.isDefeated(this, opp, match);
+        return this.#char.isDefeated(this, opp, match);
     }
     finish(opp, match) {
-        this.char.finish(this, opp, match);
+        this.#char.finish(this, opp, match);
     }
 }
 

@@ -3,9 +3,18 @@
 
 const fs = require("fs");
 
+let dataPaths = [
+    "./data/",
+    "./data/players/",
+    "./data/match/",
+];
+
 class FileIO{
     static checkExist(path){
         return fs.existsSync(path);
+    }
+    static mkdir(path){
+        fs.mkdirSync(path);
     }
     static readText(path) {
         return fs.readFileSync(path, { encoding: "utf-8" });
@@ -21,6 +30,13 @@ class FileIO{
     }
     static getAllFiles(path) {
         return fs.readdirSync(path);
+    }
+    static init(){
+        for(path of dataPaths){
+            if(!this.checkExist(path)){
+                this.mkdir(path);
+            }
+        }
     }
 };
 
