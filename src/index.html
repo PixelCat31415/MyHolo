@@ -6,42 +6,43 @@
 
         <!-- useful libraries -->
         <script defer src="dependencies/jquery-3.6.0.min.js"></script>
-        <link type="text/css" rel="stylesheet" href="dependencies/Lava-Lamp/build/css/lavalamp.css"/>
-        <script defer src="dependencies/Lava-Lamp/build/js/lavalamp.js"></script>
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="dependencies/Lava-Lamp/build/css/lavalamp.css"
+        />
+        <script
+            defer
+            src="dependencies/Lava-Lamp/build/js/lavalamp.js"
+        ></script>
 
         <!-- style sheets -->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Noto+Serif+TC|Ubuntu+Mono"
+        />
         <link type="text/css" rel="stylesheet" href="css/index.css" />
 
         <!-- script stuff -->
+        <script defer src="js/devtool.js"></script>
         <script defer src="js/index.js"></script>
     </head>
     <body>
-        <h1>MyHolo v1.0</h1>
-        <p>Under construction💤...</p>
         <ul id="navList">
-            <li id="nav_home" class="NavTarget ActiveLavalamp">
-                HOME
-            </li>
-            <li id="nav_my" class="NavTarget">
-                我的HOLO
-            </li>
-            <li id="nav_lvl" class="NavTarget">
-                樓層挑戰
-            </li>
-            <li id="nav_resp" class="NavTarget">
-                轉生系統
-            </li>
-            <li id="nav_adv" class="NavTarget">
-                成就列表
-            </li>
-            <li id="nav_rec" class="NavTarget">
-                挑戰紀錄
-            </li>
+            <li id="nav_home" class="NavTarget">MyHolo-v1.0</li>
+            <li id="nav_my" class="NavTarget">我的HOLO</li>
+            <li id="nav_lvl" class="NavTarget">樓層挑戰</li>
+            <li id="nav_resp" class="NavTarget">轉生系統</li>
+            <li id="nav_adv" class="NavTarget">成就列表</li>
+            <li id="nav_rec" class="NavTarget">挑戰紀錄</li>
+            <li id="nav_dev" class="NavTarget ActiveLavalamp">測試工具</li>
         </ul>
         <div id="d_pages">
             <div id="pg_home" class="Page" hidden>
-                <h1>HOME</h1>
+                <h1>MyHolo v1.0</h1>
+                <p>Under construction💤...</p>
                 <p>hmmm</p>
+                <p><code>Ctrl + Shift + I</code> to toggle dev tools.</p>
                 <button onclick="ping()">ping...</button>
             </div>
             <div id="pg_my" class="Page" hidden>
@@ -68,6 +69,263 @@
                 <h1>挑戰紀錄</h1>
                 <p>hmmm</p>
                 <button onclick="owo()">owo!</button>
+            </div>
+            <div id="pg_dev" class="Page">
+                <h1 style="text-align: center">
+                    MyHolo
+                    <span style="color: #0d0070; border: 2px #0d0070 solid">
+                        &nbsp;Tester
+                    </span>
+                    &nbsp;v0.0.0
+                </h1>
+                <div
+                    style="margin: 10px; border: 2px black solid; padding: 10px"
+                >
+                    <h3>控制選項</h3>
+                    <button onclick="testMatch();">進行測試對戰</button>
+                    <button>欄位說明</button>
+                    <button>可用 API 列表</button>
+                </div>
+                <div class="container">
+                    <div class="column" style="width: 30%">
+                        <div class="container" style="align-items: center">
+                            <h3 style="display: inline-block; flex-grow: 1">
+                                角色1
+                            </h3>
+                            <button onclick="resetAll(1);">返回預設值</button>
+                            <button>儲存</button>
+                        </div>
+                        <form id="form1" spellcheck="false">
+                            <label for="name1">角色名稱</label>
+                            <input
+                                type="text"
+                                id="name1"
+                                name="name"
+                                required
+                                style="width: 200px"
+                            />
+                            <fieldset>
+                                <legend>基礎能力值</legend>
+                                <label for="hp1">生命值</label>
+                                <input
+                                    type="text"
+                                    id="hp1"
+                                    name="hp"
+                                    required
+                                />
+                                <br />
+                                <label for="atk1">攻擊力</label>
+                                <input
+                                    type="text"
+                                    id="atk1"
+                                    name="atk"
+                                    required
+                                />
+                                <br />
+                                <label for="def1">防禦力</label>
+                                <input
+                                    type="text"
+                                    id="def1"
+                                    name="def"
+                                    required
+                                />
+                                <br />
+                                <label for="agi1">敏捷度</label>
+                                <input
+                                    type="text"
+                                    id="agi1"
+                                    name="agi"
+                                    required
+                                />
+                                <br />
+                                <label for="str1">體力值</label>
+                                <input
+                                    type="text"
+                                    id="str1"
+                                    name="str"
+                                    required
+                                />
+                                <br />
+                                <label for="skl1">技巧值</label>
+                                <input
+                                    type="text"
+                                    id="skl1"
+                                    name="skl"
+                                    required
+                                />
+                                <br />
+                                <label for="luk1">幸運值</label>
+                                <input
+                                    type="text"
+                                    id="luk1"
+                                    name="luk"
+                                    required
+                                />
+                            </fieldset>
+
+                            <label for="prepare1">
+                                <code>prepare(self, opp, match)</code>
+                            </label>
+                            <br />
+                            <textarea
+                                id="prepare1"
+                                name="prepare"
+                                placeholder="每次對戰開始前執行的函數"
+                            ></textarea>
+
+                            <label for="attack1">
+                                <code>attack(self, opp, match)</code>
+                            </label>
+                            <br />
+                            <textarea
+                                id="attack1"
+                                name="attack"
+                                placeholder="每回合攻擊時執行的函數"
+                            ></textarea>
+
+                            <label for="isDefeated1">
+                                <code>isDefeated(self, opp, match)</code>
+                            </label>
+                            <br />
+                            <textarea
+                                id="isDefeated1"
+                                name="isDefeated"
+                                placeholder="每回合檢查是否已經戰敗時執行的函數"
+                            ></textarea>
+
+                            <label for="finish1">
+                                <code>finish(self, opp, match)</code>
+                            </label>
+                            <br />
+                            <textarea
+                                id="finish1"
+                                name="finish"
+                                placeholder="每次對戰結束後執行的函數"
+                            ></textarea>
+                        </form>
+                    </div>
+                    <div class="column" style="width: 30%">
+                        <div class="container" style="align-items: center">
+                            <h3 style="display: inline-block; flex-grow: 1">
+                                角色2
+                            </h3>
+                            <button onclick="resetAll(2);">返回預設值</button>
+                            <button>儲存</button>
+                        </div>
+                        <form id="form2" spellcheck="false">
+                            <label for="name2">角色名稱</label>
+                            <input
+                                type="text"
+                                id="name2"
+                                name="name"
+                                required
+                                style="width: 200px"
+                            />
+                            <fieldset>
+                                <legend>基礎能力值</legend>
+                                <label for="hp2">生命值</label>
+                                <input
+                                    type="text"
+                                    id="hp2"
+                                    name="hp"
+                                    required
+                                />
+                                <br />
+                                <label for="atk2">攻擊力</label>
+                                <input
+                                    type="text"
+                                    id="atk2"
+                                    name="atk"
+                                    required
+                                />
+                                <br />
+                                <label for="def2">防禦力</label>
+                                <input
+                                    type="text"
+                                    id="def2"
+                                    name="def"
+                                    required
+                                />
+                                <br />
+                                <label for="agi2">敏捷度</label>
+                                <input
+                                    type="text"
+                                    id="agi2"
+                                    name="agi"
+                                    required
+                                />
+                                <br />
+                                <label for="str2">體力值</label>
+                                <input
+                                    type="text"
+                                    id="str2"
+                                    name="str"
+                                    required
+                                />
+                                <br />
+                                <label for="skl2">技巧值</label>
+                                <input
+                                    type="text"
+                                    id="skl2"
+                                    name="skl"
+                                    required
+                                />
+                                <br />
+                                <label for="luk2">幸運值</label>
+                                <input
+                                    type="text"
+                                    id="luk2"
+                                    name="luk"
+                                    required
+                                />
+                            </fieldset>
+
+                            <label for="prepare2">
+                                <code>prepare(self, opp, match)</code>
+                            </label>
+                            <br />
+                            <textarea
+                                id="prepare2"
+                                name="prepare"
+                                placeholder="每次對戰開始前執行的函數"
+                            ></textarea>
+
+                            <label for="attack2">
+                                <code>attack(self, opp, match)</code>
+                            </label>
+                            <br />
+                            <textarea
+                                id="attack2"
+                                name="attack"
+                                placeholder="每回合攻擊時執行的函數"
+                            ></textarea>
+
+                            <label for="isDefeated2">
+                                <code>isDefeated(self, opp, match)</code>
+                            </label>
+                            <br />
+                            <textarea
+                                id="isDefeated2"
+                                name="isDefeated"
+                                placeholder="每回合檢查是否已經戰敗時執行的函數"
+                            ></textarea>
+
+                            <label for="finish2">
+                                <code>finish(self, opp, match)</code>
+                            </label>
+                            <br />
+                            <textarea
+                                id="finish2"
+                                name="finish"
+                                placeholder="每次對戰結束後執行的函數"
+                            ></textarea>
+                        </form>
+                    </div>
+                    <div class="column" style="width: 40%">
+                        <h3>對戰測試結果</h3>
+                        <p style="font-style: italic">空空如也 OAO</p>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

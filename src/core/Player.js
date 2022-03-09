@@ -37,11 +37,10 @@ class Player {
     }
 
     prepare(opp, match) {
-        this.pts = new Points(this.maxPts);
         this.#char.prepare(this, opp, match);
     }
     attack(opp, match) {
-        match.addMessage(`${this.name}'s turn...`);
+        match.log(`${this.name}'s turn...`);
         this.#char.attack(this, opp, match);
     }
     isDefeated(opp, match) {

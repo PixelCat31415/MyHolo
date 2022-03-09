@@ -48,15 +48,15 @@ const _charProto = {
         }
         static prepare(self, opp, match) {
             self.pts = new Points(self.maxPts);
-            match.addMessage(`Never even try to challenge me, ${opp.name}...`);
+            match.log(`Never even try to challenge me, ${opp.name}...`);
         }
         static attack(self, opp, match) {
             self.pts = new Points(self.maxPts);
-            match.addMessage(`${opp.name}... I shall forgive your rudeness.`);
+            match.log(`${opp.name}... I shall forgive your rudeness.`);
         }
         static finish(self, opp, match) {
             self.pts = new Points(self.maxPts);
-            match.addMessage(`${opp.name}. I've remembered you...`);
+            match.log(`${opp.name}. I've remembered you...`);
         }
     },
 };

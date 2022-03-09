@@ -25,7 +25,7 @@ class Match {
         this.record = [];
         this.result = -49;
 
-        this.addMessage(
+        this.log(
             `Challenge from ${this.attacker.name} to ${this.defender.name}...`
         );
 
@@ -40,7 +40,7 @@ class Match {
             } else if (this.defender.isDefeated(this.attacker, this)) {
                 this.result = 1;
             } else if (this.nround >= MAX_ROUNDS) {
-                this.addMessage("雙方大戰三百回合不分勝負💤");
+                this.log("雙方大戰三百回合不分勝負💤");
                 this.result = 0;
             } else {
                 this.nround++;
@@ -58,10 +58,10 @@ class Match {
         if (this.result == -1) win = `${this.defender.name}獲勝`;
         else if (this.result == 0) win = `雙方不分軒輊`;
         else if (this.result == 1) win = `${this.attacker.name}獲勝`;
-        this.addMessage(`對戰結束! ${win}`);
+        this.log(`對戰結束! ${win}`);
     }
 
-    addMessage(msg) {
+    log(msg) {
         this.record.push(msg);
     }
 

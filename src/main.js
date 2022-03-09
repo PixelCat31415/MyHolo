@@ -25,6 +25,7 @@ const createWindow = function () {
     win.loadFile(path.join(__dirname, "index.html"));
 
     win.openDevTools();
+    win.maximize();
 };
 
 app.on("ready", createWindow);
@@ -55,9 +56,9 @@ ipcMain.handle("match", async function(event){
     return mat;
 });
 
+const dev = require("./core/DevTool");
+
 ipcMain.handle("ready", async function (event) {
     console.log("App ready!");
-    let player = new Player();
-    win.webContents.send("log", player);
-    player.save("./data/players/player.json");
+    dev.init(win);
 });

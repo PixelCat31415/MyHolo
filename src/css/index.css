@@ -3,23 +3,18 @@
     src: url("../../res/fonts/LXGWWenKaiTC-Regular.ttf") format("truetype");
 }
 
-/*
-#sections {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+* {
+    font-family: "LXGW";
 }
-*/
 
 button {
     width: 150px;
     height: 40px;
     text-align: center;
-    font-family: "LXGW";
     font-size: 20px;
 }
 
 h1 {
-    font-family: "LXGW";
     color: #0099ff;
 }
 
@@ -29,7 +24,6 @@ h1 {
 
 /* navigation bar */
 #navList {
-    padding-left: 0px;
     background-color: #bde7ff;
     text-align: center;
 }
@@ -42,4 +36,57 @@ h1 {
 #navList > li > a {
     color: white;
     text-decoration: none;
+}
+
+/* dev tool */
+#pg_dev * {
+    font-family: "Noto Serif TC";
+}
+#pg_dev code {
+    font-family: "Ubuntu Mono";
+    background-color: #d3d3d3;
+    padding: 5px;
+    border-radius: 5px;
+}
+#pg_dev .container {
+    display: flex;
+}
+#pg_dev .column {
+    border: 2px black solid;
+    margin: 10px;
+    padding: 10px;
+}
+#pg_dev input {
+    width: 100px;
+}
+#pg_dev label {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+#pg_dev fieldset {
+    margin-top: 10px;
+}
+#pg_dev textarea {
+    margin: 10px;
+    width: 300px;
+    height: 100px;
+    font-family: "Ubuntu Mono";
+}
+#pg_dev button {
+    background-color: transparent;
+    border-width: 2px;
+    border-color: #0d0070;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    font-size: medium;
+    transition-duration: 0.2s;
+}
+#pg_dev form button{
+    width:min-content;
+}
+#pg_dev button:hover {
+    background-color: #624eff;
+    color: white;
 }

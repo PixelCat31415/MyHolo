@@ -5,18 +5,18 @@ async function ping() {
     console.log(`Main process replied: ${msg}`);
 }
 
-async function match(){
+async function match() {
     let mat = await core.send("match");
-    mat.time = (new Date(mat.time)).toLocaleString('zh-TW');
+    mat.time = new Date(mat.time).toLocaleString("zh-TW");
     console.log(mat);
 }
 
-function owo(){
+function owo() {
     console.log("owo!\n");
 }
 
-function getTime(){
-    console.log((new Date(Date.now())).toLocaleString('zh-TW'));
+function getTime() {
+    console.log(new Date(Date.now()).toLocaleString("zh-TW"));
 }
 
 function init() {
@@ -29,6 +29,8 @@ function init() {
 }
 
 $(function () {
+    initDev();
+
     const settings = {
         margins: true,
         enableFocus: true,
@@ -37,11 +39,11 @@ $(function () {
     };
     const element = $("#navList")[0];
     const navbar = new Lavalamp(element, settings);
-    let active = $("#nav_home")[0];
+    let active = $("#nav_dev")[0];
     navbar.activeElement = active;
     navbar.reposition(active);
 
-    let names = ["home", "my", "lvl", "resp", "adv", "rec"];
+    let names = ["home", "my", "lvl", "resp", "adv", "rec", "dev"];
     for (let name of names) {
         let entry = $(`#nav_${name}`);
         entry.on("click", function () {
@@ -49,8 +51,8 @@ $(function () {
             $(`#pg_${name}`).show();
         });
     }
-    $("#pg_home").show();
+    // $("#pg_home").show();
 
     init();
-    match();
+    core.send("ready");
 });
