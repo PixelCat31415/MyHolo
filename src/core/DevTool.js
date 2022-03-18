@@ -54,7 +54,7 @@ class TestPlayer {
                 pushMessage(
                     "warning",
                     "數值錯誤",
-                    "能力值不是整數，自動填入預設值「0」。",
+                    `能力值 '${key}' 不是整數，自動填入預設值「0」。`,
                     "角色能力值設定"
                 );
                 this.maxPts[key] = 0;
@@ -75,7 +75,7 @@ class TestPlayer {
                 `函數解析時發生錯誤。\n錯誤訊息：「${error}」`,
                 `解析角色成員函數 '${fname}'`
             );
-            return;
+            throw error;
         }
         try {
             return func(...args);
@@ -86,6 +86,7 @@ class TestPlayer {
                 `函數執行時發生錯誤。\n錯誤訊息：「${error}」`,
                 `執行角色成員函數 '${fname}'`
             );
+            throw error;
         }
     }
 

@@ -76,24 +76,25 @@
                     <span style="color: #0d0070; border: 2px #0d0070 solid">
                         &nbsp;Tester
                     </span>
-                    &nbsp;v0.0.0
+                    &nbsp;v0.1
                 </h1>
+                <div id="dev-msg"></div>
                 <div
                     style="margin: 10px; border: 2px black solid; padding: 10px"
                 >
                     <h3>控制選項</h3>
                     <button onclick="testMatch();">進行測試對戰</button>
-                    <button>欄位說明</button>
-                    <button>可用 API 列表</button>
+                    <!-- <button>欄位說明</button> -->
+                    <!-- <button>可用 API 列表</button> -->
                 </div>
                 <div class="container">
-                    <div class="column" style="width: 30%">
+                    <div class="column" style="width: 35%">
                         <div class="container" style="align-items: center">
                             <h3 style="display: inline-block; flex-grow: 1">
                                 角色1
                             </h3>
                             <button onclick="resetAll(1);">返回預設值</button>
-                            <button>儲存</button>
+                            <!-- <button>儲存</button> -->
                         </div>
                         <form id="form1" spellcheck="false">
                             <label for="name1">角色名稱</label>
@@ -204,13 +205,13 @@
                             ></textarea>
                         </form>
                     </div>
-                    <div class="column" style="width: 30%">
+                    <div class="column" style="width: 35%">
                         <div class="container" style="align-items: center">
                             <h3 style="display: inline-block; flex-grow: 1">
                                 角色2
                             </h3>
                             <button onclick="resetAll(2);">返回預設值</button>
-                            <button>儲存</button>
+                            <!-- <button>儲存</button> -->
                         </div>
                         <form id="form2" spellcheck="false">
                             <label for="name2">角色名稱</label>
@@ -321,9 +322,11 @@
                             ></textarea>
                         </form>
                     </div>
-                    <div class="column" style="width: 40%">
+                    <div class="column" style="width: 30%">
                         <h3>對戰測試結果</h3>
-                        <p style="font-style: italic">空空如也 OAO</p>
+                        <div id="results">
+                            <p style="font-style: italic">空空如也 OAO</p>
+                        </div>
                     </div>
                 </div>
             </div>

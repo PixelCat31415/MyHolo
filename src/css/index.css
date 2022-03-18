@@ -69,7 +69,7 @@ h1 {
 }
 #pg_dev textarea {
     margin: 10px;
-    width: 300px;
+    width: 90%;
     height: 100px;
     font-family: "Ubuntu Mono";
 }
@@ -83,10 +83,48 @@ h1 {
     font-size: medium;
     transition-duration: 0.2s;
 }
-#pg_dev form button{
-    width:min-content;
+#pg_dev form button {
+    width: min-content;
 }
 #pg_dev button:hover {
-    background-color: #624eff;
+    background-color: #4e86ff;
     color: white;
+}
+#pg_dev .res-box {
+    margin: 10px;
+}
+#pg_dev .res-title {
+    margin: 0;
+    font-weight: bold;
+}
+#pg_dev .res-body {
+    margin: 0;
+    padding-left: 10px;
+}
+#pg_dev .msg {
+    margin: 10px 150px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px black solid;
+    font-size: larger;
+}
+#pg_dev .msg button{
+    border: none;
+    text-decoration: underline;
+}
+#pg_dev .msg button:hover{
+    background: none;
+    color: black;
+}
+#pg_dev .msg-info {
+    border: 2px #7bcaff solid;
+    background-color: #def2ff;
+}
+#pg_dev .msg-warning {
+    border: 2px #fdff7b solid;
+    background-color: #fffdde;
+}
+#pg_dev .msg-error {
+    border: 2px #ff7b7b solid;
+    background-color: #ffdede;
 }

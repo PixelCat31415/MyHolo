@@ -32,12 +32,14 @@ class FileIO{
         return fs.readdirSync(path);
     }
     static init(){
-        for(path of dataPaths){
+        for(let path of dataPaths){
             if(!this.checkExist(path)){
                 this.mkdir(path);
             }
         }
     }
 };
+
+FileIO.init();
 
 module.exports = FileIO;

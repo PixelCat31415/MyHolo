@@ -19,7 +19,7 @@ class Match {
         this.defender = defer;
     }
 
-    start() {
+    _start() {
         this.time = Date.now();
         this.nround = 0;
         this.record = [];
@@ -59,6 +59,16 @@ class Match {
         else if (this.result == 0) win = `雙方不分軒輊`;
         else if (this.result == 1) win = `${this.attacker.name}獲勝`;
         this.log(`對戰結束! ${win}`);
+    }
+
+    start(){
+        try{
+            this._start();
+        }catch(error){
+            this.nround = 0;
+            this.record = [];
+            this.result = -2;
+        }
     }
 
     log(msg) {
