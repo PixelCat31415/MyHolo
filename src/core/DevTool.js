@@ -1,7 +1,8 @@
 "use strict";
 
-const {ipcMain} = require("electron");
+const { ipcMain } = require("electron");
 
+const fio = require("./File");
 const Points = require("./Points");
 const Match = require("./Match");
 
@@ -120,6 +121,18 @@ let devTool = {
         ipcMain.handle("dev-match", async (event, f1, f2) => {
             pushMessage("info", "好耶", "成功送出請求", "MyHolo Core");
             return testMatch(f1, f2);
+        });
+        ipcMain.handle("dev-save", async (event, data) => {
+            const reg = /[^a-zA-Z0-9]/g;
+            let fname = data.name.replace(reg, "-");
+            let fpath = `data/characters/${fname}.json`;
+            fio.writeObj(fpath, data);
+            pushMessage(
+                "info",
+                "已儲存",
+                `已儲存角色資訊至檔案 '${fpath}'`,
+                "MyHolo Core"
+            );
         });
     },
 };

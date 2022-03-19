@@ -13,8 +13,7 @@ let win;
 const createWindow = function () {
     win = new BrowserWindow({
         title: "MyHolo v1.0",
-        width: 1400,
-        height: 800,
+        show: false,
         webPreferences: {
             // nodeIntegration: true,
             // contextIsolation: false,
@@ -25,7 +24,7 @@ const createWindow = function () {
     win.loadFile(path.join(__dirname, "index.html"));
 
     // win.openDevTools();
-    win.maximize();
+    // win.maximize();
 };
 
 app.on("ready", createWindow);
@@ -61,4 +60,5 @@ const dev = require("./core/DevTool");
 ipcMain.handle("ready", async function (event) {
     console.log("App ready!");
     dev.init(win);
+    win.maximize();
 });

@@ -103,16 +103,18 @@ h1 {
 }
 #pg_dev .msg {
     margin: 10px 150px;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 5px;
     border: 2px black solid;
     font-size: larger;
+    display: flex;
+    align-items: center;
 }
-#pg_dev .msg button{
+#pg_dev .msg button {
     border: none;
     text-decoration: underline;
 }
-#pg_dev .msg button:hover{
+#pg_dev .msg button:hover {
     background: none;
     color: black;
 }

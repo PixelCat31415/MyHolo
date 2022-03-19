@@ -28,17 +28,18 @@ function init() {
     });
 }
 
-$(function () {
+$(async function () {
     initDev();
-
+    init();
+    await core.send("ready");
+    
     const settings = {
         margins: true,
         enableFocus: true,
         setOnClick: true,
         initActiveQuery: ".ActiveLavalamp",
     };
-    const element = $("#navList")[0];
-    const navbar = new Lavalamp(element, settings);
+    const navbar = new Lavalamp($("#navList")[0], settings);
     let active = $("#nav_dev")[0];
     navbar.activeElement = active;
     navbar.reposition(active);
@@ -51,8 +52,4 @@ $(function () {
             $(`#pg_${name}`).show();
         });
     }
-    // $("#pg_home").show();
-
-    init();
-    core.send("ready");
 });

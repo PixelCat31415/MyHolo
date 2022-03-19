@@ -7,13 +7,14 @@ let dataPaths = [
     "./data/",
     "./data/players/",
     "./data/match/",
+    "./data/characters/",
 ];
 
-class FileIO{
-    static checkExist(path){
+class FileIO {
+    static checkExist(path) {
         return fs.existsSync(path);
     }
-    static mkdir(path){
+    static mkdir(path) {
         fs.mkdirSync(path);
     }
     static readText(path) {
@@ -31,14 +32,14 @@ class FileIO{
     static getAllFiles(path) {
         return fs.readdirSync(path);
     }
-    static init(){
-        for(let path of dataPaths){
-            if(!this.checkExist(path)){
+    static init() {
+        for (let path of dataPaths) {
+            if (!this.checkExist(path)) {
                 this.mkdir(path);
             }
         }
     }
-};
+}
 
 FileIO.init();
 

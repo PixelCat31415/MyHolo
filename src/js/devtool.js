@@ -88,15 +88,7 @@ function showMessage(msg) {
         $("<div>", {
             class: `msg msg-${msg.type}`,
             id: `msg${msgid}`,
-            style: "display: flex; align-items: center;",
         })
-            .append(
-                $("<button>", {
-                    text: "OK",
-                    onclick: `$('#msg${msgid}').remove()`,
-                    style: "width: 50px; margin-right: 30px",
-                })
-            )
             .append(
                 $("<div>", {
                     text: msg.title + "！",
@@ -115,12 +107,19 @@ function showMessage(msg) {
                     style: "display: inline-block; color: #333333;",
                 })
             )
+            .append(
+                $("<button>", {
+                    text: "OK",
+                    onclick: `$('#msg${msgid}').remove()`,
+                    style: "width: 50px; margin: 0px 10px;",
+                })
+            )
     );
-    if (msg.type === "info") {
-        setTimeout(() => {
-            $(`#msg${msgid}`).remove();
-        }, 3000);
-    }
+    // if (msg.type === "info") {
+    //     setTimeout(() => {
+    //         $(`#msg${msgid}`).remove();
+    //     }, 3000);
+    // }
 }
 
 async function testMatch() {
@@ -130,6 +129,11 @@ async function testMatch() {
     let mat = await core.send("dev-match", f1, f2);
     console.log("match completed");
     showMatch(mat);
+}
+
+function saveData(id){
+    let form = getFormData(`#form${id}`);
+    core.send("dev-save", form);
 }
 
 function initDev() {
