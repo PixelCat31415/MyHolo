@@ -8,7 +8,9 @@ const Match = require("./Match");
 
 let win;
 
+let NO_MSG=false;
 function pushMessage(tp, ti, ms, wh) {
+    if(NO_MSG) return;
     win.webContents.send("dev-message", {
         type: tp,
         title: ti,
@@ -133,6 +135,9 @@ let devTool = {
                 `已儲存角色資訊至檔案 '${fpath}'`,
                 "MyHolo Core"
             );
+        });
+        ipcMain.handle("dev-mute", async (event, data) =>{
+            NO_MSG=data;
         });
     },
 };

@@ -10,16 +10,20 @@ class Player {
     name;
     pts;
     maxPts;
-    rePts;
     status;
     charid;
     #char;
 
     constructor(obj) {
         if (typeof obj === "string") {
-            obj = fio.readObj(obj);
+            if (fio.checkExist(obj)){
+                obj = fio.readObj(obj);
+            }else{
+                console.log("No player data found. Creating a new one.");
+                obj = {};
+            }
         } else if (typeof obj !== "object") {
-            console.log("No player data found. Creating a new one.");
+            console.log("Constructing player with unknown type. Creating a new one.");
             obj = {};
         }
         this.name = obj.name || "I8E23A";

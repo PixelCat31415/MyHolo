@@ -29,6 +29,22 @@ function getFormData(id) {
     return res;
 }
 
+function makeBlock (title, body) {
+    return $("<div>", { class: "res-box" })
+        .append(
+            $("<p>", {
+                class: "res-title",
+                text: title,
+            })
+        )
+        .append(
+            $("<p>", {
+                class: "res-body",
+                text: body,
+            })
+        );
+};
+
 function showMatch(mat) {
     let $rec = $("<ol>", { style: "margin-top: 0px;" });
     for (let r of mat.record) {
@@ -39,22 +55,6 @@ function showMatch(mat) {
     else if (win === 1) win = "攻擊方";
     else if (win === -1) win = "防守方";
     else win = "執行錯誤";
-
-    let makeBlock = function (title, body) {
-        return $("<div>", { class: "res-box" })
-            .append(
-                $("<p>", {
-                    class: "res-title",
-                    text: title,
-                })
-            )
-            .append(
-                $("<p>", {
-                    class: "res-body",
-                    text: body,
-                })
-            );
-    };
 
     let res = $("#results");
     res.empty();
@@ -77,6 +77,37 @@ function showMatch(mat) {
                 )
                 .append($rec)
         );
+}
+
+const BAR_WIDTH=180;
+function makeBars(title, items){
+    let tot=0;
+    for(let k in items) tot+=items[k];
+
+    let $bars = $("<div>", { style: "margin-top: 0px;" });
+    for(let k in items){
+        let ratio=items[k]/tot;
+        let $bar = $("<div>", {style: "padding-left: 10px;"});
+        $bar.append($("<div>", {style: `display: inline-block; margin: 3px 0px; height: 20px; width: ${BAR_WIDTH*ratio}px; background-color: #7bcaff; vertical-align: top`}));
+        $bar.append($("<div>", {style: `display: inline-block; margin: 3px 0px; height: 20px; width: ${BAR_WIDTH*(1-ratio)}px; background-color: #def2ff; vertical-align: top`}));
+        $bar.append($("<div>",{text: `( ${Math.round(ratio*100)}% / ${items[k]} ) ${k}`, style: "display: inline-block; margin: 3px 10px; height: 20px; vertical-align: top"}));
+        $bars.append($bar);
+        // console.log(`${k}: ${items[k]} = ${ratio}`);
+    }
+    console.log(items);
+    console.log($bars);
+
+    let res=$("#results");
+    res.append(
+        $("<div>", { class: "res-box" })
+            .append(
+                $("<p>", {
+                    class: "res-title",
+                    text: title,
+                })
+            )
+            .append($bars)
+    );
 }
 
 let msgcount = 0;
@@ -129,6 +160,56 @@ async function testMatch() {
     let mat = await core.send("dev-match", f1, f2);
     console.log("match completed");
     showMatch(mat);
+}
+
+async function batchMatch(nrnd){
+    $(".msg").remove();
+    await core.send("dev-mute", true);
+    showMessage({
+        type: "info",
+        title: "警告訊息已移除",
+        message: "在批次測試中不會顯示錯誤訊息",
+        where: "MyHolo Tester",
+    });
+    let $res=$("#results");
+    $res.empty();
+    $res.append(makeBlock("OAO......",`對戰進行中 ( 0 / ${nrnd} )`));
+
+    let wincnt={
+        "雙方平手": 0,
+        "攻擊方": 0,
+        "防守方": 0,
+        "執行錯誤": 0
+    };
+    let step=5;
+    let end={};
+    for(let i=step;i<=100;i+=step) end[`${i-9} - ${i}`]=0;
+    for(let rnd=0;rnd<nrnd;rnd++){
+        let f1 = getFormData("#form1");
+        let f2 = getFormData("#form2");
+        let mat = await core.send("dev-match", f1, f2);
+        let win = mat.result;
+        if (win === 0) win = "雙方平手";
+        else if (win === 1) win = "攻擊方";
+        else if (win === -1) win = "防守方";
+        else win = "執行錯誤";
+        wincnt[win]++;
+        if(win=="執行錯誤") continue;
+        let rd=mat.nround;
+        rd=Math.ceil(rd/step)*step;
+        end[`${rd-9} - ${rd}`]++;
+        // console.log(`${win} => ${rd}`);
+        if(rnd%10==9){
+            $res.empty();
+            $res.append(makeBlock("OAO......",`對戰進行中 ( ${rnd+1} / ${nrnd} )`));
+        }
+    }
+
+    $res.empty();
+    $res.append(makeBlock("批次對戰數", nrnd));
+    makeBars("勝率統計", wincnt);
+    makeBars("結束回合數統計", end);
+    await core.send("dev-mute", false);
 }
 
 function saveData(id){
