@@ -4,40 +4,19 @@ const Characters = require("./Characters");
 const fio = require("./File");
 const Points = require("./Points");
 
-// const dataPath = "./data/players/player.json";
-
 class Player {
     name;
     pts;
-    maxPts;
-    status;
     charid;
+
     #char;
 
-    constructor(obj) {
-        if (typeof obj === "string") {
-            if (fio.checkExist(obj)){
-                obj = fio.readObj(obj);
-            }else{
-                console.log("No player data found. Creating a new one.");
-                obj = {};
-            }
-        } else if (typeof obj !== "object") {
-            console.log("Constructing player with unknown type. Creating a new one.");
-            obj = {};
-        }
-        this.name = obj.name || "I8E23A";
-        this.pts = new Points(obj.pts);
-        this.maxPts = new Points(obj.maxPts);
-        this.rePts = new Points(obj.rePts);
-        this.status = obj.status || 1;
-        this.charid = obj.charid || 0;
+    constructor(_name, _charid, _pts) {
+        console.log("constructing player");
+        this.name = _name;
+        this.charid = _charid;
+        this.pts = new Points(_pts);
         this.#char = Characters.getCharacter(this.charid);
-    }
-
-    save(path) {
-        fio.writeObj(path, this);
-        console.log("saved player data");
     }
 
     prepare(opp, match) {
@@ -52,6 +31,9 @@ class Player {
     }
     finish(opp, match) {
         this.#char.finish(this, opp, match);
+    }
+    getChar(){
+        return this.#char;
     }
 }
 

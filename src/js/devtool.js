@@ -183,7 +183,7 @@ async function batchMatch(nrnd){
     };
     let step=5;
     let end={};
-    for(let i=step;i<=100;i+=step) end[`${i-9} - ${i}`]=0;
+    for(let i=step;i<=100;i+=step) end[`${i-step+1} - ${i}`]=0;
     for(let rnd=0;rnd<nrnd;rnd++){
         let f1 = getFormData("#form1");
         let f2 = getFormData("#form2");
@@ -197,7 +197,7 @@ async function batchMatch(nrnd){
         if(win=="執行錯誤") continue;
         let rd=mat.nround;
         rd=Math.ceil(rd/step)*step;
-        end[`${rd-9} - ${rd}`]++;
+        end[`${rd-step+1} - ${rd}`]++;
         // console.log(`${win} => ${rd}`);
         if(rnd%10==9){
             $res.empty();

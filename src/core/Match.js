@@ -19,7 +19,7 @@ class Match {
         this.defender = defer;
     }
 
-    _start() {
+    #start() {
         this.time = Date.now();
         this.nround = 0;
         this.record = [];
@@ -63,7 +63,7 @@ class Match {
 
     start(){
         try{
-            this._start();
+            this.#start();
         }catch(error){
             this.nround = 0;
             this.record = [];

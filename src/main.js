@@ -7,6 +7,7 @@ const Points = require("./core/Points");
 const Player = require("./core/Player");
 const Chars = require("./core/Characters");
 const Match = require("./core/Match");
+const User = require("./core/User");
 
 let win;
 

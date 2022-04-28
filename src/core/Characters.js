@@ -3,7 +3,7 @@
 const Points = require("./Points");
 
 class CharacterBase {
-    static get name() {
+    static get char_name() {
         return "[[Characters-Prototype]]";
     }
     static get basePts() {
@@ -17,9 +17,18 @@ class CharacterBase {
             luk: 0,
         });
     }
-    static prepare(self, opp, match) {
-        self.pts = new Points(self.maxPts);
+    points(lvl) {
+        return new Points({
+            hp: 400 * Math.pow(1.07, lvl) - 400,
+            atk: 25 * Math.pow(1.06, lvl) - 23,
+            def: 25 * Math.pow(1.06, lvl) - 23,
+            agi: 25 * Math.pow(1.06, lvl) - 23,
+            str: (100 * Math.log(lvl + 10)) / Math.log(1.5) - 400,
+            skl: 10 * lvl + 10,
+            luk: 10 * lvl + 10,
+        });
     }
+    static prepare(self, opp, match) {}
     static attack(self, opp, match) {}
     static isDefeated(self, opp, match) {
         return self.pts.hp < 0;
@@ -32,7 +41,7 @@ class CharacterBase {
 const _charProto = {
     0: CharacterBase,
     1: class extends CharacterBase {
-        static get name() {
+        static get char_name() {
             return "NoEmotionCat";
         }
         static get basePts() {
@@ -61,10 +70,13 @@ const _charProto = {
     },
 };
 
-class Characters{
-    static getCharacter(id){
-        if(_charProto[id]) return _charProto[id];
+class Characters {
+    static getCharacter(id) {
+        if (_charProto[id]) return _charProto[id];
         return _charProto[0];
+    }
+    static get CharacterBase() {
+        return CharacterBase;
     }
 }
 

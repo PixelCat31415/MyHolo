@@ -5,6 +5,7 @@ const { ipcMain } = require("electron");
 const fio = require("./File");
 const Points = require("./Points");
 const Match = require("./Match");
+const Chars = require("./Characters");
 
 let win;
 
