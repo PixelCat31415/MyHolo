@@ -35,6 +35,13 @@ class Points {
         }
         return res;
     }
+    sub(o) {
+        let res = new Points(o);
+        for (let key of Points.entries) {
+            res[key] -= this[key];
+        }
+        return res;
+    }
     fill(value) {
         for (let key of Points.entries) {
             this[key] = value;

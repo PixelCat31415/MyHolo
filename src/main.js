@@ -1,3 +1,4 @@
+//nightshade was here :D
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const fs = require("fs");

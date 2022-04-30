@@ -17,7 +17,7 @@ class CharacterBase {
             luk: 0,
         });
     }
-    points(lvl) {
+    static points(lvl) {
         return new Points({
             hp: 400 * Math.pow(1.07, lvl) - 400,
             atk: 25 * Math.pow(1.06, lvl) - 23,

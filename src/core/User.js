@@ -3,6 +3,7 @@
 
 const fio = require("./File");
 const Player = require("./Player");
+const Chars = require("./Characters");
 const Points = require("./Points");
 const Exp = require("./Experience");
 
@@ -13,10 +14,17 @@ class User {
     pts;
     respawn_pts;
     status;
+    charid;
+    #char;
 
     constructor(_id) {
-        this.id = _id;
-        // TODO
+        fio.readObj2(`data/users/user-${id}`, this);
+        this.pts = new Points(this.pts);
+        this.respawn_pts = new Points(this.respawn_pts);
+        this.#char = Chars.getCharacter(this.charid);
+        if (this.id !== _id) {
+            throw "user id doesn't match file name.";
+        }
     }
 
     save(path) {
@@ -27,7 +35,12 @@ class User {
     respawn() {}
 
     addExperience(exp) {
+        let lvl0 = Exp.getLevel(this.exp);
         this.exp += exp;
+        let lvl1 = Exp.getLevel(this.exp);
+        let delta = this.#char.points(lvl1).sub(this.#char.points(lvl0));
+        this.pts += delta;
+        return delta;
     }
 
     addRespawnPoint(pt) {
@@ -41,13 +54,14 @@ class User {
     getRespawnPoint() {
         return this.respawn_pts;
     }
-
     getExperience() {
         return this.exp;
     }
-
     getLevel() {
         return Exp.getLevel(this.exp);
+    }
+    getPts() {
+        return this.pts;
     }
 }
 

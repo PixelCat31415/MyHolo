@@ -19,6 +19,7 @@ class FileIO {
         fs.mkdirSync(path, {recursive: true});
     }
     static readText(path) {
+        if(!this.checkExist(path)) throw `reading not existing file ${path}`;
         return fs.readFileSync(path, { encoding: "utf-8" });
     }
     static readObj(path) {
