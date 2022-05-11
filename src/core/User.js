@@ -10,9 +10,14 @@ const Exp = require("./Experience");
 class User {
     id;
     name;
+    
     exp;
+    pts_credit;
     pts;
+    pts_lvl;
+    respawn_credit;
     respawn_pts;
+
     status;
     charid;
     #char;
@@ -43,8 +48,14 @@ class User {
         return delta;
     }
 
-    addRespawnPoint(pt) {
-        this.respawn_pts = this.respawn_pts.add(pt);
+    addRespawnCredit(pt) {
+        this.respawn_credit += pt;
+    }
+
+    addRespawnPoints(key, x){
+        if(this.respawn_credit<x) throw "Not enough respawn credits!";
+        this.respawn_credit-=x;
+        this.respawn_pts[key]+=x;
     }
 
     isAlive() {

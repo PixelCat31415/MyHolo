@@ -17,16 +17,16 @@ class CharacterBase {
             luk: 0,
         });
     }
-    static points(lvl) {
-        return new Points({
-            hp: 400 * Math.pow(1.07, lvl) - 400,
-            atk: 25 * Math.pow(1.06, lvl) - 23,
-            def: 25 * Math.pow(1.06, lvl) - 23,
-            agi: 25 * Math.pow(1.06, lvl) - 23,
-            str: (100 * Math.log(lvl + 10)) / Math.log(1.5) - 400,
-            skl: 10 * lvl + 10,
-            luk: 10 * lvl + 10,
-        });
+    static points(pts_lvl) {
+        return pts_lvl.map({
+            hp: (lvl) => 400 * Math.pow(1.07, lvl) - 400,
+            atk: (lvl) => 25 * Math.pow(1.06, lvl) - 23,
+            def: (lvl) => 25 * Math.pow(1.06, lvl) - 23,
+            agi: (lvl) => 25 * Math.pow(1.06, lvl) - 23,
+            str: (lvl) => (100 * Math.log(lvl + 10)) / Math.log(1.5) - 400,
+            skl: (lvl) => 10 * lvl + 10,
+            luk: (lvl) => 10 * lvl + 10,
+        })
     }
     static prepare(self, opp, match) {}
     static attack(self, opp, match) {}

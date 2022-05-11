@@ -7,22 +7,20 @@
         <!-- useful libraries -->
         <script defer src="dependencies/jquery-3.6.0.min.js"></script>
         <link
-            type="text/css"
-            rel="stylesheet"
-            href="dependencies/Lava-Lamp/build/css/lavalamp.css"
+        type="text/css"
+        rel="stylesheet"
+        href="dependencies/Lava-Lamp/build/css/lavalamp.css"
         />
-        <script
-            defer
-            src="dependencies/Lava-Lamp/build/js/lavalamp.js"
+        <script defer src="dependencies/Lava-Lamp/build/js/lavalamp.js"
         ></script>
-
+        
         <!-- style sheets -->
         <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Noto+Serif+TC|Ubuntu+Mono"
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Noto+Serif+TC|Ubuntu+Mono"
         />
         <link type="text/css" rel="stylesheet" href="css/index.css" />
-
+        
         <!-- script stuff -->
         <script defer src="js/devtool.js"></script>
         <script defer src="js/index.js"></script>
@@ -78,7 +76,7 @@
                     </span>
                     &nbsp;v0.1
                 </h1>
-                <div id="dev-msg"></div>
+                <div id="devmsg"></div>
                 <div
                     style="margin: 10px; border: 2px black solid; padding: 10px"
                 >
@@ -105,9 +103,17 @@
                                 name="name"
                                 required
                                 style="width: 200px"
-                            />
+                            /><br/>
+                            <label for="lvl1">角色等級</label>
+                            <input
+                                type="text"
+                                id="lvl1"
+                                name="lvl"
+                                required
+                                style="width: 200px"
+                            /><br/>
                             <fieldset>
-                                <legend>基礎能力值</legend>
+                                <legend>能力值等級</legend>
                                 <label for="hp1">生命值</label>
                                 <input
                                     type="text"
@@ -162,6 +168,71 @@
                                     id="luk1"
                                     name="luk"
                                     required
+                                />
+                            </fieldset>
+                            <fieldset>
+                                <legend>能力值函數</legend>
+                                <label for="f_hp1">生命值</label>
+                                <input
+                                    type="text"
+                                    id="f_hp1"
+                                    name="f_hp"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_atk1">攻擊力</label>
+                                <input
+                                    type="text"
+                                    id="f_atk1"
+                                    name="f_atk"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_def1">防禦力</label>
+                                <input
+                                    type="text"
+                                    id="f_def1"
+                                    name="f_def"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_agi1">敏捷度</label>
+                                <input
+                                    type="text"
+                                    id="f_agi1"
+                                    name="f_agi"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_str1">體力值</label>
+                                <input
+                                    type="text"
+                                    id="f_str1"
+                                    name="f_str"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_skl1">技巧值</label>
+                                <input
+                                    type="text"
+                                    id="f_skl1"
+                                    name="f_skl"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_luk1">幸運值</label>
+                                <input
+                                    type="text"
+                                    id="f_luk1"
+                                    name="f_luk"
+                                    required
+                                    style="width: 200px"
                                 />
                             </fieldset>
 
@@ -222,9 +293,17 @@
                                 name="name"
                                 required
                                 style="width: 200px"
-                            />
+                            /><br/>
+                            <label for="lvl2">角色等級</label>
+                            <input
+                                type="text"
+                                id="lvl2"
+                                name="lvl"
+                                required
+                                style="width: 200px"
+                            /><br/>
                             <fieldset>
-                                <legend>基礎能力值</legend>
+                                <legend>能力值等級</legend>
                                 <label for="hp2">生命值</label>
                                 <input
                                     type="text"
@@ -279,6 +358,71 @@
                                     id="luk2"
                                     name="luk"
                                     required
+                                />
+                            </fieldset>
+                            <fieldset>
+                                <legend>能力值函數</legend>
+                                <label for="f_hp2">生命值</label>
+                                <input
+                                    type="text"
+                                    id="f_hp2"
+                                    name="f_hp"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_atk2">攻擊力</label>
+                                <input
+                                    type="text"
+                                    id="f_atk2"
+                                    name="f_atk"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_def2">防禦力</label>
+                                <input
+                                    type="text"
+                                    id="f_def2"
+                                    name="f_def"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_agi2">敏捷度</label>
+                                <input
+                                    type="text"
+                                    id="f_agi2"
+                                    name="f_agi"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_str2">體力值</label>
+                                <input
+                                    type="text"
+                                    id="f_str2"
+                                    name="f_str"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_skl2">技巧值</label>
+                                <input
+                                    type="text"
+                                    id="f_skl2"
+                                    name="f_skl"
+                                    required
+                                    style="width: 200px"
+                                />
+                                <br />
+                                <label for="f_luk2">幸運值</label>
+                                <input
+                                    type="text"
+                                    id="f_luk2"
+                                    name="f_luk"
+                                    required
+                                    style="width: 200px"
                                 />
                             </fieldset>
 

@@ -42,9 +42,24 @@ class Points {
         }
         return res;
     }
+    addAll(x) {
+        let res = new Points(this);
+        for(let key in res){
+            res[key]+=x;
+        }
+        return res;
+    }
     fill(value) {
         for (let key of Points.entries) {
             this[key] = value;
+        }
+    }
+    map(lambda) {
+        let res = new Points(this);
+        for (let key in res) {
+            if (lambda.hasOwnProperty(key)) {
+                res[key] = lambda[key](res[key]);
+            }
         }
     }
 }

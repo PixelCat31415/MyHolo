@@ -1,4 +1,3 @@
-//nightshade was here :D
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const fs = require("fs");
@@ -64,3 +63,5 @@ ipcMain.handle("ready", async function (event) {
     dev.init(win);
     win.maximize();
 });
+
+console.log("started!");
