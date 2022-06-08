@@ -2,9 +2,19 @@
 "use strict";
 
 let core = {
-    send: function(){},
-    handle: function(){}
+    send: function () {},
+    handle: function () {},
 };
+
+let abil_entries = [
+    ["hp", "生命值"],
+    ["atk", "攻擊力"],
+    ["def", "防禦力"],
+    ["agi", "敏捷度"],
+    ["str", "體力值"],
+    ["skl", "技巧值"],
+    ["luk", "幸運值"]
+];
 
 async function ping() {
     let msg = await core.send("ping", "PING from renderer process");
@@ -38,7 +48,7 @@ $(async function () {
     initDev();
     init();
     await core.send("ready");
-    
+
     const settings = {
         margins: true,
         enableFocus: true,
@@ -61,4 +71,7 @@ $(async function () {
             $(`#pg_${name}`).show();
         });
     }
+
+    $("#pg_lvl_container").load("html/level.html");
+    $("#pg_resp_container").load("html/respawn.html");
 });

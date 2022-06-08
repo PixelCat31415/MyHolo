@@ -1,0 +1,40 @@
+/* myholo page */
+.Avators {
+    width: 150px;
+    margin: 10px 0;
+}
+.Player_info {
+    font-weight: bold;
+}
+
+#my_abilities {
+    width: 400px;
+    margin: 20px auto;
+    border: 0px solid #000;
+    border-collapse: collapse;
+    font-size: 22px;
+}
+#my_abilities tr {
+    border: 1px solid #000
+}
+#my_abilities th, #my_abilities td {
+    text-align: left;
+    padding: 10px 20px;
+    /* border: 1px solid #000 */
+}
+
+.button_abil_add:hover {
+    cursor: pointer;
+}
+
+#my_streams {
+    margin: 5px;
+}
+#my_streams th,
+#my_streams td {
+    padding: 2px 5px;
+}
+#my_streams tr:hover {
+    background-color: #CCC;
+    cursor: pointer;
+}
