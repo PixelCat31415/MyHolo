@@ -89,7 +89,7 @@ typings/
 out/
 
 # :owo:
-myholo.code-workspace
+*.code-workspace
 test/
 data/
 src/deprecated/

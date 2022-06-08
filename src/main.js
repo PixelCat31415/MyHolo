@@ -61,7 +61,7 @@ const dev = require("./core/DevTool");
 ipcMain.handle("ready", async function (event) {
     console.log("App ready!");
     dev.init(win);
-    win.maximize();
+    await win.maximize();
 });
 
 console.log("started!");
