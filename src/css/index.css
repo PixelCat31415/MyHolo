@@ -5,24 +5,29 @@
 
 * {
     font-family: "LXGW";
+    font-size: 18px;
 }
 
 button {
     width: 150px;
     height: 40px;
     text-align: center;
-    font-size: 20px;
 }
 
 h1 {
     color: #0099ff;
 }
 
+.flex_container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* lavalamp navigation bar */
 .lavalamp__object {
     box-shadow: 0 0 5px 0 #999 inset;
 }
-
-/* navigation bar */
 #navList {
     background-color: #bde7ff;
     text-align: center;
@@ -36,6 +41,39 @@ h1 {
 #navList > li > a {
     color: white;
     text-decoration: none;
+}
+#navList > li:hover {
+    cursor: pointer;
+}
+
+/* myholo page */
+#my_photo {
+    width: 150px;
+}
+.Player_info {
+    font-weight: bold;
+}
+#my_abilities {
+    margin: 20px 0;
+    border: 2px solid #000;
+    border-collapse: collapse;
+    font-size: 20px;
+}
+#my_abilities th, #my_abilities td {
+    text-align: left;
+    padding: 10px;
+    width: 150px;
+    border: 1px solid #000
+}
+#my_streams {
+    margin: 5px;
+}
+#my_streams th, #my_streams td {
+    padding: 2px 5px;
+}
+#my_streams tr:hover {
+    background-color: #CCC;
+    cursor: pointer;
 }
 
 /* dev tool */
@@ -76,9 +114,9 @@ h1 {
 #pg_dev button {
     background-color: transparent;
     border-width: 2px;
-    border-color: #0d0070;
+    border-color: #000000;
     border-radius: 5px;
-    padding: 5px;
+    padding: 2px;
     margin: 5px;
     font-size: medium;
     transition-duration: 0.2s;

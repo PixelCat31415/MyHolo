@@ -1,6 +1,11 @@
 //nightshade was here :D
 "use strict";
 
+let core = {
+    send: function(){},
+    handle: function(){}
+};
+
 async function ping() {
     let msg = await core.send("ping", "PING from renderer process");
     console.log(`Main process replied: ${msg}`);
@@ -41,9 +46,12 @@ $(async function () {
         initActiveQuery: ".ActiveLavalamp",
     };
     const navbar = new Lavalamp($("#navList")[0], settings);
-    let active = $("#nav_dev")[0];
+
+    let active_page = "my";
+    let active = $(`#nav_${active_page}`)[0];
     navbar.activeElement = active;
     navbar.reposition(active);
+    $(`#pg_${active_page}`).show();
 
     let names = ["home", "my", "lvl", "resp", "adv", "rec", "dev"];
     for (let name of names) {

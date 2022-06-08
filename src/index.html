@@ -7,27 +7,29 @@
         <!-- useful libraries -->
         <script defer src="dependencies/jquery-3.6.0.min.js"></script>
         <link
-        type="text/css"
-        rel="stylesheet"
-        href="dependencies/Lava-Lamp/build/css/lavalamp.css"
+            type="text/css"
+            rel="stylesheet"
+            href="dependencies/Lava-Lamp/build/css/lavalamp.css"
         />
-        <script defer src="dependencies/Lava-Lamp/build/js/lavalamp.js"
+        <script
+            defer
+            src="dependencies/Lava-Lamp/build/js/lavalamp.js"
         ></script>
-        
+
         <!-- style sheets -->
         <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Noto+Serif+TC|Ubuntu+Mono"
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Noto+Serif+TC|Ubuntu+Mono"
         />
         <link type="text/css" rel="stylesheet" href="css/index.css" />
-        
+
         <!-- script stuff -->
         <script defer src="js/devtool.js"></script>
         <script defer src="js/index.js"></script>
     </head>
     <body>
         <ul id="navList">
-            <li id="nav_home" class="NavTarget">MyHolo-v1.0</li>
+            <li id="nav_home" class="NavTarget">關於</li>
             <li id="nav_my" class="NavTarget">我的HOLO</li>
             <li id="nav_lvl" class="NavTarget">樓層挑戰</li>
             <li id="nav_resp" class="NavTarget">轉生系統</li>
@@ -39,42 +41,144 @@
             <div id="pg_home" class="Page" hidden>
                 <h1>MyHolo v1.0</h1>
                 <p>Under construction💤...</p>
-                <p>hmmm</p>
                 <p><code>Ctrl + Shift + I</code> to toggle dev tools.</p>
                 <button onclick="ping()">ping...</button>
             </div>
             <div id="pg_my" class="Page" hidden>
-                <h1>我的HOLO</h1>
-                <p>hmmm</p>
-                <button onclick="getTime()">when?</button>
+                <div class="flex_container">
+                    <div style="width: 250px">
+                        <img
+                            id="my_photo"
+                            src="data:image/jpeg;base64,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"
+                            style="margin: 10px 30px;"
+                        />
+                        <p style="font-style: italic; color: #555; word-break: break-all; margin: 10px;" id="my_motto">
+                            速く！もっと速く！
+                        </p>
+                    </div>
+                    <div>
+                        <h3 id="my_name" style="font-size: 24px">玩家暱稱</h3>
+                        <table id="my_abilities">
+                            <tr>
+                                <th>玩家等級</th>
+                                <th id="my_level">49</th>
+                            </tr>
+                            <tr>
+                                <th>累積經驗</th>
+                                <th id="my_exp">77777</th>
+                            </tr>
+                            <tr>
+                                <th>使用角色</th>
+                                <th id="my_char">なちょ猫</th>
+                            </tr>
+                            <tr>
+                                <th>狀態</th>
+                                <th id="my_status">存活</th>
+                            </tr>
+                            <tr>
+                                <td>生命值</td>
+                                <td id="my_hp">77749</td>
+                            </tr>
+                            <tr>
+                                <td>攻擊力</td>
+                                <td id="my_atk">77749</td>
+                            </tr>
+                            <tr>
+                                <td>防禦力</td>
+                                <td id="my_def">77749</td>
+                            </tr>
+                            <tr>
+                                <td>敏捷度</td>
+                                <td id="my_agi">77749</td>
+                            </tr>
+                            <tr>
+                                <td>體力值</td>
+                                <td id="my_str">77749</td>
+                            </tr>
+                            <tr>
+                                <td>技巧值</td>
+                                <td id="my_skl">77749</td>
+                            </tr>
+                            <tr>
+                                <td>幸運值</td>
+                                <td id="my_luk">77749</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="width: 300px; text-align: center;">
+                        <h3 style="font-size: 24px; font-weight: 100;">排定直播</h3>
+                        <table id="my_streams" style="margin: 0 auto;">
+                            <tr onclick="doIdle(1)">
+                                <td>一位就關臺</td>
+                                <td>8 hr</td>
+                            </tr>
+                            <tr onclick="doIdle(2)">
+                                <td>遊戲直播</td>
+                                <td>4 hr</td>
+                            </tr>
+                            <tr onclick="doIdle(3)">
+                                <td>聯動貼貼</td>
+                                <td>2 hr</td>
+                            </tr>
+                            <tr onclick="doIdle(4)">
+                                <td>感謝祭</td>
+                                <td>1 hr</td>
+                            </tr>
+                            <tr onclick="doIdle(5)">
+                                <td>歌回</td>
+                                <td>30 min</td>
+                            </tr>
+                            <tr onclick="doIdle(6)">
+                                <td>吃棉花糖</td>
+                                <td>10 min</td>
+                            </tr>
+                            <tr onclick="doIdle(7)">
+                                <td>迷因鑑賞</td>
+                                <td>5 min</td>
+                            </tr>
+                            <tr onclick="doIdle(8)">
+                                <td>雜談</td>
+                                <td>3 min</td>
+                            </tr>
+                            <tr onclick="doIdle(9)">
+                                <td>精華剪輯</td>
+                                <td>2 min</td>
+                            </tr>
+                            <tr onclick="doIdle(10)">
+                                <td>光速下播</td>
+                                <td>1 min</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div id="pg_lvl" class="Page" hidden>
                 <h1>樓層挑戰</h1>
                 <p>hmmm</p>
-                <button onclick="owo()">owo!</button>
+                <button onclick="alert('owo')">owo!</button>
             </div>
             <div id="pg_resp" class="Page" hidden>
                 <h1>轉生系統</h1>
                 <p>hmmm</p>
-                <button onclick="owo()">owo!</button>
+                <button onclick="alert('owo')">owo!</button>
             </div>
             <div id="pg_adv" class="Page" hidden>
                 <h1>成就列表</h1>
                 <p>hmmm</p>
-                <button onclick="owo()">owo!</button>
+                <button onclick="alert('owo')">owo!</button>
             </div>
             <div id="pg_rec" class="Page" hidden>
                 <h1>挑戰紀錄</h1>
                 <p>hmmm</p>
-                <button onclick="owo()">owo!</button>
+                <button onclick="alert('owo')">owo!</button>
             </div>
-            <div id="pg_dev" class="Page">
+            <div id="pg_dev" class="Page" hidden>
                 <h1 style="text-align: center">
                     MyHolo
                     <span style="color: #0d0070; border: 2px #0d0070 solid">
                         &nbsp;Tester
                     </span>
-                    &nbsp;v0.1
+                    &nbsp;v1.1
                 </h1>
                 <div id="devmsg"></div>
                 <div
@@ -103,7 +207,7 @@
                                 name="name"
                                 required
                                 style="width: 200px"
-                            /><br/>
+                            /><br />
                             <label for="lvl1">角色等級</label>
                             <input
                                 type="text"
@@ -111,7 +215,7 @@
                                 name="lvl"
                                 required
                                 style="width: 200px"
-                            /><br/>
+                            /><br />
                             <fieldset>
                                 <legend>能力值等級</legend>
                                 <label for="hp1">生命值</label>
@@ -293,7 +397,7 @@
                                 name="name"
                                 required
                                 style="width: 200px"
-                            /><br/>
+                            /><br />
                             <label for="lvl2">角色等級</label>
                             <input
                                 type="text"
@@ -301,7 +405,7 @@
                                 name="lvl"
                                 required
                                 style="width: 200px"
-                            /><br/>
+                            /><br />
                             <fieldset>
                                 <legend>能力值等級</legend>
                                 <label for="hp2">生命值</label>
