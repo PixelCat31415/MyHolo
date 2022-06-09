@@ -1,6 +1,6 @@
 /* level challenge page */
 .infobox {
-    margin: 20px 20px;
+    margin: 20px auto;
     border: 1px solid #000;
     border-collapse: collapse;
 }
@@ -8,9 +8,14 @@
 .infobox td {
     text-align: center;
     padding: 5px;
-    width: 130px;
+    width: 150px;
     border: 1px solid #000
 }
+.infobox .colored {
+    background-color: #DDD;
+    width: 110px;
+}
+
 #boss_match_result_list {
     width: 600px;
     border-top: 1px solid #000;

@@ -2,7 +2,16 @@ function doIdle(arg) {
     $(".my_name").text(`action ${arg}`);
 }
 
-function build_my() {
+function doAddAbil(arg){
+    $(`.my_abil_${arg}`).text(Math.floor(Math.random()*100))
+}
+
+function toggleDelta(){
+    $(".my_abil_delta").toggle();
+    $(".button_abil_add").toggle();
+}
+
+function buildMy() {
     let table = $("#my_abilities");
     for (let key of abil_entries) {
         let tr = $("<tr>");
@@ -22,9 +31,10 @@ function build_my() {
                     })
                 )
                 .append(
-                    $("<span>", {
+                    $("<button>", {
                         text: " ➕ ",
                         class: "button_abil_add",
+                        onclick: `doAddAbil(\"${key[0]}")`,
                         hidden: false,
                     })
                 )
@@ -32,7 +42,7 @@ function build_my() {
             .append(
                 $("<td>", {
                     style: "width: auto; color: green",
-                    id: `my_abil_${key[0]}_delta`,
+                    class: `my_abil_${key[0]}_delta my_abil_delta`,
                     text: "+87",
                     hidden: false,
                 })
@@ -48,9 +58,5 @@ function build_my() {
 }
 
 $(async () => {
-    await $("#pg_my_container").load("html/myholo.html", build_my);
-    // console.log(document.getElementById("my_abilities"));
-    // build_my();
+    await $("#pg_my_container").load("html/myholo.html", buildMy);
 });
-
-// tr.append($("<td>", {text: "owo",})).append($("<td>", {class: `my_owo`,text: 77749,}))

@@ -360,3 +360,7 @@ function initDev() {
         showMessage(data);
     });
 }
+
+$(()=>{
+    $("#pg_dev_container").load("html/devtool.html", initDev);
+})

@@ -45,7 +45,6 @@ function init() {
 }
 
 $(async function () {
-    initDev();
     init();
     await core.send("ready");
 
@@ -57,7 +56,7 @@ $(async function () {
     };
     const navbar = new Lavalamp($("#navList")[0], settings);
 
-    let active_page = "lvl";
+    let active_page = "resp";
     let active = $(`#nav_${active_page}`)[0];
     navbar.activeElement = active;
     navbar.reposition(active);
@@ -71,7 +70,4 @@ $(async function () {
             $(`#pg_${name}`).show();
         });
     }
-
-    $("#pg_lvl_container").load("html/level.html");
-    $("#pg_resp_container").load("html/respawn.html");
 });

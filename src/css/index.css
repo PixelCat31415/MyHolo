@@ -31,17 +31,24 @@ h1 {
     font-size: 40px;
 }
 h2 {
-    font-size: 24px;
+    font-size: 26px;
 }
 
 .flex_container {
     display: flex;
+    flex-flow: row;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .centered {
     text-align: center;
+}
+
+.Avators {
+    display: block;
+    width: 150px;
+    margin: 10px auto;
 }
 
 /* lavalamp navigation bar */
@@ -64,116 +71,4 @@ h2 {
 }
 #navList > li:hover {
     cursor: pointer;
-}
-
-/* respawn page */
-button.button_min,
-button.button_add {
-    width: 40px;
-    height: 40px;
-    border: none;
-    font-size: 26px;
-}
-button.button_add:hover {
-    background-color: transparent;
-    color: rgb(32, 255, 32);
-    border-radius: 20px;
-}
-button.button_min:hover {
-    background-color: transparent;
-    color: rgb(255, 32, 88);
-    border-radius: 20px;
-}
-
-/* dev tool */
-#pg_dev * {
-    font-family: "Noto Serif TC";
-}
-#pg_dev code {
-    font-family: "Ubuntu Mono";
-    background-color: #d3d3d3;
-    padding: 5px;
-    border-radius: 5px;
-}
-#pg_dev .container {
-    display: flex;
-}
-#pg_dev .column {
-    border: 2px black solid;
-    margin: 10px;
-    padding: 10px;
-}
-#pg_dev input {
-    width: 100px;
-}
-#pg_dev label {
-    display: inline-block;
-    margin-top: 10px;
-    margin-right: 10px;
-}
-#pg_dev fieldset {
-    margin-top: 10px;
-}
-#pg_dev textarea {
-    margin: 10px;
-    width: 90%;
-    height: 100px;
-    font-family: "Ubuntu Mono";
-}
-#pg_dev button {
-    background-color: transparent;
-    border-width: 2px;
-    border-color: #000000;
-    border-radius: 5px;
-    padding: 2px;
-    margin: 5px;
-    font-size: medium;
-    transition-duration: 0.2s;
-}
-#pg_dev form button {
-    width: min-content;
-}
-#pg_dev button:hover {
-    background-color: #4e86ff;
-    color: white;
-}
-#pg_dev .res-box {
-    margin: 10px;
-}
-#pg_dev .res-title {
-    margin: 0;
-    font-weight: bold;
-}
-#pg_dev .res-body {
-    margin: 0;
-    padding-left: 10px;
-}
-#pg_dev .msg {
-    margin: 10px 150px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: 2px black solid;
-    font-size: larger;
-    display: flex;
-    align-items: center;
-}
-#pg_dev .msg button {
-    border: none;
-    text-decoration: underline;
-}
-#pg_dev .msg button:hover {
-    background: none;
-    color: black;
-}
-#pg_dev .msg-info {
-    border: 2px #7bcaff solid;
-    background-color: #def2ff;
-}
-#pg_dev .msg-warning {
-    border: 2px #fdff7b solid;
-    background-color: #fffdde;
-}
-#pg_dev .msg-error {
-    border: 2px #ff7b7b solid;
-    background-color: #ffdede;
 }

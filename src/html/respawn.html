@@ -1,8 +1,35 @@
-<h1>轉生系統</h1>
 <div>
-    <button class="button_min"> - </button>
-    <span>49</span>
-    <button class="button_add"> + </button>
+    <h2 class="centered">角色選擇</h2>
+    <div id="resp_chars_list" class="flex_container" style="width: 1000px; margin: 0 auto;"></div>
 </div>
-<p>hmmm</p>
-<button onclick="alert('owo')">owo!</button>
+
+<hr style="width: 1200px;">
+
+<div class="flex_container">
+    <!-- new character avator -->
+    <div>
+        <img
+        src="https://bit.ly/3aPVuST"
+        class="resp_avator Avators"
+        style="margin: 100px 50px;"
+        />
+    </div>
+
+    <!-- preview abilities -->
+    <div>
+        <h2 class="centered">轉生預覽</h2>
+        <p class="centered" style="font-size: 22px; margin: 0 auto;">
+            LV <span class="resp_level" style="font-size: inherit;">1</span>
+            <span class="resp_char" style="font-size: inherit;">なちょ猫</span>
+        </p>
+        <table id="resp_abilities" class="abilitybox" style="width: 400px;"></table>
+        <p class="centered">剩餘轉生點數：<span class="resp_credit">tk77749</span></p>
+        <div class="flex_container">
+            <button style="width: 150px; font-size: 22px;">確認轉生</button>
+        </div>
+    </div>
+
+    <!-- dummy div for spacing -->
+    <!-- not sure if it's a good practice (probably not) -->
+    <div class="Avators" style="margin: 100px 50px; opacity: 0%"></div>
+</div>

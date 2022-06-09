@@ -5,13 +5,14 @@
             src="https://bit.ly/3aPVuST"
             class="my_avator Avators"
         />
-        <h3 class="my_name centered" style="text-align: left; font-size: 26px">玩家暱稱</h3>
+        <h2 class="my_name centered">玩家暱稱</h2>
         <p
             style="
                 font-style: italic;
                 color: #555;
                 word-break: break-all;
                 margin: 10px;
+                text-align: center;
             "
             id="my_motto"
         >
@@ -20,32 +21,41 @@
     </div>
     <!-- player info box -->
     <div>
-        <!-- exp banner -->
+        <!-- exp & player banner -->
         <div>
             <p style="text-align: center; margin-bottom: 10px; font-size: 26px;">
-                LV <span id="my_level" style="font-size: inherit;">49</span>
-                <span id="my_char" style="font-size: inherit;">なちょ猫</span>
+                LV <span class="my_level" style="font-size: inherit;">49</span>
+                <span class="my_char" style="font-size: inherit;">なちょ猫</span>
                 ・ 
-                <span id="my_status" style="font-size: inherit; color: green">Alive</span>
+                <span class="my_status" style="font-size: inherit; color: green">Alive</span>
             </p>
             <div style="margin: 0 auto; height: 20px; width: 300px; background-color: #def2ff; border-radius: 10px;">
-                <div id="my_level_progress" style="height: 20px; width: 100px;background-color: #7bcaff; border-radius: 10px;"></div>
+                <div class="my_level_progress" style="height: 20px; width: 49%;background-color: #7bcaff; border-radius: 10px;"></div>
             </div>
             <p style="text-align: center; margin: 10px auto;">
-                <span id="my_exp">48763</span>
+                <span class="my_exp">48763</span>
                 /
-                <span id="my_exp_next">77777</span>
-                (<span id="my_exp_ratio">49</span>%)
+                <span class="my_exp_next">77777</span>
+                (<span class="my_exp_ratio">49</span>%)
             </p>
         </div>
         <!-- abilities -->
-        <table id="my_abilities"></table>
+        <table id="my_abilities" class="abilitybox" style="width: 400px;"></table>
+        <!-- some more info -->
+        <div>
+            <p class="centered">
+                剩餘升級點數：<span class="my_credit">tk888</span>
+            </p>
+        </div>
+        <div class="flex_container">
+            <button hidden onclick="toggleDelta()">toggle</button>
+        </div>
     </div>
     <!-- actions list -->
     <div class="centered" style="width: 300px;">
-        <h3 style="font-size: 26px; font-weight: 100">
+        <h2 style="font-weight: 100">
             排定直播
-        </h3>
+        </h2>
         <table id="my_streams" style="margin: 0 auto">
             <tr onclick="doIdle(1)">
                 <td>一位就關臺</td>
