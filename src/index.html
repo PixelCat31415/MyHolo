@@ -5,15 +5,15 @@
         <title>MyHolo v0.1</title>
 
         <!-- useful libraries -->
-        <script defer src="dependencies/jquery-3.6.0.min.js"></script>
+        <script defer src="lib/jquery-3.6.0.min.js"></script>
         <link
             type="text/css"
             rel="stylesheet"
-            href="dependencies/Lava-Lamp/build/css/lavalamp.css"
+            href="lib/Lava-Lamp/build/css/lavalamp.css"
         />
         <script
             defer
-            src="dependencies/Lava-Lamp/build/js/lavalamp.js"
+            src="lib/Lava-Lamp/build/js/lavalamp.js"
         ></script>
 
         <!-- style sheets -->
@@ -70,9 +70,9 @@
                 </div>
             </div>
             <div id="pg_rec" class="Page" hidden>
-                <h1>挑戰紀錄</h1>
-                <p>hmmm</p>
-                <button onclick="alert('owo')">owo!</button>
+                <div id="pg_rec_container"></div>
+                <link type="text/css" rel="stylesheet" href="css/record.css" />
+                <script defer src="js/record.js"></script>
             </div>
             <div id="pg_dev" class="Page" hidden>
                 <div id="pg_dev_container"></div>

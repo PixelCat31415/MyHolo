@@ -5,6 +5,25 @@ function doMatch(){
 
 function buildLevel(){
     let box = $("#boss_match_info");
+    
+        box.append(
+            $("<tr>").append(
+                $("<th>", {
+                    class: "my_char",
+                    text: "Nacho Neko",
+                })
+            ).append(
+                $("<th>", {
+                    class: "colored",
+                    text: "角色",
+                })
+            ).append(
+                $("<th>", {
+                    class: "boss_char",
+                    text: "Nacho Neko",
+                })
+            )
+        );
 
     box.append(
         $("<tr>").append(

@@ -1,0 +1,58 @@
+/* all records list */
+#rec_list_container {
+    margin: 0 50px;
+}
+#rec_list {
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-size: 22px;
+}
+#rec_list tr.rec_data {
+    transition: 0.3s;
+}
+#rec_list tr.rec_data:hover {
+    cursor: pointer;
+    filter: saturate(300%);
+}
+#rec_list tr.rec_head {
+    border-bottom: 1px solid #000;
+}
+#rec_list th,
+#rec_list td {
+    text-align: left;
+    padding: 10px 20px;
+}
+
+.rec_row_active {
+    transform: scale(1.03);
+    filter: saturate(300%);
+}
+
+/* rows background showing result */
+.rec_row_overview {
+    background-color: #dadada;
+}
+.rec_row_win {
+    background-color: #beffbe;
+}
+.rec_row_lose {
+    background-color: #ffbebec4;
+}
+.rec_row_tie {
+    background-color: #bed3ffc4;
+}
+
+/* list cells */
+.rec_list_time {
+    width: 200px;
+}
+.rec_list_opp {
+    width: 300px;
+}
+
+
+/* match record */
+#record_container {
+    margin: 20px;
+    width: 1000px;
+}

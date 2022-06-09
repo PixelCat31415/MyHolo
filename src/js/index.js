@@ -1,4 +1,4 @@
-//nightshade was here :D
+// nightshade was here :D
 "use strict";
 
 let core = {
@@ -35,7 +35,7 @@ function getTime() {
     console.log(new Date(Date.now()).toLocaleString("zh-TW"));
 }
 
-function init() {
+function init_ipc() {
     core.handle("pong", async (event, data) => {
         console.log(`main process said: ${data}`);
     });
@@ -44,10 +44,7 @@ function init() {
     });
 }
 
-$(async function () {
-    init();
-    await core.send("ready");
-
+function build_navlist(){
     const settings = {
         margins: true,
         enableFocus: true,
@@ -55,19 +52,25 @@ $(async function () {
         initActiveQuery: ".ActiveLavalamp",
     };
     const navbar = new Lavalamp($("#navList")[0], settings);
-
-    let active_page = "resp";
+    
+    let active_page = "rec";
     let active = $(`#nav_${active_page}`)[0];
     navbar.activeElement = active;
     navbar.reposition(active);
     $(`#pg_${active_page}`).show();
-
-    let names = ["home", "my", "lvl", "resp", "adv", "rec", "dev"];
-    for (let name of names) {
+    
+    let page_names = ["home", "my", "lvl", "resp", "adv", "rec", "dev"];
+    for (let name of page_names) {
         let entry = $(`#nav_${name}`);
         entry.on("click", function () {
             $(".Page").hide();
             $(`#pg_${name}`).show();
         });
     }
+}
+
+$(async function () {
+    init_ipc();
+    build_navlist();
+    await core.send("ready");
 });
