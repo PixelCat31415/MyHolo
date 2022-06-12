@@ -13,7 +13,7 @@ class Points {
         return ["hp", "atk", "def", "agi", "str", "skl", "luk"];
     }
     constructor(obj) {
-        if (typeof obj != "object") {
+        if (typeof obj !== "object") {
             obj = {};
         }
         for (let key of Points.entries) {
@@ -43,16 +43,16 @@ class Points {
         return res;
     }
     addAll(x) {
-        let res = new Points(this);
-        for(let key in res){
-            res[key]+=x;
+        for (let key of Points.entries) {
+            this[key]+=x;
         }
-        return res;
+        return this;
     }
     fill(value) {
         for (let key of Points.entries) {
             this[key] = value;
         }
+        return this;
     }
     map(lambda) {
         let res = new Points(this);
@@ -61,6 +61,7 @@ class Points {
                 res[key] = lambda[key](res[key]);
             }
         }
+        return res;
     }
     dump(){
         return JSON.parse(JSON.stringify(this));

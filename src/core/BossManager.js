@@ -1,6 +1,5 @@
-// manages 
+// manages all boss, so that boss can be easily added and accessed
 
-const Entity = require("./Entity");
 const File = require("./File");
 const log4js = require("log4js");
 
@@ -29,5 +28,7 @@ class BossManager {
         }
     }
 }
+
+let manager = new BossManager();
 
 module.exports = manager;

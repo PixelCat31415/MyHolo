@@ -91,7 +91,7 @@ out/
 # :owo:
 *.code-workspace
 test/
+test.*
 data/
 src/deprecated/
 TODO.md
-core_0/

@@ -9,49 +9,44 @@ logger.level = "all";
 
 class Entity {
     name;
-    avator;
     char_name;
+    avator;
     level;
     max_abil;
     abil;
 
     constructor(obj) {
-        // if(typeof obj !== "Object") return;
+        if(!obj) return;
+        if(typeof obj !== "object"){
+            logger.error("not constructing with an object");
+            return;
+        }
         this.name = obj.name;
         this.avator = obj.avator;
         this.char_name = obj.char_name;
         this.level = obj.level;
         this.max_abil = new Points(obj.max_abil);
-        this.abil = new Points(obj.abil);
     }
 
     prepare(opp, match) {
-        logger.debug("Entity::prepare() should be overridden, but using default");
-        this.abil = new Points(this.max_abil);
+        logger.debug("Entity::prepare() should be overridden");
     }
 
     attack(opp, match) {
-        logger.debug("Entity::attack() should be overridden, but using default");
+        logger.debug("Entity::attack() should be overridden");
     }
 
     isDefeated(opp, match) {
-        logger.debug("Entity::isDefeated() should be overridden, but using default");
-        return this.abil.hp < 0;
+        logger.debug("Entity::isDefeated() should be overridden");
     }
 
     finish(opp, match) {
-        logger.debug("Entity::finish() should be overridden, but using default");
+        logger.debug("Entity::finish() should be overridden");
     }
 
     dump(){
-        return {
-            name: this.name,
-            avator: this.avator,
-            char_name: this.char_name,
-            level: this.level,
-            max_abil: this.max_abil.dump(),
-            abil: this.abil.dump(),
-        }
+        logger.debug("Entity::dump() should be overridden")
+        return {}
     }
 }
 

@@ -1,11 +1,6 @@
 // nightshade was here :D
 "use strict";
 
-let core = {
-    send: function () {},
-    handle: function () {},
-};
-
 let abil_entries = [
     ["hp", "生命值"],
     ["atk", "攻擊力"],
@@ -13,7 +8,7 @@ let abil_entries = [
     ["agi", "敏捷度"],
     ["str", "體力值"],
     ["skl", "技巧值"],
-    ["luk", "幸運值"]
+    ["luk", "幸運值"],
 ];
 
 async function ping() {
@@ -44,7 +39,7 @@ function init_ipc() {
     });
 }
 
-function build_navlist(){
+function build_navlist() {
     const settings = {
         margins: true,
         enableFocus: true,
@@ -52,13 +47,13 @@ function build_navlist(){
         initActiveQuery: ".ActiveLavalamp",
     };
     const navbar = new Lavalamp($("#navList")[0], settings);
-    
+
     let active_page = "dev";
     let active = $(`#nav_${active_page}`)[0];
     navbar.activeElement = active;
     navbar.reposition(active);
     $(`#pg_${active_page}`).show();
-    
+
     let page_names = ["home", "my", "lvl", "resp", "adv", "rec", "dev"];
     for (let name of page_names) {
         let entry = $(`#nav_${name}`);
@@ -70,6 +65,15 @@ function build_navlist(){
 }
 
 $(async function () {
+    // check if app is not started by electron
+    // (frontend-only mode)
+    if (typeof core === "undefined") {
+        window.core = {
+            send: function () {},
+            handle: function () {},
+        };
+    }
+
     init_ipc();
     build_navlist();
     await core.send("ready");

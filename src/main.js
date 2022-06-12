@@ -1,13 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const fs = require("fs");
-
-const fio = require("./core_0/File");
-const Points = require("./core_0/Points");
-const Player = require("./core_0/Player");
-const Chars = require("./core_0/Characters");
-const Match = require("./core_0/Match");
-const User = require("./core_0/User");
 
 let win;
 
@@ -48,15 +40,16 @@ ipcMain.handle("ping", async function (event, data) {
 });
 
 ipcMain.handle("match", async function(event){
-    let p1 = new Player({ name: "NightShade", charid: 1, });
-    let p2 = new Player({ name: "PixelCat" });
-    let mat = new Match(p1, p2, "testing battle");
-    mat.start();
-    mat.save();
-    return mat;
+    return {"1": "qaq"};
+    // let p1 = new Player({ name: "NightShade", charid: 1, });
+    // let p2 = new Player({ name: "PixelCat" });
+    // let mat = new Match(p1, p2, "testing battle");
+    // mat.start();
+    // mat.save();
+    // return mat;
 });
 
-const dev = require("./core_0/DevTool");
+const dev = require("./core/DevTool");
 
 ipcMain.handle("ready", async function (event) {
     console.log("App ready!");
