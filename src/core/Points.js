@@ -62,6 +62,9 @@ class Points {
             }
         }
     }
+    dump(){
+        return JSON.parse(JSON.stringify(this));
+    }
 }
 
 module.exports = Points;

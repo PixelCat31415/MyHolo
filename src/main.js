@@ -2,12 +2,12 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const fs = require("fs");
 
-const fio = require("./core/File");
-const Points = require("./core/Points");
-const Player = require("./core/Player");
-const Chars = require("./core/Characters");
-const Match = require("./core/Match");
-const User = require("./core/User");
+const fio = require("./core_0/File");
+const Points = require("./core_0/Points");
+const Player = require("./core_0/Player");
+const Chars = require("./core_0/Characters");
+const Match = require("./core_0/Match");
+const User = require("./core_0/User");
 
 let win;
 
@@ -56,7 +56,7 @@ ipcMain.handle("match", async function(event){
     return mat;
 });
 
-const dev = require("./core/DevTool");
+const dev = require("./core_0/DevTool");
 
 ipcMain.handle("ready", async function (event) {
     console.log("App ready!");

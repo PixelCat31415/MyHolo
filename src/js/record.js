@@ -43,19 +43,22 @@ function getRecList(){
 }
 
 /*
-match arch
+match hierachy
 {
     time: str,
-    result: "win" | "lose" | "tie",
-    self: {
+    title: str,
+    result: "win" | "lose" | "tie" | "error",
+    attacker: {
         name: str,
         avator: str,
-        char: str,
+        char_name: str,
         level: int,
+        max_abil: (same as abil),
         abil: {hp, atk, def, agi, str, skl, luk} int each
     },
-    opp: same as self,
-    rec: str[],
+    defender: (same as attacker),
+    nround: int,
+    record: str[],
     summary: str[]
 },
 */
@@ -97,6 +100,10 @@ function build_rec(){
     }
     showEntry(getRecList[0]);
 }
+
+// function rec_owo(){
+//     $(".rec_my_avator").attr("src", "../assets/avators/gawr_gura.jpg");
+// }
 
 $(()=>{
     $("#pg_rec_container").load("html/record.html", build_rec);

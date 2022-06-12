@@ -1,6 +1,10 @@
 // handle battles
 
 const fio = require("./File");
+const log4js = require("log4js");
+
+let logger = log4js.getLogger("Match");
+logger.level = "all";
 
 const MAX_ROUNDS = 100;
 
@@ -10,8 +14,9 @@ class Match {
     attacker;
     defender;
     nround;
-    record;
     result;
+    record;
+    summary;
 
     constructor(atker, defer, info) {
         this.title = info || "Yet Another Match";
@@ -20,18 +25,14 @@ class Match {
     }
 
     #start() {
-        this.time = Date.now();
-        this.nround = 0;
-        this.record = [];
-        this.result = -49;
-
+        // both sides do preparing
         this.log(
             `Challenge from ${this.attacker.name} to ${this.defender.name}...`
         );
-
         this.attacker.prepare(this.defender, this);
         this.defender.prepare(this.attacker, this);
 
+        // take turns attacking each other
         let next = this.attacker;
         let prev = this.defender;
         while (this.result < -1 || this.result > 1) {
@@ -51,20 +52,29 @@ class Match {
             }
         }
 
+        // both sides finish up
         this.attacker.finish(this.defender, this);
         this.defender.finish(this.attacker, this);
 
+        // determine the result
         let win;
         if (this.result == -1) win = `${this.defender.name}獲勝`;
         else if (this.result == 0) win = `雙方不分軒輊`;
         else if (this.result == 1) win = `${this.attacker.name}獲勝`;
-        this.log(`對戰結束! ${win}`);
+        this.sum(`對戰結束! ${win}`);
     }
 
     start(){
+        // initialization
+        this.time = Date.now();
+        this.nround = 0;
+        this.result = -49;
+        this.record = [];
+        this.summary = [];
         try{
             this.#start();
         }catch(error){
+            logger.error(error);
             this.nround = 0;
             this.record = [];
             this.result = -2;
@@ -74,9 +84,27 @@ class Match {
     log(msg) {
         this.record.push(msg);
     }
+    sum(msg) {
+        this.summary.push(msg);
+    }
 
-    save() {
-        fio.writeObj(`./data/match/match_${this.time}.json`, this);
+    dump(){
+        let res;
+        if(this.result === -1) res = "lose";
+        else if(this.result === 0) res = "tie";
+        else if(this.result === 1) res = "win";
+        else res = "error";
+        let loc_time = new Date(this.time).toLocaleString("zh-TW")
+        return {
+            time: loc_time,
+            title: this.title,
+            result: res,
+            attacker: this.attacker.dump(),
+            defender: this.defender.dump(),
+            nround: this.nround,
+            record: this.record,
+            summary: this.summary,
+        }
     }
 }
 

@@ -53,7 +53,7 @@ function build_navlist(){
     };
     const navbar = new Lavalamp($("#navList")[0], settings);
     
-    let active_page = "rec";
+    let active_page = "dev";
     let active = $(`#nav_${active_page}`)[0];
     navbar.activeElement = active;
     navbar.reposition(active);
