@@ -53,16 +53,16 @@ class Player extends Entity {
     }
 
     prepare(opp, match) {
-        this.char.prepare(this, opp, match);
+        return this.char.prepare(this, opp, match);
     }
     attack(opp, match) {
-        this.char.attack(this, opp, match);
+        return this.char.attack(this, opp, match);
     }
     isDefeated(opp, match) {
-        this.char.isDefeated(this, opp, match);
+        return this.char.isDefeated(this, opp, match);
     }
     finish(opp, match) {
-        this.char.finish(this, opp, match);
+        return this.char.finish(this, opp, match);
     }
 
     refreshAvatar(){

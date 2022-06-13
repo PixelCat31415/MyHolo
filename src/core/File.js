@@ -5,10 +5,8 @@ const fs = require("fs");
 
 let dataPaths = [
     "./data/",
-    "./data/players/",
     "./data/match/",
-    "./data/characters/",
-    "./data/users/",
+    "./data/game/"
 ];
 
 class FileIO {

@@ -1,6 +1,6 @@
 // handle battles
 
-const fio = require("./File");
+const File = require("./File");
 const log4js = require("log4js");
 
 let logger = log4js.getLogger("Match");
@@ -15,6 +15,7 @@ class Match {
     defender;
     nround;
     result;
+    heading;
     record;
     summary;
 
@@ -26,8 +27,8 @@ class Match {
 
     #start() {
         // both sides do preparing
-        this.log(
-            `Challenge from ${this.attacker.name} to ${this.defender.name}...`
+        this.head(
+            `${this.attacker.name} 向 ${this.defender.name} 發起挑戰！`
         );
         this.attacker.prepare(this.defender, this);
         this.defender.prepare(this.attacker, this);
@@ -41,7 +42,7 @@ class Match {
             } else if (this.defender.isDefeated(this.attacker, this)) {
                 this.result = 1;
             } else if (this.nround >= MAX_ROUNDS) {
-                this.log("雙方大戰三百回合不分勝負💤");
+                this.sum("雙方大戰三百回合不分勝負💤");
                 this.result = 0;
             } else {
                 this.nround++;
@@ -69,6 +70,7 @@ class Match {
         this.time = Date.now();
         this.nround = 0;
         this.result = -49;
+        this.heading = [];
         this.record = [];
         this.summary = [];
         try {
@@ -81,6 +83,9 @@ class Match {
         }
     }
 
+    head(msg) {
+        this.heading.push(msg);
+    }
     log(msg) {
         this.record.push(msg);
     }
@@ -94,17 +99,26 @@ class Match {
         else if (this.result === 0) res = "tie";
         else if (this.result === 1) res = "win";
         else res = "error";
-        let loc_time = new Date(this.time).toLocaleString("zh-TW");
+        // new Date(this.time).toLocaleString("zh-TW");
         return {
-            time: loc_time,
+            time: this.time,
             title: this.title,
             result: res,
             attacker: this.attacker.dump(),
             defender: this.defender.dump(),
             nround: this.nround,
+            heading: this.heading,
             record: this.record,
             summary: this.summary,
         };
+    }
+
+    save() {
+        let file_name = `match_${this.time}.json`;
+        let path = `./data/match/${file_name}`;
+        File.writeObj(path, this.dump());
+        logger.log(`match written to '${path}'`);
+        return file_name;
     }
 }
 

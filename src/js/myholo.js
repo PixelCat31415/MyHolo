@@ -3,7 +3,7 @@ let player;
 async function doIdle(arg) {
     // $(".my_name").text(`action ${arg}`);
     await core.send("game-do-idle", arg);
-    refreshInfo();
+    refreshPlayer();
     initTimer();
 }
 
@@ -11,7 +11,7 @@ async function doAddAbil(arg) {
     // $(`.my_abil_${arg}`).text(Math.floor(Math.random()*100))
     let res = await core.send("game-do-addAbil", arg);
     console.log(`addAbil replied: ${res}`);
-    refreshInfo();
+    refreshPlayer();
 }
 
 let timer_id=-1;
@@ -84,10 +84,10 @@ function buildMy() {
             );
         table.append(tr);
     }
-    refreshInfo();
+    refreshPlayer();
 }
 
-async function refreshInfo() {
+async function refreshPlayer() {
     player = await core.send("game-get-player");
     // console.log(player);
 
@@ -116,7 +116,6 @@ async function refreshInfo() {
     $(".my_exp_next").text(Math.round(exp_all));
     $(".my_exp_ratio").text(Math.round(ratio));
 
-    console.log(player.abil_info);
     for (let key of abil_entries) {
         $(`.my_lvl_${key[0]}`).text(Math.round(player.abil_lvl[key[0]]));
         $(`.my_abil_${key[0]}`).text(Math.round(player.max_abil[key[0]]));

@@ -3,6 +3,7 @@
 const {ipcMain} = require("electron");
 const Player = require("./Player");
 const Boss = require("./BossManager");
+const Match = require("./Match");
 
 // class Game {
 //     win;
@@ -15,6 +16,7 @@ const Boss = require("./BossManager");
 // }
 
 let player = new Player();
+let boss = Boss.getBossByLevel(0);
 // console.log(player);
 ipcMain.handle("game-get-player", async ()=>{
     return player.dump();
@@ -26,5 +28,10 @@ ipcMain.handle("game-do-idle", async (event, type)=>{
     player.doIdle(type);
 })
 ipcMain.handle("game-get-boss", async ()=>{
-    return Boss.getBossByLevel(0).dump();
+    return boss.dump();
+})
+ipcMain.handle("game-do-match", async ()=>{
+    let match = new Match(player, boss);
+    match.start();
+    return match.dump();
 })
