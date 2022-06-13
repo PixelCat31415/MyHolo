@@ -36,23 +36,25 @@ class Points {
         return res;
     }
     sub(o) {
-        let res = new Points(o);
+        let res = new Points(this);
         for (let key of Points.entries) {
-            res[key] -= this[key];
+            res[key] -= o[key];
         }
         return res;
     }
     addAll(x) {
+        let res = new Points(this);
         for (let key of Points.entries) {
-            this[key]+=x;
+            res[key]+=x;
         }
-        return this;
+        return res;
     }
     fill(value) {
+        let res = new Points();
         for (let key of Points.entries) {
-            this[key] = value;
+            res[key] = value;
         }
-        return this;
+        return res;
     }
     map(lambda) {
         let res = new Points(this);
@@ -60,6 +62,13 @@ class Points {
             if (lambda.hasOwnProperty(key)) {
                 res[key] = lambda[key](res[key]);
             }
+        }
+        return res;
+    }
+    chmin(x) {
+        let res = new Points(this);
+        for(let key in res) {
+            res[key] = Math.min(res[key], x);
         }
         return res;
     }

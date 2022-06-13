@@ -6,6 +6,10 @@ const log4js = require("log4js");
 let logger = log4js.getLogger("Boss");
 logger.level = "all";
 
+let level_config = [
+    "Gura",
+]
+
 class BossManager {
     boss_list;
     
@@ -19,13 +23,20 @@ class BossManager {
         }
     }
 
-    getBoss(name) {
+    getBossByName(name) {
         if(!this.boss_list.has(name)){
             logger.error(`unknown boss name: ${name}`);
             logger.debug(`boss names should be same as their file name.`);
         } else {
             return new (this.boss_list.get(name))();
         }
+    }
+
+    getBossByLevel(level) {
+        if(level >= level_config.length){
+            return 0;
+        }
+        return this.getBossByName(level_config[level]);
     }
 }
 

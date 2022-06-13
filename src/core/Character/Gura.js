@@ -1,7 +1,7 @@
 const Character0 = require("./Character0");
 
 class Gura extends Character0 {
-    static get avator() {
+    static get avatar() {
         return "gawr_gura.jpg";
     }
     static attack(self, opp, match) {

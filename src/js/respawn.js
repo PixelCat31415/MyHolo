@@ -2,39 +2,39 @@
 function getChars(){
     return [
         {
-            avator: "https://bit.ly/3aPVuST",
+            avatar: "https://bit.ly/3aPVuST",
             name: "Nacho Neko",
         },
         {
-            avator: "https://bit.ly/3aPVuST",
+            avatar: "https://bit.ly/3aPVuST",
             name: "Nacho Neko",
         },
         {
-            avator: "https://bit.ly/3aPVuST",
+            avatar: "https://bit.ly/3aPVuST",
             name: "Nacho Neko",
         },
         {
-            avator: "https://bit.ly/3aPVuST",
+            avatar: "https://bit.ly/3aPVuST",
             name: "Nacho Neko",
         },
         {
-            avator: "https://bit.ly/3aPVuST",
+            avatar: "https://bit.ly/3aPVuST",
             name: "Nacho Neko",
         },
         {
-            avator: "https://bit.ly/3aPVuST",
+            avatar: "https://bit.ly/3aPVuST",
             name: "Nacho Neko",
         },
         {
-            avator: "https://bit.ly/3aPVuST",
+            avatar: "https://bit.ly/3aPVuST",
             name: "Nacho Neko",
         },
         {
-            avator: "https://bit.ly/3aPVuST",
+            avatar: "https://bit.ly/3aPVuST",
             name: "Nacho Neko",
         },
         {
-            avator: "https://bit.ly/3aPVuST",
+            avatar: "https://bit.ly/3aPVuST",
             name: "Nacho Neko",
         }
     ];
@@ -97,8 +97,8 @@ function buildCharList(){
                 onclick: `selectChar(${i})`,
             }).append(
                 $("<img>", {
-                    src: char.avator,
-                    class: "Avators"
+                    src: char.avatar,
+                    class: "Avatars"
                 })
             ).append(
                 $("<p>", {

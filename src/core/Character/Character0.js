@@ -5,7 +5,7 @@
 const Points = require("../Points");
 
 class Character0 {
-    static get avator() {
+    static get avatar() {
         return "nacho.jpg";
     }
 

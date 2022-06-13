@@ -64,16 +64,16 @@ class Match {
         this.sum(`對戰結束! ${win}`);
     }
 
-    start(){
+    start() {
         // initialization
         this.time = Date.now();
         this.nround = 0;
         this.result = -49;
         this.record = [];
         this.summary = [];
-        try{
+        try {
             this.#start();
-        }catch(error){
+        } catch (error) {
             logger.error(error);
             this.nround = 0;
             this.record = [];
@@ -88,13 +88,13 @@ class Match {
         this.summary.push(msg);
     }
 
-    dump(){
+    dump() {
         let res;
-        if(this.result === -1) res = "lose";
-        else if(this.result === 0) res = "tie";
-        else if(this.result === 1) res = "win";
+        if (this.result === -1) res = "lose";
+        else if (this.result === 0) res = "tie";
+        else if (this.result === 1) res = "win";
         else res = "error";
-        let loc_time = new Date(this.time).toLocaleString("zh-TW")
+        let loc_time = new Date(this.time).toLocaleString("zh-TW");
         return {
             time: loc_time,
             title: this.title,
@@ -104,7 +104,7 @@ class Match {
             nround: this.nround,
             record: this.record,
             summary: this.summary,
-        }
+        };
     }
 }
 

@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const Player = require("./core/Player");
+const Game = require("./core/Game");
 
 let win;
 

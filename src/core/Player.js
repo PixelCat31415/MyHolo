@@ -21,13 +21,13 @@ class Player extends Entity {
         super({});
         if(!obj) {
             obj = {
-                name: "[default player]",
+                name: "[player name]",
                 char_name: "Gura",
                 status: "alive",
                 exp: 0,
                 level: 0,
                 abil_lvl: new Points(),
-                abil_credit: 0,
+                abil_credit: 100,
                 resp_credit: 0,
                 next_action: 0,
             }
@@ -37,7 +37,7 @@ class Player extends Entity {
         }
         this.name = obj.name;
         this.char_name = obj.char_name;
-        this.avator = this.char.avator;
+        this.avatar = this.char.avatar;
         this.status = obj.status;
         this.exp = obj.exp;
         this.level = obj.level;
@@ -65,29 +65,76 @@ class Player extends Entity {
         this.char.finish(this, opp, match);
     }
 
+    refreshAvatar(){
+        this.avatar = this.char.avatar;
+    }
     refreshAbil(){
         this.max_abil = this.char.getAbil(this.abil_lvl);
     }
-
     refreshLevel(){
         let new_level = Experience.getLevel(this.exp);
         let delta_level = new_level - this.level;
         logger.info(`level up: ${this.level} + ${delta_level} -> ${new_level}`);
-        this.abil_lvl.addAll(delta_level);
+        this.abil_lvl = this.abil_lvl.addAll(delta_level).chmin(Experience.ABIL_LVL_LIMIT);
         this.abil_credit += delta_level;
         this.level += delta_level;
     }
-
     refresh(){
         this.refreshLevel();
         this.refreshAbil();
+        this.refreshAvatar();
+    }
+
+    doAddAbil(type) {
+        if(this.abil_lvl[type] === Experience.ABIL_LVL_LIMIT ||
+           this.abil_credit <= 0){
+            return false;
+        }
+        this.abil_lvl[type]++;
+        this.abil_credit--;
+        this.refreshAbil();
+        return true;
     }
 
     doIdle(type) {
+        if(this.exp >= Experience.EXP_LIMIT){
+            return 0;
+        }
         let delta_exp = Experience.getIdleExp(type);
-        this.next_action = Date.now() + Experience.getIdleTime(type);
+        delta_exp = Math.min(delta_exp, Experience.EXP_LIMIT - this.exp);
+        this.next_action = Date.now() + Experience.getIdleTime(type)*1000;
         this.exp += delta_exp;
         this.refresh();
+        return delta_exp;
+    }
+
+    dump(){
+        let res = {
+            name: this.name,
+            char_name: this.char_name,
+            avatar: this.avatar,
+            level: this.level,
+            max_abil: this.max_abil.dump(),
+            status: this.status,
+            exp: this.exp,
+            abil_lvl: this.abil_lvl.dump(),
+            abil_credit: this.abil_credit,
+            resp_credit: this.resp_credit,
+            next_action: this.next_action,
+            exp_prev: Experience.getPrevLevel(this.exp),
+            exp_next: Experience.getNextLevel(this.exp),
+            abil_info: {},
+        };
+        let now_lv = this.char.getAbil(this.abil_lvl);
+        let next_lv = this.char.getAbil(this.abil_lvl.addAll(1));
+        let diff = next_lv.sub(now_lv);
+        for(let key of Points.entries){
+            res.abil_info[key] = {
+                can_add: (this.abil_lvl[key] < Experience.ABIL_LVL_LIMIT),
+                delta: diff[key],
+            };
+        }
+        return res;
     }
 }
 

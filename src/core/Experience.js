@@ -2,7 +2,19 @@
 //  - exp for each level
 //  - idle experience reward
 
+const log4js = require("log4js");
+let logger = log4js.getLogger("Experience");
+logger.level = "all";
+
 class ExperienceHandler {
+    // some constants
+    get ABIL_LVL_LIMIT(){
+        return 49;
+    }
+    get EXP_LIMIT(){
+        return this.exp_table[48];
+    }
+
     constructor() {
         this.initExpTable();
         this.initIdleExpTable();
@@ -20,9 +32,23 @@ class ExperienceHandler {
         this.exp_table[49] = Infinity;
     }
     getLevel(exp) {
-        for (let i = 0; i <= 49; i++) {
+        for (let i = 1; i <= 49; i++) {
             if (exp < this.exp_table[i]) {
                 return i;
+            }
+        }
+    }
+    getPrevLevel(exp) {
+        for (let i = 1; i <= 49; i++) {
+            if (exp < this.exp_table[i]) {
+                return this.exp_table[i-1];
+            }
+        }
+    }
+    getNextLevel(exp) {
+        for (let i = 1; i <= 49; i++) {
+            if (exp < this.exp_table[i]) {
+                return this.exp_table[i];
             }
         }
     }
@@ -55,12 +81,12 @@ class ExperienceHandler {
         this.idle_exp_table = {};
         for (let i = 1; i <= 10; i++) {
             let eff = 0.4 * Math.pow(1.3, i);
-            this.idle_exp_table[i] = this.idle_time_table[i - 1] * eff;
+            this.idle_exp_table[i] = this.idle_time_table[i] * eff;
         }
     }
     getIdleExp(op) {
         if (op < 1 || op > 10) {
-            console.log("WARNING: invalid idle type");
+            logger.error("invalid idle type");
             return 0;
         }
         return this.idle_exp_table[op];

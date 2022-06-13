@@ -10,7 +10,7 @@ logger.level = "all";
 class Entity {
     name;
     char_name;
-    avator;
+    avatar;
     level;
     max_abil;
     abil;
@@ -22,7 +22,7 @@ class Entity {
             return;
         }
         this.name = obj.name;
-        this.avator = obj.avator;
+        this.avatar = obj.avatar;
         this.char_name = obj.char_name;
         this.level = obj.level;
         this.max_abil = new Points(obj.max_abil);

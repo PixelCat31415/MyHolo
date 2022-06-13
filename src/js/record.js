@@ -50,7 +50,7 @@ match hierachy
     result: "win" | "lose" | "tie" | "error",
     attacker: {
         name: str,
-        avator: str,
+        avatar: str,
         char_name: str,
         level: int,
         max_abil: (same as abil),
@@ -102,7 +102,7 @@ function build_rec(){
 }
 
 // function rec_owo(){
-//     $(".rec_my_avator").attr("src", "../assets/avators/gawr_gura.jpg");
+//     $(".rec_my_avatar").attr("src", "../assets/avatars/gawr_gura.jpg");
 // }
 
 $(()=>{

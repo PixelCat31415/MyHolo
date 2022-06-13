@@ -4,7 +4,7 @@ class BossGura extends Boss0 {
     constructor() {
         super({
             name: "Gawr Gura",
-            avator: "gawr_gura.jpg",
+            avatar: "gawr_gura.jpg",
             char_name: "Gawr Gura",
             level: 87,
             max_abil: {

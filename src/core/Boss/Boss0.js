@@ -25,7 +25,7 @@ class Boss0 extends Entity {
     dump(){
         return {
             name: this.name,
-            avator: this.avator,
+            avatar: this.avatar,
             char_name: this.char_name,
             level: this.level,
             max_abil: this.max_abil.dump(),
