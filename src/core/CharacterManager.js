@@ -3,19 +3,22 @@
 const File = require("./File");
 const log4js = require("log4js");
 
-let logger = log4js.getLogger("Character");
+let logger = log4js.getLogger("Characters");
 logger.level = "all";
 
 class CharManager {
+    char_names;
     char_list;
     
     constructor() {
         let char_files = File.getAllFiles("src/core/Character");
-        logger.log(`${char_files.length} char files found: ${char_files}`);
+        logger.log(`${char_files.length} character files found: ${char_files}`);
         this.char_list = new Map();
+        this.char_names = [];
         for(let char_file of char_files){
             let char_name = char_file.replace(/\.[^/.]+$/, "");
             this.char_list.set(char_name, require(`./Character/${char_name}`));
+            this.char_names.push(char_name);
         }
     }
 
@@ -26,6 +29,10 @@ class CharManager {
         } else {
             return this.char_list.get(name);
         }
+    }
+
+    getAllChars() {
+        return this.char_names;
     }
 }
 

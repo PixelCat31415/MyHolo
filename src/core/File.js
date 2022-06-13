@@ -23,22 +23,6 @@ class FileIO {
     static readObj(path) {
         return JSON.parse(this.readText(path));
     }
-    static readObj2(path, target){
-        obj = readObj(path);
-        mergeObj(target, obj);
-    }
-    static mergeObjOver(target, src){
-        for(let k in src){
-            target[k] = src[k];
-        }
-    }
-    static mergeObjAdd(target, src){
-        for(let k in src){
-            if(!target.hasOwnProperty(k)){
-                target[k] = src[k];
-            }
-        }
-    }
     static writeText(path, data) {
         fs.writeFileSync(path, data, { encoding: "utf-8" });
     }

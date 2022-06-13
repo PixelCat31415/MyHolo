@@ -21,13 +21,13 @@ class Player extends Entity {
         super({});
         if(!obj) {
             obj = {
-                name: "[player name]",
+                name: "Smol Gura",
                 char_name: "Gura",
                 status: "alive",
                 exp: 0,
-                level: 0,
-                abil_lvl: new Points(),
-                abil_credit: 100,
+                level: 1,
+                abil_lvl: (new Points()).fill(1),
+                abil_credit: 0,
                 resp_credit: 0,
                 next_action: 0,
             }
@@ -74,6 +74,7 @@ class Player extends Entity {
     refreshLevel(){
         let new_level = Experience.getLevel(this.exp);
         let delta_level = new_level - this.level;
+        if(delta_level === 0) return;
         logger.info(`level up: ${this.level} + ${delta_level} -> ${new_level}`);
         this.abil_lvl = this.abil_lvl.addAll(delta_level).chmin(Experience.ABIL_LVL_LIMIT);
         this.abil_credit += delta_level;
@@ -83,6 +84,12 @@ class Player extends Entity {
         this.refreshLevel();
         this.refreshAbil();
         this.refreshAvatar();
+    }
+
+    updateChar(new_char) {
+        this.char_name = new_char;
+        this.avatar = this.char.avatar;
+        this.refresh();
     }
 
     doAddAbil(type) {

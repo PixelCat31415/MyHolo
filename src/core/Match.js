@@ -20,7 +20,7 @@ class Match {
     summary;
 
     constructor(atker, defer, info) {
-        this.title = info || "Yet Another Match";
+        this.title = info;
         this.attacker = atker;
         this.defender = defer;
     }

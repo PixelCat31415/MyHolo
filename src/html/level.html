@@ -1,55 +1,86 @@
-<div class="flex_container">
-    <div>
-        <img
-        src="../assets/avatars/nacho.jpg"
-        class="my_avatar Avatars"
-        style="margin-top: 50px;"
-        />
-    </div>
-    <div>
-        <div class="flex_container" style="width: 570px; margin: 0 auto;">
-            <div style="flex-grow: 1;">
-                <p class="centered" style="margin-bottom: 0;">挑戰者</p>
-                <h2 class="my_name centered" style="margin-top: 4px;">玩家暱稱</h2>
+<div id="boss_match" hidden>
+    <div class="flex_container">
+        <div>
+            <img
+                src="../assets/avatars/nacho.jpg"
+                class="my_avatar Avatars"
+                style="margin-top: 50px"
+            />
+        </div>
+        <div>
+            <div class="flex_container" style="width: 570px; margin: 0 auto">
+                <div style="flex-grow: 1">
+                    <p class="centered" style="margin-bottom: 0">挑戰者</p>
+                    <h2 class="my_name centered" style="margin-top: 4px">
+                        玩家暱稱
+                    </h2>
+                </div>
+                <div style="flex-grow: 1">
+                    <p class="centered" style="margin-bottom: 0">關主</p>
+                    <h2 class="boss_name centered" style="margin-top: 4px">
+                        關主暱稱
+                    </h2>
+                </div>
             </div>
-            <div style="flex-grow: 1;">
-                <p class="centered" style="margin-bottom: 0;">關主</p>
-                <h2 class="boss_name centered" style="margin-top: 4px;">關主暱稱</h2>
+            <div>
+                <table id="boss_match_info" class="infobox"></table>
             </div>
         </div>
         <div>
-            <table id="boss_match_info" class="infobox"></table>
+            <img
+                src="../assets/avatars/nacho.jpg"
+                class="boss_avatar Avatars"
+                style="margin-top: 50px"
+            />
         </div>
     </div>
-    <div>
-        <img
-            src="../assets/avatars/nacho.jpg"
-            class="boss_avatar Avatars"
-            style="margin-top: 50px;"
-        />
+    <div class="flex_container" id="boss_match_options">
+        <div>
+            <button onclick="doMatch();">開始挑戰</button>
+        </div>
+    </div>
+    <div class="flex_container">
+        <div id="boss_match_result_box" hidden>
+            <h2
+                class="centered match_result_title"
+                id="boss_match_result_title"
+            >
+                挑戰結果
+            </h2>
+            <ul class="match_result_summary" id="boss_match_result_heading">
+                <li>
+                    喵喵喵！喵喵喵喵<span style="color: magenta">喵喵喵</span
+                    >喵喵？
+                </li>
+            </ul>
+            <hr />
+            <ol class="match_result_list" id="boss_match_result_list">
+                <li>
+                    <span style="color: magenta">喵喵喵</span>使出了
+                    <span style="color: blue">owo</span>
+                </li>
+                <li>
+                    <span style="color: magenta">喵喵喵</span>又使出了
+                    <span style="color: blue">owo</span>
+                </li>
+            </ol>
+            <hr />
+            <ul class="match_result_summary" id="boss_match_result_summary">
+                <li>挑戰者<span style="color: magenta">喵喵喵</span>勝利</li>
+                <li>你獲得了87點經驗值</li>
+            </ul>
+        </div>
+    </div>
+    <div class="flex_container">
+        <div id="boss_next_level" hidden>
+            <button onclick="nextLevel();">下一關卡</button>
+        </div>
     </div>
 </div>
-<div class="flex_container" id="boss_match_options">
-    <div>
-        <button onclick="doMatch();">開始挑戰</button>
-    </div>
-</div>
-<div class="flex_container">
-    <div id="boss_match_result_box"> <!-- hidden -->
-        <h2 class="centered match_result_title" id="boss_match_result_title">挑戰結果</h2>
-        <ul class="match_result_summary" id="boss_match_result_heading">
-            <li>挑戰者<span style="color: magenta">喵喵喵</span>勝利</li>
-            <li>你獲得了87點經驗值</li>
-        </ul>
-        <hr>
-        <ol class="match_result_list" id="boss_match_result_list">
-            <li><span style="color: magenta">喵喵喵</span>使出了 <span style="color: blue;">owo</span></li>
-            <li><span style="color: magenta">喵喵喵</span>又使出了 <span style="color: blue;">owo</span></li>
-        </ol>
-        <hr>
-        <ul class="match_result_summary" id="boss_match_result_summary">
-            <li>挑戰者<span style="color: magenta">喵喵喵</span>勝利</li>
-            <li>你獲得了87點經驗值</li>
-        </ul>
+<div id="boss_cleared" hidden>
+    <div style="display: flex; justify-content: center; align-items: center; flex-flow: column;">
+        <p style="display: inline-block; font-size: 30px; margin: 30px;">You are the</p>
+        <h2 style="font-size: 40px; margin: 0;">CHAMPION</h2>
+        <p style="font-style: italic; color: #555; font-size: 26px;">🛐🛐🛐🛐</p>
     </div>
 </div>

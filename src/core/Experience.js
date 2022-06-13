@@ -9,7 +9,7 @@ logger.level = "all";
 class ExperienceHandler {
     // some constants
     get ABIL_LVL_LIMIT(){
-        return 49;
+        return 100;
     }
     get EXP_LIMIT(){
         return this.exp_table[48];
