@@ -11,24 +11,7 @@ let abil_entries = [
     ["luk", "幸運值"],
 ];
 
-async function ping() {
-    let msg = await core.send("ping", "PING from renderer process");
-    console.log(`Main process replied: ${msg}`);
-}
-
-async function match() {
-    let mat = await core.send("match");
-    mat.time = new Date(mat.time).toLocaleString("zh-TW");
-    console.log(mat);
-}
-
-function owo() {
-    console.log("owo!\n");
-}
-
-function getTime() {
-    console.log(new Date(Date.now()).toLocaleString("zh-TW"));
-}
+let navbar;
 
 function init_ipc() {
     core.handle("pong", async (event, data) => {
@@ -39,6 +22,14 @@ function init_ipc() {
     });
 }
 
+function redirectPage(page) {
+    let active = $(`#nav_${page}`)[0];
+    navbar.activeElement = active;
+    navbar.reposition(active);
+    $(".Page").hide();
+    $(`#pg_${page}`).show();
+}
+
 function build_navlist() {
     const settings = {
         margins: true,
@@ -46,22 +37,30 @@ function build_navlist() {
         setOnClick: true,
         initActiveQuery: ".ActiveLavalamp",
     };
-    const navbar = new Lavalamp($("#navList")[0], settings);
-
-    let active_page = "lvl";
-    let active = $(`#nav_${active_page}`)[0];
-    navbar.activeElement = active;
-    navbar.reposition(active);
-    $(`#pg_${active_page}`).show();
+    navbar = new Lavalamp($("#navList")[0], settings);
 
     let page_names = ["home", "my", "lvl", "resp", "adv", "rec", "dev"];
     for (let name of page_names) {
         let entry = $(`#nav_${name}`);
         entry.on("click", function () {
-            $(".Page").hide();
-            $(`#pg_${name}`).show();
+            redirectPage(name);
         });
     }
+}
+
+let debug_count = 0;
+let debug_on = false;
+function tryDebugMode() {
+    debug_count++;
+    if (debug_count === 5) {
+        onDebugMode();
+    }
+}
+function onDebugMode() {
+    if (debug_on) return;
+    debug_on = true;
+    $(".debug").show();
+    core.send("debug");
 }
 
 $(async function () {
@@ -76,5 +75,10 @@ $(async function () {
 
     init_ipc();
     build_navlist();
+    $(".debug").hide();
+    setTimeout(() => {
+        redirectPage("my");
+    }, 1000);
+    // onDebugMode();
     await core.send("ready");
 });

@@ -1,21 +1,16 @@
-const { app, BrowserWindow } = require("electron");
+const { app } = require("electron");
 const Game = require("./core/Game");
 
 let game;
 
-function createWindow() {
+function createGame() {
     game = new Game();
 }
 
-app.on("ready", createWindow);
-// make maxOS happy
-app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
-        app.quit();
-    }
-});
-app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow();
-    }
-});
+function endGame() {
+    game.end();
+    app.quit();
+}
+
+app.on("ready", createGame);
+app.on("window-all-closed", endGame);

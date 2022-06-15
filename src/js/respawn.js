@@ -1,120 +1,152 @@
-// nacho neko's are for temporary demo OAO
-function getChars(){
-    return [
-        {
-            avatar: "https://bit.ly/3aPVuST",
-            name: "Nacho Neko",
-        },
-        {
-            avatar: "https://bit.ly/3aPVuST",
-            name: "Nacho Neko",
-        },
-        {
-            avatar: "https://bit.ly/3aPVuST",
-            name: "Nacho Neko",
-        },
-        {
-            avatar: "https://bit.ly/3aPVuST",
-            name: "Nacho Neko",
-        },
-        {
-            avatar: "https://bit.ly/3aPVuST",
-            name: "Nacho Neko",
-        },
-        {
-            avatar: "https://bit.ly/3aPVuST",
-            name: "Nacho Neko",
-        },
-        {
-            avatar: "https://bit.ly/3aPVuST",
-            name: "Nacho Neko",
-        },
-        {
-            avatar: "https://bit.ly/3aPVuST",
-            name: "Nacho Neko",
-        },
-        {
-            avatar: "https://bit.ly/3aPVuST",
-            name: "Nacho Neko",
-        }
-    ];
+let resp_char;
+let resp_credit = 0;
+let resp_abil = {};
+
+async function refreshRespCandidate(charid) {
+    resp_char = charid;
+    $(".candidate_selected").removeClass("candidate_selected");
+    $(`#candidate_char_${charid}`).addClass("candidate_selected");
+    let char = await core.send("game-get-char", charid);
+    $(".resp_char").text(char.char_name);
+    $(".resp_avatar").attr("src", `../assets/avatars/${char.avatar}`);
+    refreshRespAbil();
 }
 
-function selectChar(index){
-    $(".resp_level").text(index);
+async function refreshRespAbil() {
+    let player = await game.getPlayer();
+    $(".resp_credit").text(player.resp_credit);
+    let abil = await core.send("game-get-respAbil", resp_char, resp_abil);
+    for (let key of abil_entries) {
+        $(`.resp_abil_add_${key[0]}`).text(`${resp_abil[key[0]] / 10}`);
+        $(`.resp_abil_${key[0]}`).text(Math.round(abil[key[0]]));
+    }
+    $(".resp_credit").text(resp_credit);
 }
 
-function doAddResp(key, delta){
-    // console.log(key, delta);
-    $(`.resp_abil_add_${key}`).text(delta);
+async function resetRespAbil() {
+    let player = await game.getPlayer();
+    resp_credit = player.resp_credit;
+    resp_abil = { ...player.resp_abil };
+    refreshRespAbil();
 }
 
-function buildRespAbils(){
+async function doAddResp(key, delta) {
+    let new_credit = resp_credit - delta;
+    let new_abil = resp_abil[key] + delta;
+    if (
+        new_credit > (await game.getPlayer()).resp_credit ||
+        new_credit < 0 ||
+        new_abil < 0
+    ) {
+        return;
+    }
+    resp_credit = new_credit;
+    resp_abil[key] = new_abil;
+    refreshRespAbil();
+}
+
+async function doResp() {
+    await core.send("game-do-respawn", resp_char, resp_credit, resp_abil);
+    resetRespAbil();
+    refreshPlayer();
+    redirectPage("my");
+}
+
+async function buildRespAbils() {
     let table = $("#resp_abilities");
-    for(let key of abil_entries){
+    for (let key of abil_entries) {
         table.append(
-            $("<tr>").append(
-                $("<td>", {
-                    text: key[1],
-                })
-            ).append(
-                $("<td>").append(
-                    $("<button>", {
-                        class: "button_abil_add",
-                        text: "➖",
-                        onclick: `doAddResp(\"${key[0]}\", -1)`
-                    })
-                ).append(
-                    $("<span>", {
-                        class: `resp_abil_add_${key[0]}`,
-                        text: 87,
-                    })
-                ).append(
-                    $("<button>", {
-                        class: "button_abil_add",
-                        text: "➕",
-                        onclick: `doAddResp(\"${key[0]}\", 1)`
+            $("<tr>")
+                .append(
+                    $("<td>", {
+                        text: key[1],
                     })
                 )
-            ).append(
-                $("<td>", {
-                    class: `resp_abil_${key[0]}`,
-                    text: 48763,
-                })
-            )
-        )
+                .append(
+                    $("<td>", {
+                        style: "padding: 0;",
+                    })
+                        .append(
+                            $("<span>", {
+                                text: "Lv 1 ",
+                            })
+                        )
+                        .append(
+                            $("<button>", {
+                                class: "button_abil_add",
+                                text: "➖",
+                                onclick: `doAddResp(\"${key[0]}\", -1)`,
+                            })
+                        )
+                        .append(
+                            $("<span>", {
+                                style: "color: green;",
+                                text: "+",
+                            })
+                        )
+                        .append(
+                            $("<span>", {
+                                style: "color: green;",
+                                class: `resp_abil_add_${key[0]}`,
+                                text: 87,
+                            })
+                        )
+                        .append(
+                            $("<button>", {
+                                class: "button_abil_add",
+                                text: "➕",
+                                onclick: `doAddResp(\"${key[0]}\", 1)`,
+                            })
+                        )
+                )
+                .append(
+                    $("<td>", {
+                        style: "text-align: right; margin-right: 20px;",
+                        class: `resp_abil_${key[0]}`,
+                        text: 48763,
+                    })
+                )
+        );
     }
 }
 
-function buildCharList(){
-    let chars = getChars();
+async function buildCharList() {
+    let chars = await core.send("game-get-allChars");
     let list = $("#resp_chars_list");
-    for(let i=0; i<chars.length; i++){
-        let char = chars[i];
+    for (let it of chars) {
+        let charid = it[0];
+        let char = it[1];
         list.append(
             $("<div>", {
                 class: "candidate_char",
-                onclick: `selectChar(${i})`,
-            }).append(
-                $("<img>", {
-                    src: char.avatar,
-                    class: "Avatars"
-                })
-            ).append(
-                $("<p>", {
-                    class: "centered",
-                    text: char.name,
-                })
-            )
-        )
+                id: `candidate_char_${charid}`,
+                onclick: `refreshRespCandidate(\"${charid}\")`,
+            })
+                .append(
+                    $("<img>", {
+                        src: `../assets/avatars/${char.avatar}`,
+                        class: "Avatars",
+                    })
+                )
+                .append(
+                    $("<p>", {
+                        class: "centered",
+                        text: char.name,
+                    })
+                )
+        );
     }
+    let default_name = chars.keys().next().value;
+    refreshRespCandidate(default_name);
 }
 
-function buildResp(){
+function buildResp() {
     buildRespAbils();
     buildCharList();
+    resetRespAbil();
+    refreshRespAbil();
 }
 
-$(async function(){
+$(async function () {
     $("#pg_resp_container").load("html/respawn.html", buildResp);
-})
+});

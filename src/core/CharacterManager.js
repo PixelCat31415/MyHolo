@@ -7,23 +7,32 @@ let logger = log4js.getLogger("Characters");
 logger.level = "all";
 
 class CharManager {
+    boss_level;
     char_names;
     char_list;
-    
+
     constructor() {
-        let char_files = File.getAllFiles("src/core/Character");
+        let char_files = File.getAllFiles("src/core/Character").filter((file) =>
+            file.endsWith(".js")
+        );
         logger.log(`${char_files.length} character files found: ${char_files}`);
         this.char_list = new Map();
         this.char_names = [];
-        for(let char_file of char_files){
+        for (let char_file of char_files) {
             let char_name = char_file.replace(/\.[^/.]+$/, "");
-            this.char_list.set(char_name, require(`./Character/${char_name}`));
-            this.char_names.push(char_name);
+            let char_class = require(`./Character/${char_name}`);
+            if(!char_class.hidden){
+                this.char_list.set(char_name, new char_class());
+                this.char_names.push(char_name);
+            }
         }
+
+        this.boss_level = File.readObj("./src/core/Character/boss_level.json");
+        logger.log(`${this.boss_level.length} levels found: ${this.boss_level}`);
     }
 
     getChar(name) {
-        if(!this.char_list.has(name)){
+        if (!this.char_list.has(name)) {
             logger.error(`unknown char name: ${name}`);
             logger.debug(`char names should be same as their file name.`);
         } else {
@@ -32,7 +41,20 @@ class CharManager {
     }
 
     getAllChars() {
-        return this.char_names;
+        return this.char_list;
+    }
+
+    getMaxLevel() {
+        return this.boss_level.length - 1;
+    }
+
+    getBoss(level) {
+        if (!this.boss_level[level]) {
+            logger.error(`level range ${level} out of bound`);
+            return {};
+        } else {
+            return this.getChar(this.boss_level[level]);
+        }
     }
 }
 

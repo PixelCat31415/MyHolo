@@ -12,9 +12,22 @@
     transition: 0.5s;
     border: 2px solid transparent;
     margin: 5px;
-}
 
+    display: flex;
+    flex-direction: column;
+}
 .candidate_char:hover {
     border: 2px solid #AAA;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.candidate_char .Avatars {
+    margin: auto auto;
+}
+
+.candidate_selected,
+.candidate_selected:hover {
+    border: 2px solid rgb(104, 104, 104);
     border-radius: 10px;
 }

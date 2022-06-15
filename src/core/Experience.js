@@ -9,10 +9,16 @@ logger.level = "all";
 class ExperienceHandler {
     // some constants
     get ABIL_LVL_LIMIT(){
-        return 100;
+        return 1000;
     }
     get EXP_LIMIT(){
         return this.exp_table[48];
+    }
+    get CREDIT_LEVELUP(){
+        return 1;
+    }
+    get CREDIT_BOSS_CLEAR(){
+        return 7;
     }
 
     constructor() {
@@ -69,7 +75,7 @@ class ExperienceHandler {
     };
     getIdleTime(op) {
         if (op < 1 || op > 10) {
-            console.log("WARNING: invalid idle type");
+            logger.warn("invalid idle type");
             return 0;
         }
         return this.idle_time_table[op];

@@ -8,5 +8,3 @@ contextBridge.exposeInMainWorld("core", {
         ipcRenderer.on(channel, callable);
     },
 });
-
-console.log("preloaded.");

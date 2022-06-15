@@ -1,27 +1,33 @@
 // basic template
 // shows minimum interface of a character
 // other characters should inherit from this class
+// should not be constructed
 
 const Points = require("../Points");
+const Entity = require("../Entity");
 
-class Character0 {
-    static get avatar() {
-        return "nacho.jpg";
+class Character0 extends Entity {
+    static get hidden(){
+        return true;
     }
 
-    static prepare(self, opp, match) {
-        self.abil = new Points(self.max_abil);
+    constructor(obj) {
+        super(obj);
     }
 
-    static attack(self, opp, match) {}
-
-    static isDefeated(self, opp, match) {
-        return self.abil.hp < 0;
+    prepare(opp, match) {
+        this.abil = new Points(this.max_abil);
     }
 
-    static finish(self, opp, match) {}
+    attack(opp, match) {}
 
-    static getAbil(abil_lvl) {
+    isDefeated(opp, match) {
+        return this.abil.hp < 0;
+    }
+
+    finish(opp, match) {}
+
+    getAbil(abil_lvl) {
         return abil_lvl.map({
             hp: (lvl) => 400 * Math.pow(1.08, lvl) - 400,
             atk: (lvl) => 25 * Math.pow(1.06, lvl) - 23,
@@ -31,6 +37,16 @@ class Character0 {
             skl: (lvl) => 10 * lvl + 10,
             luk: (lvl) => 10 * lvl + 10,
         });
+    }
+
+    dump() {
+        return {
+            name: this.name,
+            avatar: this.avatar,
+            char_name: this.char_name,
+            level: this.level,
+            max_abil: this.max_abil.dump(),
+        };
     }
 }
 

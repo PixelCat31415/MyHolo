@@ -8,10 +8,9 @@ Still under construction. (probably for a long time since I'm still learning JS 
 
 some more TODO's
 
-- tidy up `main.js` (it's a big mess now)
-- finish the main game manager in `Game.js`
-- finish `Player.js`. it's missing some features now
-- actually link the frontend and backend via ipc
+- save/read game progress
+- view game record (record page)
+- allow updating name/motto
 - favicon
 
 ## yet more TODO's

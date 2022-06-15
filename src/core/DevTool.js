@@ -12,6 +12,10 @@ but this module is rather less important so i'll just leave it as it is for now
 
 const { ipcMain } = require("electron");
 
+const log4js = require("log4js");
+let logger = log4js.getLogger("Devtool");
+logger.level = "all";
+
 const fio = require("../core/File");
 const Points = require("../core/Points");
 const Match = require("../core/Match");
@@ -229,5 +233,7 @@ class DevTool {
         });
     }
 }
+
+logger.log("loaded devtools");
 
 module.exports = new DevTool();

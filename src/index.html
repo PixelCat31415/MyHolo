@@ -24,11 +24,12 @@
         <link type="text/css" rel="stylesheet" href="css/index.css" />
 
         <!-- script stuff -->
+        <script defer src="js/game.js"></script>
         <script defer src="js/index.js"></script>
     </head>
     <body>
         <h1>
-            MyHolo v0.1
+            MyHolo<span onclick="tryDebugMode();">&nbsp;</span>v0.1
         </h1>
         <ul id="navList">
             <li id="nav_home" class="NavTarget">關於</li>
@@ -37,16 +38,18 @@
             <li id="nav_resp" class="NavTarget">畢業系統</li>
             <li id="nav_adv" class="NavTarget">成就列表</li>
             <li id="nav_rec" class="NavTarget">挑戰紀錄</li>
-            <li id="nav_dev" class="NavTarget ActiveLavalamp">測試工具</li>
+            <li id="nav_dev" class="NavTarget debug">測試工具</li>
         </ul>
+        <div class="centered">
+            <p class="centered" id="dead_banner" hidden>你的 VTuber 慘遭炎上，請畢業轉生</p>
+        </div>
         <div id="d_pages">
             <div id="pg_home" class="Page" hidden>
                 <p>MyHolo Game</p>
                 <p>version: 0.1</p>
                 <p>Under construction💤...</p>
                 <p><code>Ctrl + Shift + I</code> to toggle dev tools.</p>
-                <button onclick="ping()">ping...</button>
-                <button onclick="owo()">owo!</button>
+                <button onclick="console.log('owo')">owo!</button>
             </div>
             <div id="pg_my" class="Page" hidden>
                 <div id="pg_my_container"></div>

@@ -42,10 +42,17 @@ class Points {
         }
         return res;
     }
+    divide(x) {
+        let res = new Points(this);
+        for (let key of Points.entries) {
+            res[key] /= x;
+        }
+        return res;
+    }
     addAll(x) {
         let res = new Points(this);
         for (let key of Points.entries) {
-            res[key]+=x;
+            res[key] += x;
         }
         return res;
     }
@@ -67,12 +74,12 @@ class Points {
     }
     chmin(x) {
         let res = new Points(this);
-        for(let key in res) {
+        for (let key in res) {
             res[key] = Math.min(res[key], x);
         }
         return res;
     }
-    dump(){
+    dump() {
         return JSON.parse(JSON.stringify(this));
     }
 }

@@ -1,22 +1,18 @@
-let player;
-
 async function doIdle(arg) {
     // $(".my_name").text(`action ${arg}`);
-    await core.send("game-do-idle", arg);
+    await core.send("game-do-idle", arg, Date.now());
     refreshPlayer();
     initTimer();
 }
 
 async function doAddAbil(arg) {
-    // $(`.my_abil_${arg}`).text(Math.floor(Math.random()*100))
     let res = await core.send("game-do-addAbil", arg);
-    console.log(`addAbil replied: ${res}`);
     refreshPlayer();
 }
 
 let timer_id=-1;
 async function updateTimer() {
-    let rem = Math.ceil((player.next_action - Date.now())/1000);
+    let rem = Math.ceil(((await game.getPlayer()).next_action - Date.now())/1000);
     if (!rem || rem <= 0) {
         $(".my_stream_cd").hide();
         window.clearInterval(timer_id);
@@ -45,7 +41,7 @@ function buildMy() {
         )
             .append(
                 $("<td>", {
-                    text: "lv.",
+                    text: "Lv ",
                 })
                     .append(
                         $("<span>", {
@@ -88,21 +84,22 @@ function buildMy() {
 }
 
 async function refreshPlayer() {
-    player = await core.send("game-get-player");
-    // console.log(player);
+    let player = await game.getPlayer();
 
     $(".my_avatar").attr("src", `../assets/avatars/${player.avatar}`);
     $(".my_name").text(player.name);
     $(".my_level").text(player.level);
-    $(".my_char").text(player.char_name);
+    $(".my_char").text(player.char_nickname);
 
     let $status = $(".my_status");
     if (player.status === "alive") {
         $status.text("Alive");
         $status.css("color", "green");
+        $("#dead_banner").hide();
     } else if (player.status === "dead") {
         $status.text("Dead");
         $status.css("color", "red");
+        $("#dead_banner").show();
     } else {
         $status.text("Error");
         $status.css("color", "yellow");
@@ -117,7 +114,7 @@ async function refreshPlayer() {
     $(".my_exp_ratio").text(Math.round(ratio));
 
     for (let key of abil_entries) {
-        $(`.my_lvl_${key[0]}`).text(Math.round(player.abil_lvl[key[0]]));
+        $(`.my_lvl_${key[0]}`).text(Math.round(player.abil_lvl[key[0]])/10);
         $(`.my_abil_${key[0]}`).text(Math.round(player.max_abil[key[0]]));
         if (player.abil_info[key[0]].can_add) {
             $(`.button_abil_add_${key[0]}`).css("visibility", "visible");
@@ -132,24 +129,6 @@ async function refreshPlayer() {
 
     $(".my_credit").text(player.abil_credit);
 }
-
-/*
-return {
-    name: this.name,
-    char_name: this.char_name,
-    avatar: this.avatar,
-    level: this.level,
-    max_abil: this.max_abil.dump(),
-    status: this.status,
-    exp: this.exp,
-    exp_prev: Experience.getPrevLevel(this.exp),
-    exp_next: Experience.getNextLevel(this.exp),
-    abil_lvl: this.abil_lvl.dump(),
-    abil_credit: this.abil_credit,
-    resp_credit: this.resp_credit,
-    next_action: this.next_action,
-};
-*/
 
 $(async () => {
     await $("#pg_my_container").load("html/myholo.html", buildMy);
