@@ -44,6 +44,7 @@ class Game {
         logger.info("creating game window");
         this.win = new BrowserWindow({
             title: "MyHolo v1.0",
+            icon: `${__dirname}/../../assets/facicon.ico`,
             show: false,
             webPreferences: {
                 preload: `${__dirname}/../preload.js`,
