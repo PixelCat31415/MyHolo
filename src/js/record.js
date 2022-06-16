@@ -1,110 +1,113 @@
-function getRecList(){
-    return [
-        {
-            time: "3:14:00",
-            result: "win",
-            self: {
-                name: "Nacho Neko",
-                char: "nachoneko",
-                level: 69,
-                abil: {
-                    hp: 666,
-                    atk: 666,
-                    def: 666,
-                    agi: 666,
-                    str: 666,
-                    skl: 666,
-                    luk: 666,
-                }
-            },
-            opp: {
-                name: "Nacho Neko",
-                char: "nachoneko",
-                level: 69,
-                abil: {
-                    hp: 666,
-                    atk: 666,
-                    def: 666,
-                    agi: 666,
-                    str: 666,
-                    skl: 666,
-                    luk: 666,
-                }
-            },
-            rec: [
-                "owo",
-                "owowo",
-            ],
-            summary: [
-                "owowowo"
-            ],
-        }
-    ];
+let rec_list;
+let now_selected;
+
+function showCharInfo(side, char) {
+    $(`.rec_${side}_name`).text(char.name);
+    $(`.rec_${side}_char`).text(char.char_name);
+    $(`.rec_${side}_level`).text(char.level);
+    for (let key of abil_entries) {
+        $(`.rec_${side}_${key[0]}`).text(Math.round(char.max_abil[key[0]]));
+    }
 }
 
-/*
-match hierachy
-{
-    time: str,
-    title: str,
-    result: "win" | "lose" | "tie" | "error",
-    attacker: {
-        name: str,
-        avatar: str,
-        char_name: str,
-        level: int,
-        max_abil: (same as abil),
-        abil: {hp, atk, def, agi, str, skl, luk} int each
-    },
-    defender: (same as attacker),
-    nround: int,
-    record: str[],
-    summary: str[]
-},
-*/
-function showEntry(match){
-    // TODO
+async function showMatchRecord() {
+    if(now_selected == 48763) {
+        console.log("motto hayaku!");
+        return;
+    }
+
+    $("#match_container").show();
+
+    let mat = await core.send("game-get-matchRecord", now_selected);
+
+    $(".rec_match_time").text(new Date(mat.time).toLocaleString("zh-TW"));
+    let $res = $(".rec_match_result");
+    if (mat.result === "lose") {
+        $res.css("color", "red");
+        $res.text("戰敗");
+    } else if (mat.result === "tie") {
+        $res.css("color", "blue");
+        $res.text("平手");
+    } else if (mat.result === "win") {
+        $res.css("color", "green");
+        $res.text("戰勝");
+    } else {
+        $res.css("color", "yellow");
+        $res.text("錯誤");
+    }
+
+    showCharInfo("atk", mat.attacker);
+    showCharInfo("def", mat.defender);
+
+    showMatch("rec", mat);
 }
 
-let now_selected = -1;
-function doSelectEntry(index){
-    if(now_selected != -1){
+function doSelectMatchRecord(index) {
+    if (now_selected != -1) {
         $(`#rec_row_${now_selected}`).removeClass("rec_row_active");
     }
     $(`#rec_row_${index}`).addClass("rec_row_active");
     now_selected = index;
+    showMatchRecord();
 }
 
-function build_rec(){
-    let recs = getRecList();
+async function buildRecList() {
+    $(".rec_match_entry").remove();
+    rec_list = await core.send("game-get-matchList");
     let list = $("#rec_list");
-    for(let i=0; i<recs.length; i++){
-        let rec = recs[i];
+    for(let id of rec_list){
+        let rec = await core.send("game-get-matchRecord", id);
         list.append(
             $("<tr>", {
-                class: `rec_data rec_row_${rec.result}`,
-                id: `rec_row_${i}`,
-                onclick: `doSelectEntry(${i})`,
-            }).append(
-                $("<td>", {
-                    class: "rec_list_time",
-                    text: rec.time,
-                })
-            ).append(
-                $("<td>", {
-                    class: "rec_list_opp",
-                    text: rec.opp.name,
-                })
-            )
-        )
+                class: `rec_data rec_row_${rec.result} rec_match_entry`,
+                id: `rec_row_${id}`,
+                onclick: `doSelectMatchRecord(${id})`,
+            })
+                .append(
+                    $("<td>", {
+                        class: "rec_list_time",
+                        text: new Date(rec.time).toLocaleString("zh-TW"),
+                    })
+                )
+                .append(
+                    $("<td>", {
+                        class: "rec_list_opp",
+                        text: rec.defender.name,
+                    })
+                )
+        );
     }
-    showEntry(getRecList[0]);
+    doSelectMatchRecord(48763);
 }
 
-// function rec_owo(){
-//     $(".rec_my_avatar").attr("src", "../assets/avatars/gawr_gura.jpg");
-// }
+async function buildRecordArea() {
+    let info = $("#rec_match_info");
+    for (let key of abil_entries) {
+        info.append(
+            $("<tr>")
+                .append(
+                    $("<td>", {
+                        class: `rec_atk_${key[0]}`,
+                    })
+                )
+                .append(
+                    $("<td>", {
+                        class: `colored`,
+                        text: key[1],
+                    })
+                )
+                .append(
+                    $("<td>", {
+                        class: `rec_def_${key[0]}`,
+                    })
+                )
+        );
+    }
+}
 
-$(()=>{
-    $("#pg_rec_container").load("html/record.html", build_rec);
-})
+$(() => {
+    $("#pg_rec_container").load("html/record.html", async () => {
+        buildRecordArea();
+        buildRecList();
+    });
+});

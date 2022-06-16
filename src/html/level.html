@@ -37,33 +37,22 @@
     <div class="flex_container">
         <div id="boss_match_result_box" hidden>
             <h2
-            class="centered match_result_title"
-            id="boss_match_result_title"
+                class="centered match_result_title"
+                id="boss_match_result_title"
             >
-            挑戰結果
-        </h2>
-        <ul class="match_result_summary" id="boss_match_result_heading">
-            <li>
-                喵喵喵！喵喵喵喵<span style="color: magenta">喵喵喵</span
-                    >喵喵？
-                </li>
-            </ul>
+                挑戰結果
+            </h2>
+            <ul
+                class="match_result_summary"
+                id="boss_match_result_heading"
+            ></ul>
             <hr />
-            <ol class="match_result_list" id="boss_match_result_list">
-                <li>
-                    <span style="color: magenta">喵喵喵</span>使出了
-                    <span style="color: blue">owo</span>
-                </li>
-                <li>
-                    <span style="color: magenta">喵喵喵</span>又使出了
-                    <span style="color: blue">owo</span>
-                </li>
-            </ol>
+            <ol class="match_result_list" id="boss_match_result_list"></ol>
             <hr />
-            <ul class="match_result_summary" id="boss_match_result_summary">
-                <li>挑戰者<span style="color: magenta">喵喵喵</span>勝利</li>
-                <li>你獲得了87點經驗值</li>
-            </ul>
+            <ul
+                class="match_result_summary"
+                id="boss_match_result_summary"
+            ></ul>
         </div>
     </div>
     <div class="flex_container" id="boss_match_options">
@@ -78,9 +67,19 @@
     </div>
 </div>
 <div id="boss_cleared" hidden>
-    <div style="display: flex; justify-content: center; align-items: center; flex-flow: column;">
-        <p style="display: inline-block; font-size: 30px; margin: 30px;">You are the</p>
-        <h2 style="font-size: 40px; margin: 0;">CHAMPION</h2>
-        <p style="font-style: italic; color: #555; font-size: 26px;">🛐🛐🛐🛐</p>
+    <div
+        style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+        "
+    >
+        <p style="display: inline-block; font-size: 30px; margin: 30px">
+            You are the
+        </p>
+        <h2 style="font-size: 40px; margin: 0">CHAMPION</h2>
+        <p style="font-style: italic; color: #555; font-size: 26px">🛐🛐🛐🛐</p>
+        <button onclick="resetLevel();">重設遊戲進度</button>
     </div>
 </div>

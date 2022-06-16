@@ -15,13 +15,16 @@ async function updateTimer() {
     let rem = Math.ceil(((await game.getPlayer()).next_action - Date.now())/1000);
     if (!rem || rem <= 0) {
         $(".my_stream_cd").hide();
-        window.clearInterval(timer_id);
+        if(timer_id != -1){
+            window.clearInterval(timer_id);
+        }
     } else {
         $(".my_stream_cd_value").text(rem);
         $(".my_stream_cd").show();
     }
 }
 async function initTimer() {
+    updateTimer();
     timer_id = window.setInterval(updateTimer, 999);
 }
 
@@ -81,6 +84,7 @@ function buildMy() {
         table.append(tr);
     }
     refreshPlayer();
+    initTimer();
 }
 
 async function refreshPlayer() {

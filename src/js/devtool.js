@@ -112,7 +112,7 @@ function makePtsBlock(title, pts) {
     return b;
 }
 
-async function showMatch(mat) {
+async function showDevMatch(mat) {
     let $rec = $("<ol>", { style: "margin-top: 0px;" });
     for (let r of mat.record) {
         $rec.append($("<li>", { class: "res-body", text: r }));
@@ -283,7 +283,7 @@ async function testMatch() {
     let mat = await core.send("dev-match");
     console.log("match completed");
     console.log(mat);
-    showMatch(mat);
+    showDevMatch(mat);
 }
 
 async function batchMatch(nrnd) {

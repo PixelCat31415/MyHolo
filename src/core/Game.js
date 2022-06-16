@@ -10,24 +10,26 @@ const Points = require("./Points");
 const Player = require("./Player");
 const Chars = require("./CharacterManager");
 const Match = require("./Match");
+const Record = require("./Record");
 let Dev;
 
-const path_gamedata = "./data/game/game.json";
+const gamedata_path = "./data/game/game.json";
 
 class Game {
     win;
     player;
     cur_level;
     cur_boss;
+    in_debug;
 
     constructor() {
-        if (!File.checkExist(path_gamedata)) {
+        if (!File.checkExist(gamedata_path)) {
             logger.info("no game data found. creating a new game");
             this.player = new Player();
             this.cur_level = 0;
         } else {
-            logger.info(`game data found at ${path_gamedata}`);
-            let obj = File.readObj(path_gamedata);
+            logger.info(`game data found at ${gamedata_path}`);
+            let obj = File.readObj(gamedata_path);
             this.player = new Player(obj.player);
             this.cur_level = obj.cur_level;
         }
@@ -35,6 +37,7 @@ class Game {
 
         this.createWindow();
         this.initipc();
+        this.in_debug = false;
     }
 
     createWindow() {
@@ -74,6 +77,12 @@ class Game {
         ipcMain.handle("game-get-char", async (event, charid)=>{
             return Chars.getChar(charid);
         });
+        ipcMain.handle("game-get-matchList", async ()=>{
+            return Record.fetchMatchList();
+        });
+        ipcMain.handle("game-get-matchRecord", async (event, id) => {
+            return Record.fetchMatch(id);
+        });
 
         // do action
         ipcMain.handle("game-do-addAbil", async (event, type) => {
@@ -82,23 +91,23 @@ class Game {
         });
         ipcMain.handle("game-do-idle", async (event, type, time) => {
             if(this.player.status !== "alive") return;
-            if(this.player.next_action > time) return;
+            if(!this.in_debug && this.player.next_action > time) return;
             this.player.doIdle(type, time);
         });
         ipcMain.handle("game-do-match", async () => {
-            if(this.player.status !== "alive") return;
-            let match = new Match(this.player, this.cur_boss);
-            match.start();
-            return match.dump();
+            return this.doMatch();
         });
         ipcMain.handle("game-do-nextLevel", async () => {
-            this.cur_level++;
-            this.updateBoss();
+            this.updateBoss(this.cur_level+1);
             this.player.resp_credit += 7;
         });
         ipcMain.handle("game-do-respawn", async (event, resp_char, resp_credit, resp_abil)=>{
             logger.log(`respawning: char = ${resp_char}, credit remaining: ${resp_credit}, resp_abil: ${JSON.stringify(resp_abil)}`);
             this.player.doRespawn(resp_char, resp_credit, resp_abil);
+        })
+        ipcMain.handle("game-do-resetLevel", async ()=>{
+            logger.log("game progress reset!");
+            this.updateBoss(0);
         })
 
         // misc
@@ -110,7 +119,17 @@ class Game {
         });
     }
 
-    updateBoss() {
+    doMatch(){
+        if(this.player.status !== "alive") return;
+        let match = new Match(this.player, this.cur_boss);
+        match.start();
+        match = match.dump();
+        Record.saveMatch(match);
+        return match;
+    }
+
+    updateBoss(level) {
+        this.cur_level = level;
         logger.info(`level up: lv.${this.cur_level}`);
         if (this.cur_level <= Chars.getMaxLevel()) {
             this.cur_boss = Chars.getBoss(this.cur_level);
@@ -124,17 +143,20 @@ class Game {
         Dev = require("./DevTool");
         Dev.init(this.win);
         this.win.openDevTools();
+        this.in_debug = true;
         logger.debug("debug mode activated");
     }
 
     dump() {
-        // TODO
-        // dump game object into plain data types
+        return {
+            cur_level: this.cur_level,
+            player: this.player.dump(),
+        }
     }
 
     end() {
-        // TODO
-        // save game data
+        File.writeObj(gamedata_path, this.dump());
+        logger.log("all game data saved");
     }
 }
 

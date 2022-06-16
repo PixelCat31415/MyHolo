@@ -1,7 +1,7 @@
-function showBossMatch(match) {
-    let head = $("#boss_match_result_heading");
-    let rec = $("#boss_match_result_list");
-    let sum = $("#boss_match_result_summary");
+function showMatch(container, match) {
+    let head = $(`#${container}_match_result_heading`);
+    let rec = $(`#${container}_match_result_list`);
+    let sum = $(`#${container}_match_result_summary`);
 
     head.empty();
     if (match.title) {
@@ -43,17 +43,28 @@ async function doMatch() {
     $("#boss_match_result_box").show();
     let match = await core.send("game-do-match");
     if(!match) return;
-    showBossMatch(match);
+    showMatch("boss", match);
     if (match.result === "win") {
         $("#boss_next_level").show();
         $("#boss_match_options").hide();
     }
     refreshPlayer();
+    buildRecList();
 }
 
 async function nextLevel() {
     $("#boss_next_level").hide();
     await core.send("game-do-nextLevel");
+    refreshBoss();
+    resetRespAbil();
+    $("#boss_match_options").show();
+    $("#boss_match_result_box").hide();
+}
+
+async function resetLevel(){
+    await core.send("game-do-resetLevel");
+    $("#boss_cleared").hide();
+    $("#boss_next_level").hide();
     refreshBoss();
     resetRespAbil();
     $("#boss_match_options").show();

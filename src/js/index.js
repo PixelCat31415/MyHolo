@@ -10,17 +10,10 @@ let abil_entries = [
     ["skl", "技巧值"],
     ["luk", "幸運值"],
 ];
+// let page_ids = ["home", "my", "lvl", "resp", "adv", "rec", "dev"];
+let page_ids = ["my", "lvl", "resp", "adv", "rec", "dev"];
 
 let navbar;
-
-function init_ipc() {
-    core.handle("pong", async (event, data) => {
-        console.log(`main process said: ${data}`);
-    });
-    core.handle("log", function (event, data) {
-        console.log(data);
-    });
-}
 
 function redirectPage(page) {
     let active = $(`#nav_${page}`)[0];
@@ -28,6 +21,10 @@ function redirectPage(page) {
     navbar.reposition(active);
     $(".Page").hide();
     $(`#pg_${page}`).show();
+}
+
+function toggleDimmed(){
+    $("body").toggleClass("dimmed");
 }
 
 function build_navlist() {
@@ -39,8 +36,7 @@ function build_navlist() {
     };
     navbar = new Lavalamp($("#navList")[0], settings);
 
-    let page_names = ["home", "my", "lvl", "resp", "adv", "rec", "dev"];
-    for (let name of page_names) {
+    for (let name of page_ids) {
         let entry = $(`#nav_${name}`);
         entry.on("click", function () {
             redirectPage(name);
@@ -73,7 +69,6 @@ $(async function () {
         };
     }
 
-    init_ipc();
     build_navlist();
     $(".debug").hide();
     setTimeout(() => {

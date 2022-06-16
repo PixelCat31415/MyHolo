@@ -1,0 +1,6 @@
+body {
+    transition: 0.5s;
+}
+body.dimmed {
+    opacity: 50%;
+}

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>MyHolo v0.1</title>
+        <title>MyHolo v1.0</title>
 
         <!-- useful libraries -->
         <script defer src="lib/jquery-3.6.0.min.js"></script>
@@ -29,10 +29,10 @@
     </head>
     <body>
         <h1>
-            MyHolo<span onclick="tryDebugMode();">&nbsp;</span>v0.1
+            MyHolo<span onclick="tryDebugMode();">&nbsp;</span><span class="app_version"></span>
         </h1>
         <ul id="navList">
-            <li id="nav_home" class="NavTarget">關於</li>
+            <li id="nav_home" class="NavTarget debug">關於</li>
             <li id="nav_my" class="NavTarget">我的HOLO</li>
             <li id="nav_lvl" class="NavTarget">樓層挑戰</li>
             <li id="nav_resp" class="NavTarget">畢業系統</li>
@@ -43,14 +43,12 @@
         <div class="centered">
             <p class="centered" id="dead_banner" hidden>你的 VTuber 慘遭炎上，請畢業轉生</p>
         </div>
-        <div id="d_pages">
-            <div id="pg_home" class="Page" hidden>
-                <p>MyHolo Game</p>
-                <p>version: 0.1</p>
-                <p>Under construction💤...</p>
-                <p><code>Ctrl + Shift + I</code> to toggle dev tools.</p>
-                <button onclick="console.log('owo')">owo!</button>
-            </div>
+        <div id="pages_container">
+            <!-- <div id="pg_home" class="Page" hidden>
+                <div id="pg_home_container"></div>
+                <link type="text/css" rel="stylesheet" href="css/home.css">
+                <script defer src="js/home.js"></script>
+            </div> -->
             <div id="pg_my" class="Page" hidden>
                 <div id="pg_my_container"></div>
                 <link type="text/css" rel="stylesheet" href="css/myholo.css" />
@@ -67,11 +65,9 @@
                 <script defer src="js/respawn.js"></script>
             </div>
             <div id="pg_adv" class="Page" hidden>
-                <div style="display: flex; justify-content: center; align-items: center; flex-flow: column;">
-                    <p style="display: inline-block; font-size: 30px; margin: 30px;">成就已解鎖（1/1）</p>
-                    <h2 style="font-size: 40px; margin: 0;">發現成就系統還沒做好</h2>
-                    <p style="font-style: italic; color: #555; font-size: 26px;">欸，碼農不要再混了！</p>
-                </div>
+                <div id="pg_adv_container"></div>
+                <link type="text/css" rel="stylesheet" href="css/advancement.css" />
+                <script defer src="js/advancement.js"></script>
             </div>
             <div id="pg_rec" class="Page" hidden>
                 <div id="pg_rec_container"></div>
