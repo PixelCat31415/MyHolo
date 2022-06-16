@@ -5,6 +5,7 @@ function showCharInfo(side, char) {
     $(`.rec_${side}_name`).text(char.name);
     $(`.rec_${side}_char`).text(char.char_name);
     $(`.rec_${side}_level`).text(char.level);
+    $(`.rec_${side}_avatar`).attr("src", `../assets/avatars/${char.avatar}`);
     for (let key of abil_entries) {
         $(`.rec_${side}_${key[0]}`).text(Math.round(char.max_abil[key[0]]));
     }

@@ -8,7 +8,7 @@ Still under construction. (probably for a long time since I'm still learning JS 
 
 some more TODO's
 
-- view game record (record page)
+- better info/error logging
 - allow updating name/motto
 - favicon
 

@@ -3,10 +3,11 @@
 
 const fs = require("fs");
 
+let root_path = `${__dirname}/../..`;
 let dataPaths = [
-    "./data/",
-    "./data/match/",
-    "./data/game/"
+    `${root_path}/data/`,
+    `${root_path}/data/record/`,
+    `${root_path}/data/game/`
 ];
 
 class FileIO {
@@ -17,7 +18,7 @@ class FileIO {
         fs.mkdirSync(path, {recursive: true});
     }
     static readText(path) {
-        if(!this.checkExist(path)) throw `reading not existing file ${path}`;
+        if(!this.checkExist(path)) throw `reading non-existing file ${path}`;
         return fs.readFileSync(path, { encoding: "utf-8" });
     }
     static readObj(path) {

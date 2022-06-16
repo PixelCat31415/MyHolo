@@ -12,7 +12,7 @@ class CharManager {
     char_list;
 
     constructor() {
-        let char_files = File.getAllFiles("src/core/Character").filter((file) =>
+        let char_files = File.getAllFiles(`${__dirname}/Character`).filter((file) =>
             file.endsWith(".js")
         );
         logger.log(`${char_files.length} character files found: ${char_files}`);
@@ -20,15 +20,15 @@ class CharManager {
         this.char_names = [];
         for (let char_file of char_files) {
             let char_name = char_file.replace(/\.[^/.]+$/, "");
-            let char_class = require(`./Character/${char_name}`);
+            let char_class = require(`${__dirname}/Character/${char_name}`);
             if(!char_class.hidden){
                 this.char_list.set(char_name, new char_class());
                 this.char_names.push(char_name);
             }
         }
 
-        this.boss_level = File.readObj("./src/core/Character/boss_level.json");
-        logger.log(`${this.boss_level.length} levels found: ${this.boss_level}`);
+        this.boss_level = File.readObj(`${__dirname}/Character/boss_level.json`);
+        logger.log(`${this.boss_level.length} boss found: ${this.boss_level}`);
     }
 
     getChar(name) {

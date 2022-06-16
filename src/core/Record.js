@@ -4,14 +4,18 @@ logger.level = "all";
 
 const File = require("./File");
 
-const record_data_path = "./data/record/";
+const record_data_path = `${__dirname}/../../data/record/`;
 
 class Record {
     record_id;
     records;
 
     constructor() {
-        this.record_id = File.getAllFiles(record_data_path);
+        if(File.checkExist(record_data_path)){
+            this.record_id = File.getAllFiles(record_data_path);
+        }else {
+            this.record_id = [];
+        }
         this.records = new Map();
         for (let rec of this.record_id) {
             let match = File.readObj(`${record_data_path}${rec}`);

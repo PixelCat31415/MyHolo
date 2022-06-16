@@ -125,6 +125,7 @@ class Player extends Entity {
     }
 
     doRespawn(resp_char, resp_credit, resp_abil){
+        logger.log(`player respawned`);
         this.char_name = resp_char;
         this.status = "alive";
         this.exp = 0;

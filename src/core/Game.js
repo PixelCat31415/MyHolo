@@ -13,7 +13,7 @@ const Match = require("./Match");
 const Record = require("./Record");
 let Dev;
 
-const gamedata_path = "./data/game/game.json";
+const root_dir = `${__dirname}/../..`;
 
 class Game {
     win;
@@ -23,6 +23,7 @@ class Game {
     in_debug;
 
     constructor() {
+        let gamedata_path = `${root_dir}/data/game/game.json`;
         if (!File.checkExist(gamedata_path)) {
             logger.info("no game data found. creating a new game");
             this.player = new Player();
@@ -33,7 +34,9 @@ class Game {
             this.player = new Player(obj.player);
             this.cur_level = obj.cur_level;
         }
-        this.updateBoss();
+        logger.info(`game starts at level ${this.cur_level}`);
+
+        this.updateBoss(this.cur_level);
 
         this.createWindow();
         this.initipc();
@@ -44,13 +47,13 @@ class Game {
         logger.info("creating game window");
         this.win = new BrowserWindow({
             title: "MyHolo v1.0",
-            icon: `${__dirname}/../../assets/facicon.ico`,
+            icon: `${root_dir}/assets/facicon.ico`,
             show: false,
             webPreferences: {
-                preload: `${__dirname}/../preload.js`,
+                preload: `${root_dir}/src/preload.js`,
             },
         });
-        this.win.loadFile(`${__dirname}/../index.html`);
+        this.win.loadFile(`${root_dir}/src/index.html`);
         this.win.maximize();
     }
 
@@ -131,7 +134,7 @@ class Game {
 
     updateBoss(level) {
         this.cur_level = level;
-        logger.info(`level up: lv.${this.cur_level}`);
+        logger.info(`boss clear: now at lv.${this.cur_level}`);
         if (this.cur_level <= Chars.getMaxLevel()) {
             this.cur_boss = Chars.getBoss(this.cur_level);
         } else {
@@ -141,7 +144,7 @@ class Game {
     }
 
     onDebugMode() {
-        Dev = require("./DevTool");
+        Dev = require(`${root_dir}/src/core/DevTool.js`);
         Dev.init(this.win);
         this.win.openDevTools();
         this.in_debug = true;
@@ -156,7 +159,7 @@ class Game {
     }
 
     end() {
-        File.writeObj(gamedata_path, this.dump());
+        File.writeObj(`${root_dir}/data/game/game.json`, this.dump());
         logger.log("all game data saved");
     }
 }
