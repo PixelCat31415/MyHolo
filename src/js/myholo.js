@@ -49,7 +49,8 @@ function buildMy() {
                     .append(
                         $("<span>", {
                             class: `my_lvl_${key[0]}`,
-                            text: 69,
+                            style: "display: inline-block; width: 50px; text-align: right;",
+                            text: ".0".padStart(Math.floor(Math.random()*2)+3,"0"),
                         })
                     )
                     .append(
@@ -69,14 +70,14 @@ function buildMy() {
                     $("<span>", {
                         style: "text-align: center;",
                         class: `my_abil_${key[0]}`,
-                        text: 77749,
+                        text: "".padStart(Math.floor(Math.random()*5)+1,"0"),
                     })
                 )
                 .append(
                     $("<span>", {
-                        style: "width: auto; color: green; margin-left: 10px;",
+                        style: "display: inline-block; width: 70px; color: green; margin-left: 10px; text-align: left;",
                         class: `my_abil_${key[0]}_delta my_abil_delta`,
-                        text: "(+87)",
+                        text: `(+${"".padStart(Math.floor(Math.random()*4)+1,"0")})`,
                         hidden: false,
                     })
                 )
@@ -118,7 +119,7 @@ async function refreshPlayer() {
     $(".my_exp_ratio").text(Math.round(ratio));
 
     for (let key of abil_entries) {
-        $(`.my_lvl_${key[0]}`).text(Math.round(player.abil_lvl[key[0]])/10);
+        $(`.my_lvl_${key[0]}`).text((Math.round(player.abil_lvl[key[0]])/10).toFixed(1));
         $(`.my_abil_${key[0]}`).text(Math.round(player.max_abil[key[0]]));
         if (player.abil_info[key[0]].can_add) {
             $(`.button_abil_add_${key[0]}`).css("visibility", "visible");
