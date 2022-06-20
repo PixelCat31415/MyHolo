@@ -1,3 +1,11 @@
+.app_version {
+    color: inherit;
+    font-size: inherit;
+}
+.app_version::after {
+    content: "v1.1";
+}
+
 @font-face {
     font-family: "LXGW";
     src: url("../../assets/fonts/LXGWWenKaiTC-Regular.ttf") format("truetype");
@@ -89,12 +97,4 @@ h2 {
     color: red;
     font-size: 24px;
     padding: 10px;
-}
-
-.app_version {
-    color: inherit;
-    font-size: inherit;
-}
-.app_version::after {
-    content: "v1.0";
 }
