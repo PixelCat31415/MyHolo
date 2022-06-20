@@ -141,7 +141,6 @@ function buildLevel() {
                 )
         );
     }
-
     refreshBoss();
 }
 
@@ -157,11 +156,7 @@ async function refreshBoss() {
         $(".boss_char").text(boss.char_name);
         $(".boss_level").text(boss.level);
         for (let key of abil_entries) {
-            $(`.boss_abil_${key[0]}`).text(boss.max_abil[key[0]]);
+            $(`.boss_abil_${key[0]}`).text(Math.round(boss.max_abil[key[0]]));
         }
     }
 }
-
-$(async () => {
-    await $("#pg_lvl_container").load("html/level.html", buildLevel);
-});

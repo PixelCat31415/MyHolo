@@ -4,3 +4,23 @@ body {
 body.dimmed {
     opacity: 50%;
 }
+
+#popup {
+    position: fixed;
+    top: 120px;
+    z-index: 99;
+
+    width: 30%;
+    padding: 30px;
+
+    background-color: azure;
+    border: 2px solid #8fbcff;
+    opacity: 100%;
+
+    transition: 0.3s;
+}
+#popup.hidden {
+    opacity: 0%;
+    visibility: hidden;
+    transform: translateY(-60px);
+}

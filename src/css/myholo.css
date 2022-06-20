@@ -3,6 +3,15 @@
     font-weight: bold;
 }
 
+.motto {
+    font-style: italic;
+    color: #555;
+    word-break: break-all;
+    margin: 10px;
+    text-align: center;
+    padding: 5px 15px;
+}
+
 .abilitybox {
     margin: 20px auto;
     border: 0px solid #000;

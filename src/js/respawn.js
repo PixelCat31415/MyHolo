@@ -9,6 +9,10 @@ async function refreshRespCandidate(charid) {
     let char = await core.send("game-get-char", charid);
     $(".resp_char").text(char.char_name);
     $(".resp_avatar").attr("src", `../assets/avatars/${char.avatar}`);
+    $(".resp_motto").text(char.motto);
+    for(let i=0;i<5;i++){
+        $(`.resp_skill${i}`).text(char.skills[i]);
+    }
     refreshRespAbil();
 }
 
@@ -17,7 +21,7 @@ async function refreshRespAbil() {
     $(".resp_credit").text(player.resp_credit);
     let abil = await core.send("game-get-respAbil", resp_char, resp_abil);
     for (let key of abil_entries) {
-        $(`.resp_abil_add_${key[0]}`).text(`${resp_abil[key[0]] / 10}`);
+        $(`.resp_abil_add_${key[0]}`).text(`+${(resp_abil[key[0]] / 10).toFixed(1)}`);
         $(`.resp_abil_${key[0]}`).text(Math.round(abil[key[0]]));
     }
     $(".resp_credit").text(resp_credit);
@@ -80,13 +84,7 @@ async function buildRespAbils() {
                         )
                         .append(
                             $("<span>", {
-                                style: "color: green;",
-                                text: "+",
-                            })
-                        )
-                        .append(
-                            $("<span>", {
-                                style: "color: green;",
+                                style: "color: green; width: 50px; display: inline-block; text-align: right;",
                                 class: `resp_abil_add_${key[0]}`,
                                 text: 87,
                             })
@@ -107,6 +105,18 @@ async function buildRespAbils() {
                     })
                 )
         );
+    }
+    let skl = $("#resp_skills");
+    for(let i=0;i<5;i++){
+        skl.append(
+            $("<tr>", {
+                style: "height: 30px;"
+            }).append(
+                $("<td>", {
+                    class: `resp_skill${i}`,
+                })
+            )
+        )
     }
 }
 
@@ -136,7 +146,7 @@ async function buildCharList() {
                 )
         );
     }
-    let default_name = chars.keys().next().value;
+    let default_name = chars[0][0];
     refreshRespCandidate(default_name);
 }
 
@@ -146,7 +156,3 @@ function buildResp() {
     resetRespAbil();
     refreshRespAbil();
 }
-
-$(async function () {
-    $("#pg_resp_container").load("html/respawn.html", buildResp);
-});

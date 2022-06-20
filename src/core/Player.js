@@ -27,12 +27,8 @@ class Player extends Entity {
     constructor(obj) {
         super({});
         if (!obj) {
-            this.doSetName("Smol Gura");
-            this.doRespawn(
-                "Gura",
-                0,
-                new Points()
-            );
+            this.doSetName("Tanigou Motoaki");
+            this.doRespawn("Yagoo", 0, new Points());
             return;
         }
         if (typeof obj !== "object") {
@@ -68,6 +64,8 @@ class Player extends Entity {
         this.char = Chars.getChar(this.char_name);
         this.char_nickname = this.char.name;
         this.avatar = this.char.avatar;
+        this.motto = this.char.motto;
+        this.skills = this.char.skills;
     }
     refreshAbil() {
         this.max_abil = this.char.getAbil(this.abil_lvl.divide(10));
@@ -95,7 +93,7 @@ class Player extends Entity {
         this.refresh();
     }
 
-    doSetName(new_name){
+    doSetName(new_name) {
         this.name = new_name;
     }
 
@@ -124,8 +122,12 @@ class Player extends Entity {
         return delta_exp;
     }
 
-    doRespawn(resp_char, resp_credit, resp_abil){
-        logger.log(`player respawned`);
+    doRespawn(resp_char, resp_credit, resp_abil) {
+        logger.log(
+            `player respawning: char = ${resp_char}, credit remaining: ${resp_credit}, resp_abil: ${JSON.stringify(
+                resp_abil
+            )}`
+        );
         this.char_name = resp_char;
         this.status = "alive";
         this.exp = 0;
@@ -138,7 +140,7 @@ class Player extends Entity {
         this.refresh();
     }
 
-    kill(){
+    kill() {
         this.status = "dead";
     }
 
@@ -148,6 +150,7 @@ class Player extends Entity {
             char_name: this.char_name,
             char_nickname: this.char_nickname,
             avatar: this.avatar,
+            motto: this.motto,
             level: this.level,
             max_abil: this.max_abil.dump(),
             status: this.status,

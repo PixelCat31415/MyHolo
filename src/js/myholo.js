@@ -92,6 +92,7 @@ async function refreshPlayer() {
     let player = await game.getPlayer();
 
     $(".my_avatar").attr("src", `../assets/avatars/${player.avatar}`);
+    $(".my_motto").text(player.motto);
     $(".my_name").text(player.name);
     $(".my_level").text(player.level);
     $(".my_char").text(player.char_nickname);
@@ -134,7 +135,3 @@ async function refreshPlayer() {
 
     $(".my_credit").text(player.abil_credit);
 }
-
-$(async () => {
-    await $("#pg_my_container").load("html/myholo.html", buildMy);
-});
