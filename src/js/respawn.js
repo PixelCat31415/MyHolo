@@ -21,7 +21,7 @@ async function refreshRespAbil() {
     $(".resp_credit").text(player.resp_credit);
     let abil = await core.send("game-get-respAbil", resp_char, resp_abil);
     for (let key of abil_entries) {
-        $(`.resp_abil_add_${key[0]}`).text(`${resp_abil[key[0]] / 10}`);
+        $(`.resp_abil_add_${key[0]}`).text(`+${(resp_abil[key[0]] / 10).toFixed(1)}`);
         $(`.resp_abil_${key[0]}`).text(Math.round(abil[key[0]]));
     }
     $(".resp_credit").text(resp_credit);
@@ -84,13 +84,7 @@ async function buildRespAbils() {
                         )
                         .append(
                             $("<span>", {
-                                style: "color: green;",
-                                text: "+",
-                            })
-                        )
-                        .append(
-                            $("<span>", {
-                                style: "color: green;",
+                                style: "color: green; width: 50px; display: inline-block; text-align: right;",
                                 class: `resp_abil_add_${key[0]}`,
                                 text: 87,
                             })

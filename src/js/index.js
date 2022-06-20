@@ -79,7 +79,7 @@ $(async function () {
     build_navlist();
     $(".debug").hide();
     setTimeout(() => {
-        redirectPage("resp");
+        redirectPage("my");
     }, 1000);
     // onDebugMode();
 
