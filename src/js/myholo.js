@@ -93,7 +93,6 @@ async function refreshPlayer() {
 
     $(".my_avatar").attr("src", `../assets/avatars/${player.avatar}`);
     $(".my_motto").text(player.motto);
-    console.log(player.motto);
     $(".my_name").text(player.name);
     $(".my_level").text(player.level);
     $(".my_char").text(player.char_nickname);

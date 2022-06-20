@@ -27,8 +27,8 @@ class Player extends Entity {
     constructor(obj) {
         super({});
         if (!obj) {
-            this.doSetName("Smol Gura");
-            this.doRespawn("Gura", 0, new Points());
+            this.doSetName("Tanigou Motoaki");
+            this.doRespawn("Yagoo", 0, new Points());
             return;
         }
         if (typeof obj !== "object") {

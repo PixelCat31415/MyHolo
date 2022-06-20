@@ -9,16 +9,13 @@ const Entity = require("../Entity");
 const KILL_CHANCE = 0.85;
 
 class Character0 extends Entity {
-    static get hidden() {
-        return true;
-    }
-
-    static get skills() {
-        return ["技能1", "技能2", "技能3", "技能4", "技能5"];
-    }
+    hidden;
 
     constructor(obj) {
         super(obj);
+        this.max_abil = this.getAbil(new Points().fill(this.level));
+        if (obj && obj.hasOwnProperty("hidden")) this.hidden = obj.hidden;
+        else this.hidden = true;
     }
 
     prepare(opp, match) {

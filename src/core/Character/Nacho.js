@@ -1,29 +1,18 @@
 const Character0 = require("./Character0");
 
 class Gura extends Character0 {
-    static get hidden (){
-        return false;
-    }
-
     constructor(){
         super({
             name: "Nacho Neko",
             avatar: "nacho.jpg",
-            full_picture: "nacho_full.jpg",
-            motto: "ouououo",
+            full_picture: "nacho.jpg",
+            motto: "",
             skills: ["耳膜穿刺", "健康作息", "超耐久配信", "*WINK*", "にゃ"],
             char_name: "Nacho Neko",
             level: 87,
-            max_abil: {
-                hp: 16971,
-                atk: 411,
-                def: 411,
-                agi: 411,
-                str: 906,
-                skl: 500,
-                luk: 500,
-            },
+            max_abil: {},
             abil: {},
+            hidden: true,
         });
     }
 

@@ -152,7 +152,7 @@ async function buildCharList() {
                 )
         );
     }
-    let default_name = chars.keys().next().value;
+    let default_name = chars[0][0];
     refreshRespCandidate(default_name);
 }
 

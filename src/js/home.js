@@ -25,6 +25,13 @@ async function doResetAll() {
         .append(
             $("<div>").append(
                 $("<button>", {
+                    text: "先不要",
+                    click: async () => {
+                        pop.addClass("hidden");
+                    },
+                })
+            ).append(
+                $("<button>", {
                     text: "我叫你設！",
                     click: async () => {
                         pop.addClass("hidden");
