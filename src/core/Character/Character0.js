@@ -9,8 +9,12 @@ const Entity = require("../Entity");
 const KILL_CHANCE = 0.85;
 
 class Character0 extends Entity {
-    static get hidden(){
+    static get hidden() {
         return true;
+    }
+
+    static get skills() {
+        return ["技能1", "技能2", "技能3", "技能4", "技能5"];
     }
 
     constructor(obj) {
@@ -68,19 +72,19 @@ class Character0 extends Entity {
 
         if (Math.random() <= sklq1 / sklp) {
             mov = 0.5;
-            tri = "技能1";
+            tri = this.skills[0];
         } else if (Math.random() <= sklq2 / sklp) {
             mov = 0.8;
-            tri = "技能2";
+            tri = this.skills[1];
         } else if (Math.random() <= sklq3 / sklp) {
             mov = 1;
-            tri = "技能3";
+            tri = this.skills[2];
         } else if (Math.random() <= sklq4 / sklp) {
             mov = 1.2;
-            tri = "技能4";
+            tri = this.skills[3];
         } else {
             mov = 1.5;
-            tri = "技能5";
+            tri = this.skills[4];
         }
 
         this.abil.str = this.abil.str - 8 - 4 * Math.random();
@@ -97,7 +101,10 @@ class Character0 extends Entity {
         this.abil.def = this.max_abil.def * str + 1;
 
         harm =
-            (this.abil.atk * this.abil.atk * (0.8 + Math.random() * 0.4) * mov) /
+            (this.abil.atk *
+                this.abil.atk *
+                (0.8 + Math.random() * 0.4) *
+                mov) /
             (this.abil.atk + opp.abil.def);
         harm = Math.floor(harm);
         dod = 0.2 * Math.pow(opp.abil.agi / this.abil.agi, 0.4);
@@ -143,8 +150,8 @@ class Character0 extends Entity {
     }
 
     finish(opp, match) {
-        if(match.result < 0 && opp.is_player){
-            if(Math.random()<=KILL_CHANCE){
+        if (match.result < 0 && opp.is_player) {
+            if (Math.random() <= KILL_CHANCE) {
                 opp.kill();
             }
         }
@@ -166,9 +173,11 @@ class Character0 extends Entity {
         return {
             name: this.name,
             avatar: this.avatar,
+            motto: this.motto,
             char_name: this.char_name,
             level: this.level,
             max_abil: this.max_abil.dump(),
+            skills: this.skills,
         };
     }
 }

@@ -81,7 +81,7 @@ class Game {
             }
         );
         ipcMain.handle("game-get-char", async (event, charid) => {
-            return Chars.getChar(charid);
+            return Chars.getChar(charid).dump();
         });
         ipcMain.handle("game-get-matchList", async () => {
             return Record.fetchMatchList();

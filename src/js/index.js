@@ -27,7 +27,6 @@ function build_navlist() {
         margins: true,
         enableFocus: true,
         setOnClick: true,
-        initActiveQuery: ".ActiveLavalamp",
     };
     navbar = new Lavalamp($("#navList")[0], settings);
 
@@ -80,7 +79,7 @@ $(async function () {
     build_navlist();
     $(".debug").hide();
     setTimeout(() => {
-        redirectPage("home");
+        redirectPage("resp");
     }, 1000);
     // onDebugMode();
 

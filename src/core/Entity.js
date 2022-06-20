@@ -13,6 +13,7 @@ class Entity {
     avatar;
     full_picture;
     motto;
+    skills;
     level;
     max_abil;
     abil;
@@ -27,6 +28,7 @@ class Entity {
         this.avatar = obj.avatar;
         this.full_picture = obj.full_picture;
         this.motto = obj.motto;
+        this.skills = obj.skills;
         this.char_name = obj.char_name;
         this.level = obj.level;
         this.max_abil = new Points(obj.max_abil);

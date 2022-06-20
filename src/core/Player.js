@@ -64,6 +64,8 @@ class Player extends Entity {
         this.char = Chars.getChar(this.char_name);
         this.char_nickname = this.char.name;
         this.avatar = this.char.avatar;
+        this.motto = this.char.motto;
+        this.skills = this.char.skills;
     }
     refreshAbil() {
         this.max_abil = this.char.getAbil(this.abil_lvl.divide(10));
@@ -148,6 +150,7 @@ class Player extends Entity {
             char_name: this.char_name,
             char_nickname: this.char_nickname,
             avatar: this.avatar,
+            motto: this.motto,
             level: this.level,
             max_abil: this.max_abil.dump(),
             status: this.status,

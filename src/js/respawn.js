@@ -9,6 +9,10 @@ async function refreshRespCandidate(charid) {
     let char = await core.send("game-get-char", charid);
     $(".resp_char").text(char.char_name);
     $(".resp_avatar").attr("src", `../assets/avatars/${char.avatar}`);
+    $(".resp_motto").text(char.motto);
+    for(let i=0;i<5;i++){
+        $(`.resp_skill${i}`).text(char.skills[i]);
+    }
     refreshRespAbil();
 }
 
@@ -107,6 +111,18 @@ async function buildRespAbils() {
                     })
                 )
         );
+    }
+    let skl = $("#resp_skills");
+    for(let i=0;i<5;i++){
+        skl.append(
+            $("<tr>", {
+                style: "height: 30px;"
+            }).append(
+                $("<td>", {
+                    class: `resp_skill${i}`,
+                })
+            )
+        )
     }
 }
 
