@@ -134,7 +134,3 @@ async function refreshPlayer() {
 
     $(".my_credit").text(player.abil_credit);
 }
-
-$(async () => {
-    await $("#pg_my_container").load("html/myholo.html", buildMy);
-});

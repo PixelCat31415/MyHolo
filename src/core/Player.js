@@ -28,11 +28,7 @@ class Player extends Entity {
         super({});
         if (!obj) {
             this.doSetName("Smol Gura");
-            this.doRespawn(
-                "Gura",
-                0,
-                new Points()
-            );
+            this.doRespawn("Gura", 0, new Points());
             return;
         }
         if (typeof obj !== "object") {
@@ -95,7 +91,7 @@ class Player extends Entity {
         this.refresh();
     }
 
-    doSetName(new_name){
+    doSetName(new_name) {
         this.name = new_name;
     }
 
@@ -124,8 +120,12 @@ class Player extends Entity {
         return delta_exp;
     }
 
-    doRespawn(resp_char, resp_credit, resp_abil){
-        logger.log(`player respawned`);
+    doRespawn(resp_char, resp_credit, resp_abil) {
+        logger.log(
+            `player respawning: char = ${resp_char}, credit remaining: ${resp_credit}, resp_abil: ${JSON.stringify(
+                resp_abil
+            )}`
+        );
         this.char_name = resp_char;
         this.status = "alive";
         this.exp = 0;
@@ -138,7 +138,7 @@ class Player extends Entity {
         this.refresh();
     }
 
-    kill(){
+    kill() {
         this.status = "dead";
     }
 

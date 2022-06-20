@@ -115,10 +115,3 @@ async function buildRecordArea() {
         );
     }
 }
-
-$(() => {
-    $("#pg_rec_container").load("html/record.html", async () => {
-        buildRecordArea();
-        buildRecList();
-    });
-});

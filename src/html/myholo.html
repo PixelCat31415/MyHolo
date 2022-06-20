@@ -1,39 +1,42 @@
 <div class="flex_container">
     <!-- playaer avatar & motto (no function for now) -->
     <div style="width: 250px">
-        <img
-            src="https://bit.ly/3aPVuST"
-            class="my_avatar Avatars"
-        />
-        <h2 class="my_name centered">玩家暱稱</h2>
-        <p
-            style="
-                font-style: italic;
-                color: #555;
-                word-break: break-all;
-                margin: 10px;
-                text-align: center;
-            "
-            id="my_motto"
-            hidden
-        >
-            速く！もっと速く！
-        </p>
+        <img src="https://bit.ly/3aPVuST" class="my_avatar Avatars" />
+        <p id="my_motto" class="motto">速く！もっと速く！</p>
     </div>
     <!-- player info box -->
     <div>
         <!-- exp & player banner -->
         <div>
-            <p style="text-align: center; margin-bottom: 10px; font-size: 26px;">
-                LV <span class="my_level" style="font-size: inherit;">49</span>
-                <span class="my_char" style="font-size: inherit;">なちょ猫</span>
-                ・ 
-                <span class="my_status" style="font-size: inherit; color: green">Alive</span>
+            <h2 class="my_name centered" style="margin-bottom: 10px;">玩家暱稱</h2>
+            <p style="text-align: center; margin-top: 0; margin-bottom: 10px; font-size: 24px">
+                LV <span class="my_level" style="font-size: inherit">49</span>
+                <span class="my_char" style="font-size: inherit">なちょ猫</span>
+                ・
+                <span class="my_status" style="font-size: inherit; color: green"
+                    >Alive</span
+                >
             </p>
-            <div style="margin: 0 auto; height: 20px; width: 300px; background-color: #def2ff; border-radius: 10px;">
-                <div class="my_level_progress" style="height: 20px; width: 49%;background-color: #7bcaff; border-radius: 10px;"></div>
+            <div
+                style="
+                    margin: 0 auto;
+                    height: 20px;
+                    width: 300px;
+                    background-color: #def2ff;
+                    border-radius: 10px;
+                "
+            >
+                <div
+                    class="my_level_progress"
+                    style="
+                        height: 20px;
+                        width: 49%;
+                        background-color: #7bcaff;
+                        border-radius: 10px;
+                    "
+                ></div>
             </div>
-            <p style="text-align: center; margin: 10px auto;">
+            <p style="text-align: center; margin: 10px auto">
                 <span class="my_exp">48763</span>
                 /
                 <span class="my_exp_next">77777</span>
@@ -41,7 +44,11 @@
             </p>
         </div>
         <!-- abilities -->
-        <table id="my_abilities" class="abilitybox" style="width: 450px;"></table>
+        <table
+            id="my_abilities"
+            class="abilitybox"
+            style="width: 450px"
+        ></table>
         <!-- some more info -->
         <div>
             <p class="centered">
@@ -53,10 +60,8 @@
         </div>
     </div>
     <!-- actions list -->
-    <div class="centered" style="width: 300px;">
-        <h2 style="font-weight: 100">
-            排定直播
-        </h2>
+    <div class="centered" style="width: 300px">
+        <h2 style="font-weight: 100">排定直播</h2>
         <table id="my_streams" style="margin: 0 auto">
             <tr onclick="doIdle(1)">
                 <td>一位就關臺</td>

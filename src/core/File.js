@@ -33,6 +33,14 @@ class FileIO {
     static getAllFiles(path) {
         return fs.readdirSync(path);
     }
+    static remove(path) {
+        fs.unlinkSync(path);
+    }
+    static clearDirectory(dir){
+        for(let file of this.getAllFiles(dir)){
+            this.remove(`${dir}${file}`);
+        }
+    }
     static init() {
         for (let path of dataPaths) {
             if (!this.checkExist(path)) {

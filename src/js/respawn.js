@@ -146,7 +146,3 @@ function buildResp() {
     resetRespAbil();
     refreshRespAbil();
 }
-
-$(async function () {
-    $("#pg_resp_container").load("html/respawn.html", buildResp);
-});

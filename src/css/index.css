@@ -25,6 +25,16 @@ button:hover {
     cursor: pointer;
 }
 
+button.danger {
+    border-color:rgb(255, 69, 69);
+    background-color:rgb(255, 184, 184);
+    color: rgb(255, 0, 0);
+}
+button.danger:hover {
+    background-color:rgb(255, 69, 69);
+    color: white;
+}
+
 h1,
 h1 span {
     color: #0099ff;

@@ -10,8 +10,7 @@ let abil_entries = [
     ["skl", "技巧值"],
     ["luk", "幸運值"],
 ];
-// let page_ids = ["home", "my", "lvl", "resp", "adv", "rec", "dev"];
-let page_ids = ["my", "lvl", "resp", "adv", "rec", "dev"];
+let page_ids = ["home", "my", "lvl", "resp", "adv", "rec", "dev"];
 
 let navbar;
 
@@ -21,10 +20,6 @@ function redirectPage(page) {
     navbar.reposition(active);
     $(".Page").hide();
     $(`#pg_${page}`).show();
-}
-
-function toggleDimmed(){
-    $("body").toggleClass("dimmed");
 }
 
 function build_navlist() {
@@ -42,6 +37,19 @@ function build_navlist() {
             redirectPage(name);
         });
     }
+}
+
+function loadPages(){
+    return Promise.all([
+        $("#pg_home_container").load("html/home.html"),
+        $("#pg_my_container").load("html/myholo.html", buildMy),
+        $("#pg_lvl_container").load("html/level.html", buildLevel),
+        $("#pg_rec_container").load("html/record.html", async () => {
+            buildRecordArea();
+            buildRecList();
+        }),
+        $("#pg_resp_container").load("html/respawn.html", buildResp),
+    ]);
 }
 
 let debug_count = 0;
@@ -72,8 +80,13 @@ $(async function () {
     build_navlist();
     $(".debug").hide();
     setTimeout(() => {
-        redirectPage("my");
+        redirectPage("home");
     }, 1000);
     // onDebugMode();
-    await core.send("ready");
+
+    // load pages
+    await loadPages();
+
+    core.send("ready");
+    doResetAll();
 });

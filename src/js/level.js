@@ -161,7 +161,3 @@ async function refreshBoss() {
         }
     }
 }
-
-$(async () => {
-    await $("#pg_lvl_container").load("html/level.html", buildLevel);
-});

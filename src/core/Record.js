@@ -11,6 +11,10 @@ class Record {
     records;
 
     constructor() {
+        this.loadRecord();
+    }
+
+    loadRecord(){
         if (File.checkExist(record_data_path)) {
             this.record_id = File.getAllFiles(record_data_path);
         } else {
@@ -27,7 +31,11 @@ class Record {
             return 0;
         });
         logger.log(`${this.record_id.length} match records found`);
-        logger.debug(`match id: ${this.record_id}`);
+    }
+
+    clearRecord(){
+        File.clearDirectory(record_data_path);
+        this.loadRecord();
     }
 
     fetchMatchList() {
