@@ -2,16 +2,33 @@
 
 A simple idle game made by two Hololive fans. Inspired by MyKirito.
 
-Still under construction. (probably for a long time since I'm still learning JS on the way :cry:)
+## Building
 
-## TODO's
+I won't be providing .exe so you have to build it yourself.
 
-some more TODO's
+prerequisites (not sure if lower versions work):
 
+1. Node.js 16.13.1
+
+building executables:
+
+1. clone/download this repo
+2. run `npm install` to install node packages
+3. run `npm run make` to build executable
+
+the game executable and all data will be in `./out/myholo-{your-system}/` folder.
+
+## Features to Add
+
+### TODO's
+
+some unfinshed features
+
+- advancement system
 - better info/error logging
 - favicon
 
-## yet more TODO's
+### yet more TODO's
 
 probably won't be done (~~at least before 1.0~~ probably never :P) bacause of ~~time issue~~ tons of exams to prepare for.
 
@@ -19,9 +36,8 @@ probably won't be done (~~at least before 1.0~~ probably never :P) bacause of ~~
 - main page for the game
 - tutorial or some kind of tips inside the game
 - notification system
-- advancement system
 
-## the '有生之年' section
+### the '有生之年' series
 
 some future work iff I have LOTS of time for this project cuz any of these requires a full rewrite.
 

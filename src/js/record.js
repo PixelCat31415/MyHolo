@@ -54,12 +54,11 @@ function doSelectMatchRecord(index) {
 
 function getDateString(date){
     let year = `${date.getFullYear()}`.padStart(4,"0");
-    let month = `${date.getMonth()}`.padStart(2,"0");
+    let month = `${date.getMonth()+1}`.padStart(2,"0");
     let day = `${date.getDate()}`.padStart(2,"0");
     let hour = `${date.getHours()}`.padStart(2,"0");
     let min = `${date.getMinutes()}`.padStart(2,"0");
     return `${year}/${month}/${day}-${hour}:${min}`;
-    // return date.toLocaleString("zh-TW");
 }
 
 async function buildRecList() {
