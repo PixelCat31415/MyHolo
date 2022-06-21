@@ -123,6 +123,7 @@ async function buildRespAbils() {
 async function buildCharList() {
     let chars = await core.send("game-get-allChars");
     let list = $("#resp_chars_list");
+    list.empty();
     for (let it of chars) {
         let charid = it[0];
         let char = it[1];

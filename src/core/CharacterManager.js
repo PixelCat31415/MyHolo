@@ -65,7 +65,10 @@ class CharManager {
             logger.error(`level range ${level} out of bound`);
             return {};
         } else {
-            return this.getChar(this.boss_level[level]);
+            return {
+                name: this.boss_level[level],
+                boss: this.getChar(this.boss_level[level]),
+            }
         }
     }
 }

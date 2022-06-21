@@ -48,6 +48,7 @@ async function doMatch() {
         $("#boss_next_level").show();
         $("#boss_match_options").hide();
         resetRespAbil();
+        buildCharList();
     }
     refreshPlayer();
     buildRecList();
