@@ -45,6 +45,7 @@ async function doMatch() {
     if(!match) return;
     showMatch("boss", match);
     if (match.result === "win") {
+        await core.send("game-do-nextLevel");
         $("#boss_next_level").show();
         $("#boss_match_options").hide();
     }
@@ -54,7 +55,6 @@ async function doMatch() {
 
 async function nextLevel() {
     $("#boss_next_level").hide();
-    await core.send("game-do-nextLevel");
     refreshBoss();
     resetRespAbil();
     $("#boss_match_options").show();

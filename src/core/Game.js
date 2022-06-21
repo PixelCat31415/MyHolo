@@ -105,7 +105,7 @@ class Game {
         });
         ipcMain.handle("game-do-nextLevel", async () => {
             this.updateBoss(this.cur_level + 1);
-            this.player.resp_credit += 7;
+            this.player.resp_credit += 7 * this.cur_level;
         });
         ipcMain.handle(
             "game-do-respawn",
