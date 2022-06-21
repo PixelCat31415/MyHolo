@@ -110,6 +110,14 @@ class Player extends Entity {
         return true;
     }
 
+    doAddExp(exp) {
+        if (this.exp >= Experience.EXP_LIMIT) {
+            return 0;
+        }
+        this.exp += exp;
+        this.refresh();
+    }
+
     doIdle(type, timestamp) {
         if (this.exp >= Experience.EXP_LIMIT) {
             return 0;
@@ -117,8 +125,7 @@ class Player extends Entity {
         let delta_exp = Experience.getIdleExp(type);
         delta_exp = Math.min(delta_exp, Experience.EXP_LIMIT - this.exp);
         this.next_action = timestamp + Experience.getIdleTime(type) * 1000;
-        this.exp += delta_exp;
-        this.refresh();
+        this.doAddExp(delta_exp);
         return delta_exp;
     }
 

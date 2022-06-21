@@ -26,9 +26,7 @@ class CharManager {
             this.char_names.push(char_name);
         }
 
-        this.boss_level = File.readObj(
-            `${__dirname}/Character/boss_level.json`
-        );
+        this.boss_level = File.readObj(`${__dirname}/level/boss.json`);
         logger.log(`${this.boss_level.length} boss found`);
         logger.debug(`${this.boss_level}`);
         for (let id of this.boss_level) {

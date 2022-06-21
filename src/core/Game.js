@@ -9,6 +9,7 @@ const File = require("./File");
 const Points = require("./Points");
 const Player = require("./Player");
 const Chars = require("./CharacterManager");
+const Experience = require("./Experience");
 const Match = require("./Match");
 const Record = require("./Record");
 let Dev;
@@ -106,10 +107,6 @@ class Game {
         ipcMain.handle("game-do-match", async () => {
             return this.doMatch();
         });
-        ipcMain.handle("game-do-nextLevel", async () => {
-            this.updateBoss(this.cur_level + 1);
-            this.player.resp_credit += 7 * this.cur_level;
-        });
         ipcMain.handle(
             "game-do-respawn",
             async (event, resp_char, resp_credit, resp_abil) => {
@@ -139,6 +136,12 @@ class Game {
         match.start();
         match = match.dump();
         Record.saveMatch(match);
+        if (match.result === "win") {
+            this.player.doAddExp(Experience.getBossExp(this.cur_level));
+            this.player.resp_credit +=
+                Experience.CREDIT_BOSS_CLEAR * (this.cur_level + 1);
+            this.updateBoss(this.cur_level + 1);
+        }
         return match;
     }
 

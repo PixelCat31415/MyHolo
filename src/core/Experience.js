@@ -6,24 +6,27 @@ const log4js = require("log4js");
 let logger = log4js.getLogger("Experience");
 logger.level = "all";
 
+const File = require("./File");
+
 class ExperienceHandler {
     // some constants
-    get ABIL_LVL_LIMIT(){
+    get ABIL_LVL_LIMIT() {
         return 1000;
     }
-    get EXP_LIMIT(){
+    get EXP_LIMIT() {
         return this.exp_table[48];
     }
-    get CREDIT_LEVELUP(){
+    get CREDIT_LEVELUP() {
         return 1;
     }
-    get CREDIT_BOSS_CLEAR(){
+    get CREDIT_BOSS_CLEAR() {
         return 7;
     }
 
     constructor() {
         this.initExpTable();
         this.initIdleExpTable();
+        this.initBossExp();
     }
 
     // maximum experience for each level (exclusive)
@@ -47,7 +50,7 @@ class ExperienceHandler {
     getPrevLevel(exp) {
         for (let i = 1; i <= 49; i++) {
             if (exp < this.exp_table[i]) {
-                return this.exp_table[i-1];
+                return this.exp_table[i - 1];
             }
         }
     }
@@ -96,6 +99,14 @@ class ExperienceHandler {
             return 0;
         }
         return this.idle_exp_table[op];
+    }
+
+    boss_exp;
+    initBossExp() {
+        this.boss_exp = File.readObj(`${__dirname}/level/experience.json`);
+    }
+    getBossExp(level) {
+        return this.boss_exp[level];
     }
 }
 
