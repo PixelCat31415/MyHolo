@@ -10,7 +10,7 @@ async function refreshRespCandidate(charid) {
     $(".resp_char").text(char.char_name);
     $(".resp_avatar").attr("src", `../assets/avatars/${char.avatar}`);
     $(".resp_motto").text(char.motto);
-    for(let i=0;i<5;i++){
+    for (let i = 0; i < 5; i++) {
         $(`.resp_skill${i}`).text(char.skills[i]);
     }
     refreshRespAbil();
@@ -21,27 +21,31 @@ async function refreshRespAbil() {
     $(".resp_credit").text(player.resp_credit);
     let abil = await core.send("game-get-respAbil", resp_char, resp_abil);
     for (let key of abil_entries) {
-        $(`.resp_abil_add_${key[0]}`).text(`+${(resp_abil[key[0]] / 10).toFixed(1)}`);
+        $(`.resp_abil_add_${key[0]}`).text(
+            `+${(resp_abil[key[0]] / 10).toFixed(1)}`
+        );
         $(`.resp_abil_${key[0]}`).text(Math.round(abil[key[0]]));
     }
     $(".resp_credit").text(resp_credit);
 }
 
-async function resetRespAbil() {
+async function resetRespAbil(reset_all) {
     let player = await game.getPlayer();
     resp_credit = player.resp_credit;
     resp_abil = { ...player.resp_abil };
+    if(reset_all) {
+        for(let key in resp_abil){
+            resp_credit += resp_abil[key];
+            resp_abil[key] = 0;
+        }
+    }
     refreshRespAbil();
 }
 
 async function doAddResp(key, delta) {
     let new_credit = resp_credit - delta;
     let new_abil = resp_abil[key] + delta;
-    if (
-        new_credit > (await game.getPlayer()).resp_credit ||
-        new_credit < 0 ||
-        new_abil < 0
-    ) {
+    if (new_credit < 0 || new_abil < 0) {
         return;
     }
     resp_credit = new_credit;
@@ -107,16 +111,16 @@ async function buildRespAbils() {
         );
     }
     let skl = $("#resp_skills");
-    for(let i=0;i<5;i++){
+    for (let i = 0; i < 5; i++) {
         skl.append(
             $("<tr>", {
-                style: "height: 30px;"
+                style: "height: 30px;",
             }).append(
                 $("<td>", {
                     class: `resp_skill${i}`,
                 })
             )
-        )
+        );
     }
 }
 

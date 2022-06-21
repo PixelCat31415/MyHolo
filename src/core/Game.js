@@ -152,8 +152,7 @@ class Game {
             this.unlocked_char.add(this.cur_boss_name);
             logger.log(`unlocked character: ${this.cur_boss_name}`);
             this.player.doAddExp(Experience.getBossExp(this.cur_level));
-            this.player.resp_credit +=
-                Experience.CREDIT_BOSS_CLEAR * (this.cur_level + 1);
+            this.player.resp_credit += Experience.CREDIT_BOSS_CLEAR;
             this.updateBoss(this.cur_level + 1);
         }
         return match;
