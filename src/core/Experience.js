@@ -90,7 +90,7 @@ class ExperienceHandler {
         this.idle_exp_table = {};
         for (let i = 1; i <= 10; i++) {
             let eff = 0.4 * Math.pow(1.3, i);
-            this.idle_exp_table[i] = this.idle_time_table[i] * eff;
+            this.idle_exp_table[i] = this.idle_time_table[i] * 60 * eff;
         }
     }
     getIdleExp(op) {
