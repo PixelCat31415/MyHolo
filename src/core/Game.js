@@ -120,6 +120,10 @@ class Game {
         ipcMain.handle("game-do-resetAll", async () => {
             this.doResetAll();
         });
+        ipcMain.handle("game-do-setPlayerName", async (event, name) => {
+            logger.log(`updateing player name with new name: ${name}`);
+            this.player.doSetName(name);
+        });
 
         // misc
         ipcMain.handle("ready", async () => {
