@@ -73,9 +73,14 @@ async function doSetName(){
         )
         .append(
             $("<p>", {
-                text: `你現在的暱稱是：${game.getPlayer().name}`,
                 style: "margin-bottom: 0;",
-            })
+                text: `你現在的暱稱是：`,
+            }).append(
+                $("<span>", {
+                    style: "font-weight: bold;",
+                    text: `${(await game.getPlayer()).name}`,
+                })
+            )
         )
         .append(
             $("<input>", {
