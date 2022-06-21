@@ -15,7 +15,8 @@ class CharManager {
         let char_files = File.getAllFiles(`${__dirname}/Character`).filter(
             (file) => file.endsWith(".js")
         );
-        logger.log(`${char_files.length} character files found: ${char_files}`);
+        logger.log(`${char_files.length} character files found`);
+        logger.debug(`${char_files}`);
         this.char_list = new Map();
         this.char_names = [];
         for (let char_file of char_files) {
@@ -28,7 +29,8 @@ class CharManager {
         this.boss_level = File.readObj(
             `${__dirname}/Character/boss_level.json`
         );
-        logger.log(`${this.boss_level.length} boss found: ${this.boss_level}`);
+        logger.log(`${this.boss_level.length} boss found`);
+        logger.debug(`${this.boss_level}`);
         for (let id of this.boss_level) {
             if (!this.char_list.has(id)) {
                 logger.error(`unknown boss id: ${id}`);

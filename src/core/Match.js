@@ -59,9 +59,9 @@ class Match {
 
         // determine the result
         let win;
-        if (this.result == -1) win = `${this.defender.name}獲勝`;
+        if (this.result == -1) win = `${this.defender.name} 獲勝`;
         else if (this.result == 0) win = `雙方不分軒輊`;
-        else if (this.result == 1) win = `${this.attacker.name}獲勝`;
+        else if (this.result == 1) win = `${this.attacker.name} 獲勝`;
         this.sum(`對戰結束! ${win}`);
     }
 
