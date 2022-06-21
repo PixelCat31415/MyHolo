@@ -3,7 +3,7 @@
     font-size: inherit;
 }
 .app_version::after {
-    content: "v1.1";
+    content: "v1.2";
 }
 
 @font-face {
@@ -19,8 +19,7 @@ button {
     width: 150px;
     height: 40px;
     background-color: transparent;
-    border-width: 2px;
-    border-color: #555;
+    border: 2px solid #555;
     border-radius: 5px;
     padding: 2px;
     margin: 5px;

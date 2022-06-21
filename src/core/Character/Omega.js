@@ -9,7 +9,7 @@ class Omega extends Character0 {
             motto: "",
             skills: ["始源之劍","世界放逐","遠古詛咒","終焉之時","歐米茄的凝視"],
             char_name: "Omega Alpha",
-            level: 70,
+            level: 56,
             max_abil: {},
             abil: {},
             hidden: false,

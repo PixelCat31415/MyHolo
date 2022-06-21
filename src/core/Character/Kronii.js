@@ -9,7 +9,7 @@ class Kronii extends Character0 {
             motto: "",
             skills: ["指針刺擊","直升機空襲","時間牢籠","穿梭時空","za warudo"],
             char_name: "Ouro Kronii",
-            level: 60,
+            level: 52,
             max_abil: {},
             abil: {},
             hidden: false,

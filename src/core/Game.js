@@ -9,6 +9,7 @@ const File = require("./File");
 const Points = require("./Points");
 const Player = require("./Player");
 const Chars = require("./CharacterManager");
+const Experience = require("./Experience");
 const Match = require("./Match");
 const Record = require("./Record");
 let Dev;
@@ -19,7 +20,9 @@ class Game {
     win;
     player;
     cur_level;
+    cur_boss_name;
     cur_boss;
+    unlocked_char;
     in_debug;
 
     constructor() {
@@ -28,15 +31,19 @@ class Game {
             logger.info("no game data found. creating a new game");
             this.player = new Player();
             this.cur_level = 0;
+            this.unlocked_char = new Set([this.player.char_name]);
             this.updateBoss(this.cur_level);
         } else {
             logger.info(`game data found at ${gamedata_path}`);
             let obj = File.readObj(gamedata_path);
             this.player = new Player(obj.player);
             this.cur_level = obj.cur_level;
+            this.unlocked_char = new Set(obj.unlocked_char);
             this.updateBoss(this.cur_level);
         }
         logger.info(`game starts at level ${this.cur_level}`);
+        logger.info(`${this.unlocked_char.size} character unlocked`);
+        logger.debug(`${Array.from(this.unlocked_char.values())}`);
 
         this.createWindow();
         this.initipc();
@@ -46,7 +53,7 @@ class Game {
     createWindow() {
         logger.info("creating game window");
         this.win = new BrowserWindow({
-            title: "MyHolo v1.0",
+            title: "MyHolo v1.2",
             icon: `${root_dir}/assets/facicon.ico`,
             show: false,
             webPreferences: {
@@ -68,8 +75,13 @@ class Game {
             if (this.cur_boss) return this.cur_boss.dump();
             return null;
         });
+        ipcMain.handle("game-get-curLevel", async () => {
+            return this.cur_level;
+        });
         ipcMain.handle("game-get-allChars", async () => {
-            return Chars.getAllChars();
+            return Chars.getAllChars().filter((item) =>
+                this.unlocked_char.has(item[0])
+            );
         });
         ipcMain.handle(
             "game-get-respAbil",
@@ -103,10 +115,6 @@ class Game {
         ipcMain.handle("game-do-match", async () => {
             return this.doMatch();
         });
-        ipcMain.handle("game-do-nextLevel", async () => {
-            this.updateBoss(this.cur_level + 1);
-            this.player.resp_credit += 7;
-        });
         ipcMain.handle(
             "game-do-respawn",
             async (event, resp_char, resp_credit, resp_abil) => {
@@ -119,6 +127,10 @@ class Game {
         });
         ipcMain.handle("game-do-resetAll", async () => {
             this.doResetAll();
+        });
+        ipcMain.handle("game-do-setPlayerName", async (event, name) => {
+            logger.log(`updateing player name with new name: ${name}`);
+            this.player.doSetName(name);
         });
 
         // misc
@@ -136,12 +148,20 @@ class Game {
         match.start();
         match = match.dump();
         Record.saveMatch(match);
+        if (match.result === "win") {
+            this.unlocked_char.add(this.cur_boss_name);
+            logger.log(`unlocked character: ${this.cur_boss_name}`);
+            this.player.doAddExp(Experience.getBossExp(this.cur_level));
+            this.player.resp_credit += Experience.CREDIT_BOSS_CLEAR;
+            this.updateBoss(this.cur_level + 1);
+        }
         return match;
     }
 
     doResetAll() {
         this.player = new Player();
         this.cur_level = 0;
+        this.unlocked_char = new Set([this.player.char_name]);
         this.updateBoss(this.cur_level);
         Record.clearRecord();
         logger.log("reset all game progress");
@@ -151,9 +171,12 @@ class Game {
         this.cur_level = level;
         logger.info(`boss clear: now at lv.${this.cur_level}`);
         if (this.cur_level <= Chars.getMaxLevel()) {
-            this.cur_boss = Chars.getBoss(this.cur_level);
+            let res = Chars.getBoss(this.cur_level);
+            this.cur_boss_name = res.name;
+            this.cur_boss = res.boss;
         } else {
             logger.info("highest level reached");
+            this.cur_boss_name = "null";
             this.cur_boss = null;
         }
     }
@@ -170,6 +193,7 @@ class Game {
         return {
             cur_level: this.cur_level,
             player: this.player.dump(),
+            unlocked_char: Array.from(this.unlocked_char.values()),
         };
     }
 

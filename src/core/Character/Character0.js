@@ -107,7 +107,7 @@ class Character0 extends Entity {
         dod = 0.2 * Math.pow(opp.abil.agi / this.abil.agi, 0.4);
 
         if (dod - Math.random() > 0) {
-            match.log(`${opp.name} 躲開了 ${this.name} 的攻擊`);
+            match.log(`${this.name} 的攻擊被 ${opp.name} 一個靈動的轉身躲開了`);
         } else {
             if (luk - Math.random() > 0) {
                 if (Math.random() > 0.99) {
@@ -150,6 +150,9 @@ class Character0 extends Entity {
         if (match.result < 0 && opp.is_player) {
             if (Math.random() <= KILL_CHANCE) {
                 opp.kill();
+                match.sum(`${opp.name} 戰敗，不幸慘烈犧牲 \\|/`);
+            }else{
+                match.sum(`${opp.name} 戰敗，僥倖逃過一杰`);
             }
         }
     }
