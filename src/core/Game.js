@@ -68,6 +68,9 @@ class Game {
             if (this.cur_boss) return this.cur_boss.dump();
             return null;
         });
+        ipcMain.handle("game-get-curLevel", async () => {
+            return this.cur_level;
+        });
         ipcMain.handle("game-get-allChars", async () => {
             return Chars.getAllChars();
         });

@@ -42,7 +42,7 @@ function showMatch(container, match) {
 async function doMatch() {
     $("#boss_match_result_box").show();
     let match = await core.send("game-do-match");
-    if(!match) return;
+    if (!match) return;
     showMatch("boss", match);
     if (match.result === "win") {
         await core.send("game-do-nextLevel");
@@ -61,7 +61,7 @@ async function nextLevel() {
     $("#boss_match_result_box").hide();
 }
 
-async function resetLevel(){
+async function resetLevel() {
     await core.send("game-do-resetLevel");
     $("#boss_cleared").hide();
     $("#boss_next_level").hide();
@@ -159,4 +159,5 @@ async function refreshBoss() {
             $(`.boss_abil_${key[0]}`).text(Math.round(boss.max_abil[key[0]]));
         }
     }
+    $(".cur_level").text((await core.send("game-get-curLevel")) + 1);
 }
