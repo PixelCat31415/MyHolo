@@ -9,7 +9,7 @@ class Mumei extends Character0 {
             motto: "",
             skills: ["鑽木取火","貓頭鷹俯衝","念力冥想","智慧之光","諸神黃昏"],
             char_name: "Nanashi Mumei",
-            level: 50,
+            level: 49,
             max_abil: {},
             abil: {},
             hidden: false,

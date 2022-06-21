@@ -9,7 +9,7 @@ class Inanis extends Character0 {
             motto: "",
             skills: ["召喚tako","觸手鞭笞","san值歸零","靈魂綑綁","古神降臨"],
             char_name: "Ninomae Ina'nis",
-            level: 65,
+            level: 53,
             max_abil: {},
             abil: {},
             hidden: false,

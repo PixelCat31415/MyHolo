@@ -9,7 +9,7 @@ class Calliope extends Character0 {
             motto: "",
             skills: ["鐮刀斬","生命剝奪","召喚亡靈","死亡之聲","靈魂收割"],
             char_name: "Mori Calliope",
-            level: 55,
+            level: 50,
             max_abil: {},
             abil: {},
             hidden: false,
