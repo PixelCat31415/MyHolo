@@ -65,16 +65,16 @@ class ExperienceHandler {
     // idle time required for each idle type
     // in seconds
     idle_time_table = {
-        1: 28800,
-        2: 14400,
-        3: 7200,
-        4: 3600,
-        5: 1800,
-        6: 600,
-        7: 300,
-        8: 180,
-        9: 120,
-        10: 60,
+        1: 480,
+        2: 240,
+        3: 120,
+        4: 60,
+        5: 30,
+        6: 10,
+        7: 5,
+        8: 3,
+        9: 2,
+        10: 1,
     };
     getIdleTime(op) {
         if (op < 1 || op > 10) {
