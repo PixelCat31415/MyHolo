@@ -53,7 +53,7 @@ class Game {
     createWindow() {
         logger.info("creating game window");
         this.win = new BrowserWindow({
-            title: "MyHolo v1.0",
+            title: "MyHolo v1.2",
             icon: `${root_dir}/assets/facicon.ico`,
             show: false,
             webPreferences: {
