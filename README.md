@@ -1,47 +1,55 @@
 # MyHolo
 
-A simple idle game made by two Hololive fans. Inspired by MyKirito.
+由兩位 Hololive 粉絲製作的、一個簡單的閒置遊戲，受遊戲 MyKirito 啟發。
 
-## Building
+## 建置
 
-I won't be providing .exe so you have to build it yourself.
+目前只有 Windows 平台上的執行檔，然而你可以自行建置適用於其他平台（linux/MaxOS）的遊戲執行檔。
 
-prerequisites (not sure if lower versions work):
+前置需求（不確定更低的版本能否正常執行）：
 
 1. Node.js 16.13.1
 
-building executables:
+建置執行檔:
 
-1. clone/download this repo
-2. run `npm install` to install node packages
-3. run `npm run make` to build executable
+1. clone 或下載此存儲庫
+2. 執行 `npm install` 安裝需要的套件
+3. 執行 `npm run make` 建置專案
+4. 遊戲執行檔將會輸出到 `./out/myholo-{your-system}/` 目錄
 
-the game executable and all data will be in `./out/myholo-{your-system}/` folder.
+注意本遊戲沒有對 node 套件做任何優化，因此安裝套件可能需要一些時間空間。
 
-## Features to Add
+## 版權聲明
 
-### TODO's
+我們 **並不擁有** 任何圖片素材的版權。圖片素材來自
 
-some unfinshed features
+- Hololive 官網 https://hololive.hololivepro.com/en/talents
+- 萌娘百科 https://zh.moegirl.org.cn/
 
-- advancement system
-- better info/error logging
-- favicon
+其餘程式碼在 [WTF Public license](http://www.wtfpl.net/) 下發布。
 
-### yet more TODO's
+## 未加入的特性
 
-probably won't be done (~~at least before 1.0~~ probably never :P) bacause of ~~time issue~~ tons of exams to prepare for.
+### TODO
 
-- some more comments/docs?
-- main page for the game
-- tutorial or some kind of tips inside the game
-- notification system
+一些還沒做完的功能。
 
-### the '有生之年' series
+- 成就系統
+- 遊戲應用程式圖標
 
-some future work iff I have LOTS of time for this project cuz any of these requires a full rewrite.
+### 更多 TODO
 
-- weak typing is poisonous. maybe rewrite in typescript? (personally really want to do this)
-- the frontend is a mess now. maybe switch over to vue.js?
-- implement character system in a more organized way
-- use MySQL or something similar as database instead of json everywhere
+高機率（永遠）不會完成的功能。
+
+- 完整的程式碼註解
+- 遊戲內教學、提示
+- 遊戲事件訊息顯示
+
+### 有生之年系列
+
+一些未來可能會發展的方向，除非我們有超級多時間而且對這個遊戲極度有愛不然不可能完成，因為任何一項都會要幾乎重寫大半個遊戲。
+
+- 擺脫弱型別毒瘤，擁抱 TypeScript 正道。
+- 處理前端的義大利麵腳本，學習使用 Vue.js 之類好用的框架
+- 重新組織處於量子糾纏中的（玩家和關主的）角色系統
+- 學習用 MySQL 之類的資料庫存遊戲檔案（不確定會有什麼實質效果不過聽起來很酷）
