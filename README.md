@@ -12,7 +12,7 @@
 
 建置執行檔:
 
-1. clone 或下載此存儲庫
+1. clone 或下載此 repo
 2. 執行 `npm install` 安裝需要的套件
 3. 執行 `npm run make` 建置專案
 4. 遊戲執行檔將會輸出到 `./out/myholo-{your-system}/` 目錄
@@ -49,11 +49,12 @@
 
 我們 **並不擁有** 任何圖片素材的版權。圖片素材來自
 
-- Hololive 官網 [https://hololive.hololivepro.com/en/talents]
-- 萌娘百科 [https://zh.moegirl.org.cn/]
+- Hololive 官網 [https://hololive.hololivepro.com/en/talents](https://hololive.hololivepro.com/en/talents)
+- 萌娘百科 [https://zh.moegirl.org.cn/](https://zh.moegirl.org.cn/)
 
 其餘程式碼在 [WTF Public license](http://www.wtfpl.net/) 下發布。
 
+<!-- 
 ## 未加入的特性
 
 ### TODO
@@ -79,3 +80,4 @@
 - 處理前端的義大利麵腳本，學習使用 Vue.js 之類好用的框架
 - 重新組織處於量子糾纏中的（玩家和關主的）角色系統
 - 學習用 MySQL 之類的資料庫存遊戲檔案（不確定會有什麼實質效果不過聽起來很酷）
+ -->
