@@ -1,5 +1,6 @@
 # MyHolo
 
+A simple idle game made by two Hololive fans. Inspired by the game MyKirito.
 由兩位 Hololive 粉絲製作的、一個簡單的閒置遊戲，受遊戲 MyKirito 啟發。
 
 ## 建置
@@ -17,7 +18,7 @@
 3. 執行 `npm run make` 建置專案
 4. 遊戲執行檔將會輸出到 `./out/myholo-{your-system}/` 目錄
 
-注意本遊戲沒有對 node 套件做任何優化，因此安裝套件可能需要一些時間空間。
+然而本遊戲沒有對 node 套件做任何優化，因此安裝套件可能需要一些時間/空間。
 
 ## 遊戲介紹
 
